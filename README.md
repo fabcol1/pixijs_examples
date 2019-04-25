@@ -4,4 +4,4 @@ Examples with PixiJS library
 
 ## List of examples:
 
-- [DuckHunt Clone](https://localhost:1234/duck-hunt)
+- [DuckHunt Clone](https://eager-shaw-8e9d24.netlify.com/#!duck-hunt)
