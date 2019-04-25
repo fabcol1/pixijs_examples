@@ -1,0 +1,1 @@
+{"version":3,"sources":["index.js"],"names":["document","querySelector","textContent"],"mappings":";;;AAEA,aAFA,QAAA,sBAEAA,SAASC,cAAc,MAAMC,YAAc","file":"src.41ddbded.js","sourceRoot":"../src","sourcesContent":["import './styles/main.scss';\n\ndocument.querySelector('h1').textContent = 'Pinco Pallino';\n"]}
