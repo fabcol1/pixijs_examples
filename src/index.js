@@ -9,7 +9,7 @@ const router = new Navigo(null, false, '#');
 router
   .on({
     'duck-hunt': (query, parameter) => {
-      new DuckHunt();
+      new DuckHunt(document.body);
     },
     '*': (query, parameter) => {
       document.body.innerHTML = new NotFound().render();
