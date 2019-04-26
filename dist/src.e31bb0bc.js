@@ -41532,7 +41532,7 @@ function () {
   _createClass(ResourceLoader, null, [{
     key: "loadResources",
     value: function loadResources(setup) {
-      _pixi.loader.add('sceneBack', _.scene_back_0).add('sceneTree', _.scene_tree_0).add('dogSniff0', _.dog_sniff_0).add('dogSniff1', _.dog_sniff_1).add('dogSniff2', _.dog_sniff_2).add('dogSniff3', _.dog_sniff_3).add('dogSniff4', _.dog_sniff_4).load(setup);
+      _pixi.loader.add('sceneBack', _.scene_back_0).add('sceneTree', _.scene_tree_0).add('dogSniff0', _.dog_sniff_0).add('dogSniff1', _.dog_sniff_1).add('dogSniff2', _.dog_sniff_2).add('dogSniff3', _.dog_sniff_3).add('dogSniff4', _.dog_sniff_4).add('dogFind', _.dog_find_0).add('dogJump0', _.dog_jump_0).add('dogJump1', _.dog_jump_1).load(setup);
     }
   }]);
 
@@ -41644,6 +41644,23 @@ function (_Scene) {
     _this.tree.x = 60;
     _this.tree.y = 235;
     var dogSniffFrames = [resources.dogSniff0.texture, resources.dogSniff1.texture, resources.dogSniff2.texture, resources.dogSniff3.texture, resources.dogSniff4.texture];
+    _this.dogFind = new _pixi.Sprite(resources.dogFind.texture);
+    _this.dogFind.y = 470;
+    _this.dogFind.x = 300;
+    var dogJumpFrames = [resources.dogJump0.texture, resources.dogJump1.texture];
+    _this.dogJump = new AnimatedSprite(dogJumpFrames);
+    _this.dogJump.x = 320;
+    _this.dogJump.y = 440;
+    _this.dogJump.vx = 0;
+    _this.dogJump.vy = -3;
+    _this.dogJump.animationSpeed = 0.1;
+    _this.dogJump.loop = false;
+    _this.dogJump.visible = false;
+
+    _this.dogJump.onComplete = function () {
+      return _this.container.removeChild(_this.dogJump);
+    };
+
     _this.dogSniff = new AnimatedSprite(dogSniffFrames);
     _this.dogSniff.y = 470;
     _this.dogSniff.vx = 0.5;
@@ -41666,8 +41683,29 @@ function (_Scene) {
   _createClass(MainMenu, [{
     key: "play",
     value: function play(delta) {
-      this.dogSniff.x += this.dogSniff.vx; // console.log(delta);
+      var _this2 = this;
+
+      this.dogSniff.x += this.dogSniff.vx;
+
+      if (this.dogSniff.x == 320) {
+        this.container.removeChild(this.dogSniff);
+        this.container.addChild(this.dogFind);
+        setTimeout(function () {
+          _this2.container.removeChild(_this2.dogFind);
+
+          _this2.dogJump.visible = true;
+
+          _this2.dogJump.play();
+
+          _this2.container.addChild(_this2.dogJump);
+        }, 500);
+      }
+
+      if (this.dogSniff.x > 320 && this.dogJump.visible) {
+        this.dogJump.y += this.dogJump.vy;
+      } // console.log(delta);
       // console.log(this, this.back);
+
     }
   }, {
     key: "destroy",
@@ -41852,7 +41890,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37785" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34641" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

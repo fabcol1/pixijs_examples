@@ -6,7 +6,10 @@ import {
   dog_sniff_1,
   dog_sniff_2,
   dog_sniff_3,
-  dog_sniff_4
+  dog_sniff_4,
+  dog_find_0,
+  dog_jump_0,
+  dog_jump_1
 } from '../../../static/duck_hunt_static/*.png';
 
 export default class ResourceLoader {
@@ -19,6 +22,9 @@ export default class ResourceLoader {
       .add('dogSniff2', dog_sniff_2)
       .add('dogSniff3', dog_sniff_3)
       .add('dogSniff4', dog_sniff_4)
+      .add('dogFind', dog_find_0)
+      .add('dogJump0', dog_jump_0)
+      .add('dogJump1', dog_jump_1)
       .load(setup);
   }
 }
