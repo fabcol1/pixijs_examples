@@ -41357,76 +41357,7 @@ if (typeof _deprecation2.default === 'function') {
 // Always export PixiJS globally.
 global.PIXI = exports; // eslint-disable-line
 
-},{"./polyfill":"../node_modules/pixi.js/lib/polyfill/index.js","./core":"../node_modules/pixi.js/lib/core/index.js","./deprecation":"../node_modules/pixi.js/lib/deprecation.js","./accessibility":"../node_modules/pixi.js/lib/accessibility/index.js","./extract":"../node_modules/pixi.js/lib/extract/index.js","./extras":"../node_modules/pixi.js/lib/extras/index.js","./filters":"../node_modules/pixi.js/lib/filters/index.js","./interaction":"../node_modules/pixi.js/lib/interaction/index.js","./loaders":"../node_modules/pixi.js/lib/loaders/index.js","./mesh":"../node_modules/pixi.js/lib/mesh/index.js","./particles":"../node_modules/pixi.js/lib/particles/index.js","./prepare":"../node_modules/pixi.js/lib/prepare/index.js"}],"components/duck-hunt/KeyBoardKey.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-var KeyBoardKey =
-/*#__PURE__*/
-function () {
-  function KeyBoardKey(value, press, release) {
-    _classCallCheck(this, KeyBoardKey);
-
-    this.value = value;
-    this.isDown = false;
-    this.isUp = true;
-    this.press = press;
-    this.release = release;
-    this.downListener = this._downHandler.bind(this);
-    this.upListener = this._upHandler.bind(this);
-    window.addEventListener('keydown', this.downListener, false);
-    window.addEventListener('keyup', this.upListener, false);
-  } //The `downHandler`
-
-
-  _createClass(KeyBoardKey, [{
-    key: "_downHandler",
-    value: function _downHandler(event) {
-      console.log(this.press);
-
-      if (event.key === this.value) {
-        if (this.isUp && this.press) this.press();
-        this.isDown = true;
-        this.isUp = false;
-        event.preventDefault();
-      }
-    } //The `upHandler`
-
-  }, {
-    key: "_upHandler",
-    value: function _upHandler(event) {
-      if (event.key === this.value) {
-        if (this.isDown && this.release) this.release();
-        this.isDown = false;
-        this.isUp = true;
-        event.preventDefault();
-      }
-    } // Detach event listeners
-
-  }, {
-    key: "unsubscribe",
-    value: function unsubscribe() {
-      window.removeEventListener('keydown', this.downListener);
-      window.removeEventListener('keyup', this.upListener);
-    }
-  }]);
-
-  return KeyBoardKey;
-}();
-
-var _default = KeyBoardKey;
-exports.default = _default;
-},{}],"static/duck_hunt_static/dog_double_0.png":[function(require,module,exports) {
+},{"./polyfill":"../node_modules/pixi.js/lib/polyfill/index.js","./core":"../node_modules/pixi.js/lib/core/index.js","./deprecation":"../node_modules/pixi.js/lib/deprecation.js","./accessibility":"../node_modules/pixi.js/lib/accessibility/index.js","./extract":"../node_modules/pixi.js/lib/extract/index.js","./extras":"../node_modules/pixi.js/lib/extras/index.js","./filters":"../node_modules/pixi.js/lib/filters/index.js","./interaction":"../node_modules/pixi.js/lib/interaction/index.js","./loaders":"../node_modules/pixi.js/lib/loaders/index.js","./mesh":"../node_modules/pixi.js/lib/mesh/index.js","./particles":"../node_modules/pixi.js/lib/particles/index.js","./prepare":"../node_modules/pixi.js/lib/prepare/index.js"}],"static/duck_hunt_static/dog_double_0.png":[function(require,module,exports) {
 module.exports = "/dog_double_0.16e71405.png";
 },{}],"static/duck_hunt_static/dog_find_0.png":[function(require,module,exports) {
 module.exports = "/dog_find_0.6a047cd7.png";
@@ -41573,7 +41504,7 @@ module.exports = {
   "scene_back_0": require("./scene_back_0.png"),
   "scene_tree_0": require("./scene_tree_0.png")
 };
-},{"./dog_double_0.png":"static/duck_hunt_static/dog_double_0.png","./dog_find_0.png":"static/duck_hunt_static/dog_find_0.png","./dog_jump_0.png":"static/duck_hunt_static/dog_jump_0.png","./dog_jump_1.png":"static/duck_hunt_static/dog_jump_1.png","./dog_laugh_0.png":"static/duck_hunt_static/dog_laugh_0.png","./dog_laugh_1.png":"static/duck_hunt_static/dog_laugh_1.png","./dog_single_0.png":"static/duck_hunt_static/dog_single_0.png","./dog_sniff_0.png":"static/duck_hunt_static/dog_sniff_0.png","./dog_sniff_1.png":"static/duck_hunt_static/dog_sniff_1.png","./dog_sniff_2.png":"static/duck_hunt_static/dog_sniff_2.png","./dog_sniff_3.png":"static/duck_hunt_static/dog_sniff_3.png","./dog_sniff_4.png":"static/duck_hunt_static/dog_sniff_4.png","./duck_black_dead_0.png":"static/duck_hunt_static/duck_black_dead_0.png","./duck_black_dead_1.png":"static/duck_hunt_static/duck_black_dead_1.png","./duck_black_dead_2.png":"static/duck_hunt_static/duck_black_dead_2.png","./duck_black_left_0.png":"static/duck_hunt_static/duck_black_left_0.png","./duck_black_left_1.png":"static/duck_hunt_static/duck_black_left_1.png","./duck_black_left_2.png":"static/duck_hunt_static/duck_black_left_2.png","./duck_black_right_0.png":"static/duck_hunt_static/duck_black_right_0.png","./duck_black_right_1.png":"static/duck_hunt_static/duck_black_right_1.png","./duck_black_right_2.png":"static/duck_hunt_static/duck_black_right_2.png","./duck_black_top-left_0.png":"static/duck_hunt_static/duck_black_top-left_0.png","./duck_black_top-left_1.png":"static/duck_hunt_static/duck_black_top-left_1.png","./duck_black_top-left_2.png":"static/duck_hunt_static/duck_black_top-left_2.png","./duck_black_top-right_0.png":"static/duck_hunt_static/duck_black_top-right_0.png","./duck_black_top-right_1.png":"static/duck_hunt_static/duck_black_top-right_1.png","./duck_black_top-right_2.png":"static/duck_hunt_static/duck_black_top-right_2.png","./duck_hunt_sprites.ff896709.png":"static/duck_hunt_static/duck_hunt_sprites.ff896709.png","./duck_red_dead_0.png":"static/duck_hunt_static/duck_red_dead_0.png","./duck_red_dead_1.png":"static/duck_hunt_static/duck_red_dead_1.png","./duck_red_dead_2.png":"static/duck_hunt_static/duck_red_dead_2.png","./duck_red_left_0.png":"static/duck_hunt_static/duck_red_left_0.png","./duck_red_left_1.png":"static/duck_hunt_static/duck_red_left_1.png","./duck_red_left_2.png":"static/duck_hunt_static/duck_red_left_2.png","./duck_red_right_0.png":"static/duck_hunt_static/duck_red_right_0.png","./duck_red_right_2.png":"static/duck_hunt_static/duck_red_right_2.png","./duck_red_shot_0.png":"static/duck_hunt_static/duck_red_shot_0.png","./duck_red_top-left_0.png":"static/duck_hunt_static/duck_red_top-left_0.png","./duck_red_top-left_1.png":"static/duck_hunt_static/duck_red_top-left_1.png","./duck_red_top-left_2.png":"static/duck_hunt_static/duck_red_top-left_2.png","./duck_red_top-right_0.png":"static/duck_hunt_static/duck_red_top-right_0.png","./duck_red_top-right_1.png":"static/duck_hunt_static/duck_red_top-right_1.png","./duck_red_top-right_2.png":"static/duck_hunt_static/duck_red_top-right_2.png","./hud_bullet_0.png":"static/duck_hunt_static/hud_bullet_0.png","./hud_score-dead_0.png":"static/duck_hunt_static/hud_score-dead_0.png","./hud_score-live_0.png":"static/duck_hunt_static/hud_score-live_0.png","./scene_back_0.png":"static/duck_hunt_static/scene_back_0.png","./scene_tree_0.png":"static/duck_hunt_static/scene_tree_0.png"}],"components/duck-hunt/DuckHunt.js":[function(require,module,exports) {
+},{"./dog_double_0.png":"static/duck_hunt_static/dog_double_0.png","./dog_find_0.png":"static/duck_hunt_static/dog_find_0.png","./dog_jump_0.png":"static/duck_hunt_static/dog_jump_0.png","./dog_jump_1.png":"static/duck_hunt_static/dog_jump_1.png","./dog_laugh_0.png":"static/duck_hunt_static/dog_laugh_0.png","./dog_laugh_1.png":"static/duck_hunt_static/dog_laugh_1.png","./dog_single_0.png":"static/duck_hunt_static/dog_single_0.png","./dog_sniff_0.png":"static/duck_hunt_static/dog_sniff_0.png","./dog_sniff_1.png":"static/duck_hunt_static/dog_sniff_1.png","./dog_sniff_2.png":"static/duck_hunt_static/dog_sniff_2.png","./dog_sniff_3.png":"static/duck_hunt_static/dog_sniff_3.png","./dog_sniff_4.png":"static/duck_hunt_static/dog_sniff_4.png","./duck_black_dead_0.png":"static/duck_hunt_static/duck_black_dead_0.png","./duck_black_dead_1.png":"static/duck_hunt_static/duck_black_dead_1.png","./duck_black_dead_2.png":"static/duck_hunt_static/duck_black_dead_2.png","./duck_black_left_0.png":"static/duck_hunt_static/duck_black_left_0.png","./duck_black_left_1.png":"static/duck_hunt_static/duck_black_left_1.png","./duck_black_left_2.png":"static/duck_hunt_static/duck_black_left_2.png","./duck_black_right_0.png":"static/duck_hunt_static/duck_black_right_0.png","./duck_black_right_1.png":"static/duck_hunt_static/duck_black_right_1.png","./duck_black_right_2.png":"static/duck_hunt_static/duck_black_right_2.png","./duck_black_top-left_0.png":"static/duck_hunt_static/duck_black_top-left_0.png","./duck_black_top-left_1.png":"static/duck_hunt_static/duck_black_top-left_1.png","./duck_black_top-left_2.png":"static/duck_hunt_static/duck_black_top-left_2.png","./duck_black_top-right_0.png":"static/duck_hunt_static/duck_black_top-right_0.png","./duck_black_top-right_1.png":"static/duck_hunt_static/duck_black_top-right_1.png","./duck_black_top-right_2.png":"static/duck_hunt_static/duck_black_top-right_2.png","./duck_hunt_sprites.ff896709.png":"static/duck_hunt_static/duck_hunt_sprites.ff896709.png","./duck_red_dead_0.png":"static/duck_hunt_static/duck_red_dead_0.png","./duck_red_dead_1.png":"static/duck_hunt_static/duck_red_dead_1.png","./duck_red_dead_2.png":"static/duck_hunt_static/duck_red_dead_2.png","./duck_red_left_0.png":"static/duck_hunt_static/duck_red_left_0.png","./duck_red_left_1.png":"static/duck_hunt_static/duck_red_left_1.png","./duck_red_left_2.png":"static/duck_hunt_static/duck_red_left_2.png","./duck_red_right_0.png":"static/duck_hunt_static/duck_red_right_0.png","./duck_red_right_2.png":"static/duck_hunt_static/duck_red_right_2.png","./duck_red_shot_0.png":"static/duck_hunt_static/duck_red_shot_0.png","./duck_red_top-left_0.png":"static/duck_hunt_static/duck_red_top-left_0.png","./duck_red_top-left_1.png":"static/duck_hunt_static/duck_red_top-left_1.png","./duck_red_top-left_2.png":"static/duck_hunt_static/duck_red_top-left_2.png","./duck_red_top-right_0.png":"static/duck_hunt_static/duck_red_top-right_0.png","./duck_red_top-right_1.png":"static/duck_hunt_static/duck_red_top-right_1.png","./duck_red_top-right_2.png":"static/duck_hunt_static/duck_red_top-right_2.png","./hud_bullet_0.png":"static/duck_hunt_static/hud_bullet_0.png","./hud_score-dead_0.png":"static/duck_hunt_static/hud_score-dead_0.png","./hud_score-live_0.png":"static/duck_hunt_static/hud_score-live_0.png","./scene_back_0.png":"static/duck_hunt_static/scene_back_0.png","./scene_tree_0.png":"static/duck_hunt_static/scene_tree_0.png"}],"components/duck-hunt/utils/ResourceLoader.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -41581,15 +41512,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var PIXI = _interopRequireWildcard(require("pixi.js"));
+var _pixi = require("pixi.js");
 
-var _KeyBoardKey = _interopRequireDefault(require("./KeyBoardKey.js"));
-
-var _ = require("../../static/duck_hunt_static/*.png");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+var _ = require("../../../static/duck_hunt_static/*.png");
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -41597,131 +41522,287 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-//Aliases
-var Application = PIXI.Application,
-    loader = PIXI.loader,
-    resources = PIXI.loader.resources,
-    Sprite = PIXI.Sprite,
-    Rectangle = PIXI.Rectangle;
-
-var DuckHunt =
+var ResourceLoader =
 /*#__PURE__*/
 function () {
-  function DuckHunt(parentElement) {
-    _classCallCheck(this, DuckHunt);
-
-    var type = 'WebGL';
-
-    if (!PIXI.utils.isWebGLSupported()) {
-      type = 'canvas';
-    }
-
-    PIXI.utils.sayHello(type); //Create a Pixi Application
-
-    this.app = new Application({
-      width: 256,
-      height: 256,
-      antialias: true,
-      transparent: false,
-      resolution: 1
-    });
-    this.app.renderer.backgroundColor = 0x89c4f4;
-    this.app.renderer.view.style.position = 'absolute';
-    this.app.renderer.view.style.display = 'block';
-    this.app.renderer.autoResize = true;
-    this.app.renderer.resize(window.innerWidth, window.innerHeight); //Add the canvas that Pixi automatically created for you to the HTML document
-
-    parentElement.innerHTML = '';
-    parentElement.appendChild(this.app.view); //Load sprites and after loading initialize sprites on screen
-
-    loader.add('sceneBack', _.scene_back_0).add('sceneTree', _.scene_tree_0).load(this.setup.bind(this)); // this.gameLoop.bind(this);
-    // this.play.bind(this);
-
-    this.state = this.play;
+  function ResourceLoader() {
+    _classCallCheck(this, ResourceLoader);
   }
 
-  _createClass(DuckHunt, [{
+  _createClass(ResourceLoader, null, [{
+    key: "loadResources",
+    value: function loadResources(setup) {
+      _pixi.loader.add('sceneBack', _.scene_back_0).add('sceneTree', _.scene_tree_0).add('dogSniff0', _.dog_sniff_0).add('dogSniff1', _.dog_sniff_1).add('dogSniff2', _.dog_sniff_2).add('dogSniff3', _.dog_sniff_3).add('dogSniff4', _.dog_sniff_4).load(setup);
+    }
+  }]);
+
+  return ResourceLoader;
+}();
+
+exports.default = ResourceLoader;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../../../static/duck_hunt_static/*.png":"static/duck_hunt_static/*.png"}],"components/duck-hunt/scenes/Scene.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _pixi = require("pixi.js");
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Scene =
+/*#__PURE__*/
+function () {
+  function Scene(resources, changeScene) {
+    _classCallCheck(this, Scene);
+
+    this.changeScene = changeScene;
+    this.play = this.play.bind(this);
+    this.destroy = this.destroy.bind(this);
+    this.reset = this.reset.bind(this);
+    this.container = new _pixi.Container();
+  }
+
+  _createClass(Scene, [{
+    key: "play",
+    value: function play(delta) {
+      throw new Error('You have to implement the method play(delta)!');
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      throw new Error('You have to implement the method destory()!');
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      throw new Error('You have to implement the method reset()!');
+    }
+  }]);
+
+  return Scene;
+}();
+
+exports.default = Scene;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js"}],"components/duck-hunt/scenes/MainMenu.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _pixi = require("pixi.js");
+
+var _Scene2 = _interopRequireDefault(require("./Scene.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var AnimatedSprite = _pixi.extras.AnimatedSprite;
+
+var MainMenu =
+/*#__PURE__*/
+function (_Scene) {
+  _inherits(MainMenu, _Scene);
+
+  function MainMenu(resources, changeScene) {
+    var _this;
+
+    _classCallCheck(this, MainMenu);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MainMenu).call(this, resources, changeScene));
+    _this.bg = new _pixi.Sprite(_pixi.Texture.WHITE);
+    _this.back = new _pixi.Sprite(resources.sceneBack.texture);
+    _this.tree = new _pixi.Sprite(resources.sceneTree.texture);
+    _this.bg.height = 600;
+    _this.bg.width = 800;
+    _this.bg.tint = 0x89c4f4;
+    _this.tree.x = 60;
+    _this.tree.y = 235;
+    var dogSniffFrames = [resources.dogSniff0.texture, resources.dogSniff1.texture, resources.dogSniff2.texture, resources.dogSniff3.texture, resources.dogSniff4.texture];
+    _this.dogSniff = new AnimatedSprite(dogSniffFrames);
+    _this.dogSniff.y = 470;
+    _this.dogSniff.vx = 0.5;
+    _this.dogSniff.vy = 0;
+    _this.dogSniff.animationSpeed = 0.1;
+
+    _this.dogSniff.play();
+
+    _this.container.addChild(_this.bg);
+
+    _this.container.addChild(_this.tree);
+
+    _this.container.addChild(_this.back);
+
+    _this.container.addChild(_this.dogSniff);
+
+    return _this;
+  }
+
+  _createClass(MainMenu, [{
+    key: "play",
+    value: function play(delta) {
+      this.dogSniff.x += this.dogSniff.vx; // console.log(delta);
+      // console.log(this, this.back);
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {}
+  }, {
+    key: "reset",
+    value: function reset() {}
+  }]);
+
+  return MainMenu;
+}(_Scene2.default);
+
+exports.default = MainMenu;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./Scene.js":"components/duck-hunt/scenes/Scene.js"}],"components/duck-hunt/Game.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _pixi = require("pixi.js");
+
+var _ResourceLoader = _interopRequireDefault(require("./utils/ResourceLoader.js"));
+
+var _MainMenu = _interopRequireDefault(require("./scenes/MainMenu.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Game =
+/*#__PURE__*/
+function () {
+  function Game(parentElement) {
+    var _this = this;
+
+    _classCallCheck(this, Game);
+
+    this.setup = this.setup.bind(this);
+    this.changeScene = this.changeScene.bind(this);
+    this.scenes = {};
+    this.state = undefined;
+    this.buildApp(parentElement);
+    this.loadResources(); // Resize all scenes on window resize event
+
+    window.addEventListener('resize', function (e) {
+      _this.app.renderer.resize(window.innerWidth, window.innerHeight);
+
+      for (var s in _this.scenes) {
+        _this.scenes[s].container.width = _this.app.screen.width;
+        _this.scenes[s].container.height = _this.app.screen.height;
+      }
+    });
+  }
+
+  _createClass(Game, [{
+    key: "buildApp",
+    value: function buildApp(parentElement) {
+      var type = 'WebGL';
+
+      if (!_pixi.utils.isWebGLSupported()) {
+        type = 'canvas';
+      }
+
+      _pixi.utils.sayHello(type); //Create a Pixi Application
+
+
+      this.app = new _pixi.Application({
+        width: 256,
+        height: 256,
+        antialias: true,
+        transparent: false,
+        resolution: 1
+      });
+      this.app.renderer.view.style.position = 'absolute';
+      this.app.renderer.view.style.display = 'block';
+      this.app.renderer.autoResize = true;
+      this.app.renderer.resize(window.innerWidth, window.innerHeight); //Add the canvas that Pixi automatically created for you to the HTML document
+
+      parentElement.innerHTML = '';
+      parentElement.appendChild(this.app.view);
+    }
+  }, {
+    key: "loadResources",
+    value: function loadResources() {
+      _ResourceLoader.default.loadResources(this.setup);
+    }
+  }, {
     key: "setup",
     value: function setup(loader, resources) {
-      var _this = this;
+      var _this2 = this;
 
-      var app = this.app;
-      this.back = new Sprite(resources.sceneBack.texture);
-      this.tree = new Sprite(resources.sceneTree.texture);
-      var back = this.back;
-      var tree = this.tree;
-      tree.vx = 0;
-      tree.vy = 0;
-      this.left = new _KeyBoardKey.default('ArrowLeft', function () {
-        _this.tree.vx = -5;
-        _this.tree.vy = 0;
-      }, function () {
-        if (!_this.right.isDown && _this.tree.vy === 0) {
-          _this.tree.vx = 0;
-        }
-      });
-      this.up = new _KeyBoardKey.default('ArrowUp', function () {
-        _this.tree.vy = -5;
-        _this.tree.vx = 0;
-      }, function () {
-        if (!_this.down.isDown && _this.tree.vx === 0) {
-          _this.tree.vy = 0;
-        }
-      });
-      this.right = new _KeyBoardKey.default('ArrowRight', function () {
-        _this.tree.vx = 5;
-        _this.tree.vy = 0;
-      }, function () {
-        if (!_this.left.isDown && _this.tree.vy === 0) {
-          _this.tree.vx = 0;
-        }
-      });
-      this.down = new _KeyBoardKey.default('ArrowDown', function () {
-        _this.tree.vy = 5;
-        _this.tree.vx = 0;
-      }, function () {
-        if (!_this.up.isDown && _this.tree.vx === 0) {
-          _this.tree.vy = 0;
-        }
-      });
-      back.position.set(0, app.renderer.height - back.height);
-      back.width = app.renderer.width;
-      tree.position.set(app.renderer.width / 10, app.renderer.height - tree.height);
-      app.stage.addChild(tree);
-      app.stage.addChild(back); // this.gameLoop.apply(this);
-      //Start the game loop by adding the `gameLoop` function to
-      //Pixi's `ticker` and providing it with a `delta` argument.
+      // create scenes
+      this.createScene(new _MainMenu.default(resources, this.changeScene), 'MM');
+      this.changeScene('MM'); // this.scenes['mainMenu'].container.width = this.app.screen.width;
+      // this.scenes['mainMenu'].container.height = this.app.screen.height;
+      // this.scenes['mainMenu'] = new MainMenuScene(resources);
+      // this.app.stage.addChild(this.scenes['mainMenu'].container);
+      // this.state = this.scenes['mainMenu'].play;
 
-      app.ticker.add(function (delta) {
-        return _this.gameLoop(delta);
+      this.app.ticker.add(function (delta) {
+        return _this2.gameLoop(delta);
       });
     }
   }, {
     key: "gameLoop",
     value: function gameLoop(delta) {
-      // console.log(delta);
-      //Update the current game state:
       this.state(delta);
     }
   }, {
-    key: "play",
-    value: function play(delta) {
-      //Update the cat's velocity
-      // this.tree.vx = 1;
-      // this.tree.vy = -1;
-      //Apply the velocity values to the cat's
-      //position to make it move
-      this.tree.x += this.tree.vx;
-      this.tree.y += this.tree.vy;
+    key: "createScene",
+    value: function createScene(scene, sceneName) {
+      scene.container.width = this.app.screen.width;
+      scene.container.height = this.app.screen.height;
+      this.scenes[sceneName] = scene;
+    }
+  }, {
+    key: "changeScene",
+    value: function changeScene(sceneName) {
+      this.scenes[sceneName].reset();
+      this.app.stage.addChild(this.scenes[sceneName].container);
+      this.state = this.scenes[sceneName].play;
     }
   }]);
 
-  return DuckHunt;
+  return Game;
 }();
 
-var _default = DuckHunt;
-exports.default = _default;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./KeyBoardKey.js":"components/duck-hunt/KeyBoardKey.js","../../static/duck_hunt_static/*.png":"static/duck_hunt_static/*.png"}],"index.js":[function(require,module,exports) {
+exports.default = Game;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./utils/ResourceLoader.js":"components/duck-hunt/utils/ResourceLoader.js","./scenes/MainMenu.js":"components/duck-hunt/scenes/MainMenu.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("./styles/main.scss");
@@ -41730,20 +41811,20 @@ var _Navigo = _interopRequireDefault(require("./utils/Navigo"));
 
 var _NotFound = _interopRequireDefault(require("./components/NotFound"));
 
-var _DuckHunt = _interopRequireDefault(require("./components/duck-hunt/DuckHunt"));
+var _Game = _interopRequireDefault(require("./components/duck-hunt/Game"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var router = new _Navigo.default(null, false, '#');
 router.on({
   'duck-hunt': function duckHunt(query, parameter) {
-    new _DuckHunt.default(document.body);
+    new _Game.default(document.body);
   },
   '*': function _(query, parameter) {
     document.body.innerHTML = new _NotFound.default().render();
   }
 }).resolve();
-},{"./styles/main.scss":"styles/main.scss","./utils/Navigo":"utils/Navigo.js","./components/NotFound":"components/NotFound.js","./components/duck-hunt/DuckHunt":"components/duck-hunt/DuckHunt.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./styles/main.scss":"styles/main.scss","./utils/Navigo":"utils/Navigo.js","./components/NotFound":"components/NotFound.js","./components/duck-hunt/Game":"components/duck-hunt/Game.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -41771,7 +41852,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "39229" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37785" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
