@@ -12,7 +12,9 @@ export default class GameScene extends Scene {
     this.reset();
   }
 
-  play(delta) {}
+  play(delta) {
+    this.destroy();
+  }
 
   destroy() {
     this.container.removeChild(this.background);

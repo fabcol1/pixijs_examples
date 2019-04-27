@@ -41379,12 +41379,12 @@ module.exports = "/dog_sniff_1.75abad81.png";
 module.exports = "/dog_sniff_2.2d55f6d5.png";
 },{}],"static/duck_hunt_static/dog_sniff_3.png":[function(require,module,exports) {
 module.exports = "/dog_sniff_3.67224777.png";
+},{}],"static/duck_hunt_static/dog_sniff_4.png":[function(require,module,exports) {
+module.exports = "/dog_sniff_4.fdd168dd.png";
 },{}],"static/duck_hunt_static/duck_black_dead_0.png":[function(require,module,exports) {
 module.exports = "/duck_black_dead_0.5ff3a17e.png";
 },{}],"static/duck_hunt_static/duck_black_dead_1.png":[function(require,module,exports) {
 module.exports = "/duck_black_dead_1.398150d5.png";
-},{}],"static/duck_hunt_static/dog_sniff_4.png":[function(require,module,exports) {
-module.exports = "/dog_sniff_4.fdd168dd.png";
 },{}],"static/duck_hunt_static/duck_black_dead_2.png":[function(require,module,exports) {
 module.exports = "/duck_black_dead_2.6c4d0479.png";
 },{}],"static/duck_hunt_static/duck_black_left_0.png":[function(require,module,exports) {
@@ -41464,9 +41464,9 @@ module.exports = {
   "dog_sniff_1": require("./dog_sniff_1.png"),
   "dog_sniff_2": require("./dog_sniff_2.png"),
   "dog_sniff_3": require("./dog_sniff_3.png"),
+  "dog_sniff_4": require("./dog_sniff_4.png"),
   "duck_black_dead_0": require("./duck_black_dead_0.png"),
   "duck_black_dead_1": require("./duck_black_dead_1.png"),
-  "dog_sniff_4": require("./dog_sniff_4.png"),
   "duck_black_dead_2": require("./duck_black_dead_2.png"),
   "duck_black_left_0": require("./duck_black_left_0.png"),
   "duck_black_left_1": require("./duck_black_left_1.png"),
@@ -41501,7 +41501,7 @@ module.exports = {
   "scene_back_0": require("./scene_back_0.png"),
   "scene_tree_0": require("./scene_tree_0.png")
 };
-},{"./dog_double_0.png":"static/duck_hunt_static/dog_double_0.png","./dog_find_0.png":"static/duck_hunt_static/dog_find_0.png","./dog_jump_0.png":"static/duck_hunt_static/dog_jump_0.png","./dog_jump_1.png":"static/duck_hunt_static/dog_jump_1.png","./dog_laugh_0.png":"static/duck_hunt_static/dog_laugh_0.png","./dog_laugh_1.png":"static/duck_hunt_static/dog_laugh_1.png","./dog_single_0.png":"static/duck_hunt_static/dog_single_0.png","./dog_sniff_0.png":"static/duck_hunt_static/dog_sniff_0.png","./dog_sniff_1.png":"static/duck_hunt_static/dog_sniff_1.png","./dog_sniff_2.png":"static/duck_hunt_static/dog_sniff_2.png","./dog_sniff_3.png":"static/duck_hunt_static/dog_sniff_3.png","./duck_black_dead_0.png":"static/duck_hunt_static/duck_black_dead_0.png","./duck_black_dead_1.png":"static/duck_hunt_static/duck_black_dead_1.png","./dog_sniff_4.png":"static/duck_hunt_static/dog_sniff_4.png","./duck_black_dead_2.png":"static/duck_hunt_static/duck_black_dead_2.png","./duck_black_left_0.png":"static/duck_hunt_static/duck_black_left_0.png","./duck_black_left_1.png":"static/duck_hunt_static/duck_black_left_1.png","./duck_black_left_2.png":"static/duck_hunt_static/duck_black_left_2.png","./duck_black_right_0.png":"static/duck_hunt_static/duck_black_right_0.png","./duck_black_right_1.png":"static/duck_hunt_static/duck_black_right_1.png","./duck_black_right_2.png":"static/duck_hunt_static/duck_black_right_2.png","./duck_black_top-left_0.png":"static/duck_hunt_static/duck_black_top-left_0.png","./duck_black_top-left_1.png":"static/duck_hunt_static/duck_black_top-left_1.png","./duck_black_top-left_2.png":"static/duck_hunt_static/duck_black_top-left_2.png","./duck_black_top-right_0.png":"static/duck_hunt_static/duck_black_top-right_0.png","./duck_black_top-right_1.png":"static/duck_hunt_static/duck_black_top-right_1.png","./duck_black_top-right_2.png":"static/duck_hunt_static/duck_black_top-right_2.png","./duck_red_dead_0.png":"static/duck_hunt_static/duck_red_dead_0.png","./duck_red_dead_1.png":"static/duck_hunt_static/duck_red_dead_1.png","./duck_red_dead_2.png":"static/duck_hunt_static/duck_red_dead_2.png","./duck_red_left_0.png":"static/duck_hunt_static/duck_red_left_0.png","./duck_red_left_1.png":"static/duck_hunt_static/duck_red_left_1.png","./duck_red_left_2.png":"static/duck_hunt_static/duck_red_left_2.png","./duck_red_right_0.png":"static/duck_hunt_static/duck_red_right_0.png","./duck_red_right_2.png":"static/duck_hunt_static/duck_red_right_2.png","./duck_red_shot_0.png":"static/duck_hunt_static/duck_red_shot_0.png","./duck_red_top-left_0.png":"static/duck_hunt_static/duck_red_top-left_0.png","./duck_red_top-left_1.png":"static/duck_hunt_static/duck_red_top-left_1.png","./duck_red_top-left_2.png":"static/duck_hunt_static/duck_red_top-left_2.png","./duck_red_top-right_0.png":"static/duck_hunt_static/duck_red_top-right_0.png","./duck_red_top-right_1.png":"static/duck_hunt_static/duck_red_top-right_1.png","./duck_red_top-right_2.png":"static/duck_hunt_static/duck_red_top-right_2.png","./hud_bullet_0.png":"static/duck_hunt_static/hud_bullet_0.png","./hud_score-dead_0.png":"static/duck_hunt_static/hud_score-dead_0.png","./hud_score-live_0.png":"static/duck_hunt_static/hud_score-live_0.png","./scene_back_0.png":"static/duck_hunt_static/scene_back_0.png","./scene_tree_0.png":"static/duck_hunt_static/scene_tree_0.png"}],"components/duck-hunt/utils/ResourceLoader.js":[function(require,module,exports) {
+},{"./dog_double_0.png":"static/duck_hunt_static/dog_double_0.png","./dog_find_0.png":"static/duck_hunt_static/dog_find_0.png","./dog_jump_0.png":"static/duck_hunt_static/dog_jump_0.png","./dog_jump_1.png":"static/duck_hunt_static/dog_jump_1.png","./dog_laugh_0.png":"static/duck_hunt_static/dog_laugh_0.png","./dog_laugh_1.png":"static/duck_hunt_static/dog_laugh_1.png","./dog_single_0.png":"static/duck_hunt_static/dog_single_0.png","./dog_sniff_0.png":"static/duck_hunt_static/dog_sniff_0.png","./dog_sniff_1.png":"static/duck_hunt_static/dog_sniff_1.png","./dog_sniff_2.png":"static/duck_hunt_static/dog_sniff_2.png","./dog_sniff_3.png":"static/duck_hunt_static/dog_sniff_3.png","./dog_sniff_4.png":"static/duck_hunt_static/dog_sniff_4.png","./duck_black_dead_0.png":"static/duck_hunt_static/duck_black_dead_0.png","./duck_black_dead_1.png":"static/duck_hunt_static/duck_black_dead_1.png","./duck_black_dead_2.png":"static/duck_hunt_static/duck_black_dead_2.png","./duck_black_left_0.png":"static/duck_hunt_static/duck_black_left_0.png","./duck_black_left_1.png":"static/duck_hunt_static/duck_black_left_1.png","./duck_black_left_2.png":"static/duck_hunt_static/duck_black_left_2.png","./duck_black_right_0.png":"static/duck_hunt_static/duck_black_right_0.png","./duck_black_right_1.png":"static/duck_hunt_static/duck_black_right_1.png","./duck_black_right_2.png":"static/duck_hunt_static/duck_black_right_2.png","./duck_black_top-left_0.png":"static/duck_hunt_static/duck_black_top-left_0.png","./duck_black_top-left_1.png":"static/duck_hunt_static/duck_black_top-left_1.png","./duck_black_top-left_2.png":"static/duck_hunt_static/duck_black_top-left_2.png","./duck_black_top-right_0.png":"static/duck_hunt_static/duck_black_top-right_0.png","./duck_black_top-right_1.png":"static/duck_hunt_static/duck_black_top-right_1.png","./duck_black_top-right_2.png":"static/duck_hunt_static/duck_black_top-right_2.png","./duck_red_dead_0.png":"static/duck_hunt_static/duck_red_dead_0.png","./duck_red_dead_1.png":"static/duck_hunt_static/duck_red_dead_1.png","./duck_red_dead_2.png":"static/duck_hunt_static/duck_red_dead_2.png","./duck_red_left_0.png":"static/duck_hunt_static/duck_red_left_0.png","./duck_red_left_1.png":"static/duck_hunt_static/duck_red_left_1.png","./duck_red_left_2.png":"static/duck_hunt_static/duck_red_left_2.png","./duck_red_right_0.png":"static/duck_hunt_static/duck_red_right_0.png","./duck_red_right_2.png":"static/duck_hunt_static/duck_red_right_2.png","./duck_red_shot_0.png":"static/duck_hunt_static/duck_red_shot_0.png","./duck_red_top-left_0.png":"static/duck_hunt_static/duck_red_top-left_0.png","./duck_red_top-left_1.png":"static/duck_hunt_static/duck_red_top-left_1.png","./duck_red_top-left_2.png":"static/duck_hunt_static/duck_red_top-left_2.png","./duck_red_top-right_0.png":"static/duck_hunt_static/duck_red_top-right_0.png","./duck_red_top-right_1.png":"static/duck_hunt_static/duck_red_top-right_1.png","./duck_red_top-right_2.png":"static/duck_hunt_static/duck_red_top-right_2.png","./hud_bullet_0.png":"static/duck_hunt_static/hud_bullet_0.png","./hud_score-dead_0.png":"static/duck_hunt_static/hud_score-dead_0.png","./hud_score-live_0.png":"static/duck_hunt_static/hud_score-live_0.png","./scene_back_0.png":"static/duck_hunt_static/scene_back_0.png","./scene_tree_0.png":"static/duck_hunt_static/scene_tree_0.png"}],"components/duck-hunt/utils/ResourceLoader.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42035,7 +42035,9 @@ function (_Scene) {
 
   _createClass(GameScene, [{
     key: "play",
-    value: function play(delta) {}
+    value: function play(delta) {
+      this.destroy();
+    }
   }, {
     key: "destroy",
     value: function destroy() {
@@ -42233,7 +42235,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33881" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45711" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
