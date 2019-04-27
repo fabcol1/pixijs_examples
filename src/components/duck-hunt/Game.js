@@ -1,6 +1,7 @@
 import { Application, utils } from 'pixi.js';
 import ResourceLoader from './utils/ResourceLoader.js';
 import MainMenu from './scenes/MainMenu.js';
+import GameScene from './scenes/GameScene.js';
 
 export default class Game {
   constructor(parentElement) {
@@ -53,14 +54,9 @@ export default class Game {
   setup(loader, resources) {
     // create scenes
     this.createScene(new MainMenu(resources, this.changeScene), 'MM');
+    this.createScene(new GameScene(resources, this.changeScene), 'GS');
 
     this.changeScene('MM');
-    // this.scenes['mainMenu'].container.width = this.app.screen.width;
-    // this.scenes['mainMenu'].container.height = this.app.screen.height;
-    // this.scenes['mainMenu'] = new MainMenuScene(resources);
-
-    // this.app.stage.addChild(this.scenes['mainMenu'].container);
-    // this.state = this.scenes['mainMenu'].play;
     this.app.ticker.add(delta => this.gameLoop(delta));
   }
 

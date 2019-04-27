@@ -7,6 +7,7 @@ export default class Scene {
     this.destroy = this.destroy.bind(this);
     this.reset = this.reset.bind(this);
     this.container = new Container();
+    this.resources = resources;
   }
 
   play(delta) {
