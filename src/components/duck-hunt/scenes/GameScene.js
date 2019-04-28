@@ -3,10 +3,12 @@ import { Sprite, Texture, extras, Container } from 'pixi.js';
 const { AnimatedSprite } = extras;
 
 import Background from '../entities/Background.js';
-import DuckBlack from '../entities/DuckBlack.js';
-import DuckRed from '../entities/DuckRed.js';
 import Scene from './Scene.js';
-import DogAnimationBuilder from '../animations/DogAnimationBuilder.js';
+
+import DogAnimationBuilder from '../entities-layers/DogAnimationBuilder.js';
+import Ducks from '../entities-layers/Ducks.js';
+
+import GameSceneEventListenerController from '../event-listeners/GameSceneEventListenerController';
 
 export default class GameScene extends Scene {
   constructor(resources, changeScene) {
@@ -14,58 +16,36 @@ export default class GameScene extends Scene {
     this.reset();
   }
 
-  play(delta) {
-    this.ducks.forEach(duck => duck.logicUpdate(delta));
-    this.ducks = this.ducks.filter(o => {
-      const isActive = o.isActive();
-      if (!isActive) {
-        o.visible = false;
-        this.container.removeChild(o);
-      }
-      return isActive;
-    });
-
-    this.dogAnimationBuilder.logicUpdate(delta);
+  update_(delta) {
+    this.ducks.update_(delta);
+    this.dogAnimationBuilder.update_(delta);
   }
 
   destroy() {
-    this.container.removeChild(this.background);
-    this.changeScene('MM');
+    this.eventListenerController.removeEventListeners();
+    this.mainContainer.removeChild(this.dogAnimationBuilder);
+    this.mainContainer.removeChild(this.background);
   }
 
   reset() {
-    this.background = new Background(this.resources);
-    this.dogAnimationBuilder = new DogAnimationBuilder(this);
-    this.ducks = [
-      new DuckBlack(this, 210, 430, 'topRight'),
-      new DuckBlack(this, 330, 400, 'topRight'),
-      new DuckRed(this, 325, 420, 'topRight'),
-      new DuckRed(this, 435, 410, 'topLeft')
-    ];
+    // EventListenerController
+    this.eventListenerController = new GameSceneEventListenerController(this);
+    this.eventListenerController.initEventListeners();
 
-    this.gameSceneEvents();
+    // Layer 1
     this.bgColor();
-    this.ducks.forEach(duck => this.container.addChild(duck));
-    this.container.addChild(this.dogAnimationBuilder);
-    this.container.addChild(this.background);
-  }
 
-  gameSceneEvents() {
-    this.container.removeAllListeners();
-    this.container.interactive = true;
-    this.container.on('pointerdown', e => {
-      const shotBg = new Sprite(Texture.WHITE);
-      shotBg.height = 600;
-      shotBg.width = 800;
-      shotBg.alpha = 0.5;
-      this.container.addChild(shotBg);
-      setTimeout(() => {
-        this.container.removeChild(shotBg);
-      }, 20);
-    });
-    this.container.on('duckkill', (e, x) => {
-      this.dogAnimationBuilder.dogSingleAnim(x, 500);
-    });
+    // Layer 2
+    this.ducks = new Ducks(this);
+    this.ducks.generateWave();
+
+    // Layer 3
+    this.dogAnimationBuilder = new DogAnimationBuilder(this);
+    this.mainContainer.addChild(this.dogAnimationBuilder);
+
+    // Layer 4
+    this.background = new Background(this);
+    this.mainContainer.addChild(this.background);
   }
 
   bgColor() {
@@ -73,6 +53,6 @@ export default class GameScene extends Scene {
     bgColor.height = 600;
     bgColor.width = 800;
     bgColor.tint = 0x89c4f4;
-    this.container.addChild(bgColor);
+    this.mainContainer.addChild(bgColor);
   }
 }

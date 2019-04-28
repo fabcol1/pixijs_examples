@@ -10,6 +10,7 @@ import {
   dog_find_0,
   dog_jump_0,
   dog_jump_1,
+  duck_black_shot_0,
   duck_black_dead_0,
   duck_black_dead_1,
   duck_black_dead_2,
@@ -56,6 +57,7 @@ export default class ResourceLoader {
       .add('dogFind', dog_find_0)
       .add('dogJump0', dog_jump_0)
       .add('dogJump1', dog_jump_1)
+      .add('duckBlackShot', duck_black_shot_0)
       .add('duckBlackDead0', duck_black_dead_0)
       .add('duckBlackDead1', duck_black_dead_1)
       .add('duckBlackDead2', duck_black_dead_2)

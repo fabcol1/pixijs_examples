@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.1.0] - 2019-04-28
+
+### Added
+
+- [Duck Hunt Clone](https://eager-shaw-8e9d24.netlify.com) : Dog animation, EventListener, GameOver/Restart.
+
+### Changed
+
+- Code refactor: EventListener for every Scene, all events emitted are handled in a single ListenerController for Scene.
+
 ## [0.0.0] - 2019-04-25
 
 ### Added

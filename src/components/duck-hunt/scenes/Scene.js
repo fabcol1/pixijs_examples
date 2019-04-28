@@ -1,23 +1,24 @@
 import { Container } from 'pixi.js';
 
+import EventListenerController from '../event-listeners/EventListenerController';
+
 export default class Scene {
   constructor(resources, changeScene) {
     this.changeScene = changeScene;
-    this.play = this.play.bind(this);
+    this.update_ = this.update_.bind(this);
     this.destroy = this.destroy.bind(this);
     this.reset = this.reset.bind(this);
-    this.container = new Container();
+    this.mainContainer = new Container();
+    this.eventListenerController = new EventListenerController();
     this.resources = resources;
   }
 
-  play(delta) {
-    throw new Error('You have to implement the method play(delta)!');
+  update_(delta) {
+    throw new Error('You have to implement the method update_(delta)!');
   }
-
   destroy() {
     throw new Error('You have to implement the method destory()!');
   }
-
   reset() {
     throw new Error('You have to implement the method reset()!');
   }

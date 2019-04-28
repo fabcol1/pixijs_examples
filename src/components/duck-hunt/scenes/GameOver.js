@@ -1,9 +1,8 @@
-import { Sprite, Texture } from 'pixi.js';
+import { Sprite, Texture, TextStyle, Text } from 'pixi.js';
 
 import Scene from './Scene.js';
-import MainMenuEventListenerController from '../event-listeners/MainMenuEventListenerController.js';
+import GameOverEventListenerController from '../event-listeners/GameOverEventListenerController.js';
 import Background from '../entities/Background.js';
-import DogAnimationBuilder from '../entities-layers/DogAnimationBuilder';
 
 export default class MainMenu extends Scene {
   constructor(resources, changeScene) {
@@ -11,19 +10,16 @@ export default class MainMenu extends Scene {
     this.reset();
   }
 
-  update_(delta) {
-    this.dogAnimationBuilder.update_(delta);
-  }
+  update_(delta) {}
 
   destroy() {
     this.eventListenerController.removeEventListeners();
     this.mainContainer.removeChild(this.background);
-    this.mainContainer.removeChild(this.dogAnimationBuilder);
   }
 
   reset() {
     // EventListenerController
-    this.eventListenerController = new MainMenuEventListenerController(this);
+    this.eventListenerController = new GameOverEventListenerController(this);
     this.eventListenerController.initEventListeners();
     // Layer 1
     this.bgColor();
@@ -31,11 +27,26 @@ export default class MainMenu extends Scene {
     this.background = new Background(this);
     this.mainContainer.addChild(this.background);
     // Layer 3
-    this.dogAnimationBuilder = new DogAnimationBuilder(this);
-    this.dogAnimationBuilder.dogEntryAnim(0, 470);
-    this.mainContainer.addChild(this.dogAnimationBuilder);
+    this.gameOverMessage();
   }
 
+  gameOverMessage() {
+    const style = new TextStyle({
+      fontFamily: 'Arial',
+      fontSize: 42,
+      fill: 'white',
+      align: 'center',
+      dropShadow: true,
+      dropShadowColor: '#000000',
+      dropShadowBlur: 1,
+      dropShadowAngle: Math.PI / 10,
+      dropShadowDistance: 3
+    });
+    const message = new Text('Game Over\nplay again?', style);
+    message.x = 400 - message.width / 2;
+    message.y = 300 - message.height / 2;
+    this.mainContainer.addChild(message);
+  }
   bgColor() {
     const bgColor = new Sprite(Texture.WHITE);
     bgColor.height = 600;

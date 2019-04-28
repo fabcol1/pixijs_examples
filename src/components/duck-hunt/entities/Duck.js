@@ -2,14 +2,14 @@ import { Sprite, Texture, Container, extras } from 'pixi.js';
 const { AnimatedSprite } = extras;
 
 export default class Duck extends AnimatedSprite {
-  constructor(game, x, y, state, frames) {
+  constructor(scene, x, y, state, frames) {
     super(frames[state]);
-    this.game = game;
+    this.scene = scene;
     this.x = x;
     this.y = y;
     this.vx = 0;
     this.vy = 0;
-    this.animationSpeed = 0.1;
+    this.animationSpeed = 0.15;
     this.state = state;
     this.frames = frames;
     this.logics = {
@@ -27,16 +27,11 @@ export default class Duck extends AnimatedSprite {
     this.removeAllListeners();
     this.on('pointerdown', e => {
       if (this.state == 'rightDead' || this.state == 'leftDead') return;
-
       const lastState = this.state;
-      if (this.frames['shot'].length > 0) {
-        this.stateUpdate('shot');
-        setTimeout(() => {
-          this.killEvent(lastState);
-        }, 500);
-      } else {
+      this.stateUpdate('shot');
+      setTimeout(() => {
         this.killEvent(lastState);
-      }
+      }, 500);
     });
 
     this.counter = 0;
@@ -105,7 +100,11 @@ export default class Duck extends AnimatedSprite {
   isActive() {
     if (this.y > 600 - this.height || this.y < 0 - this.height) {
       if (this.y > 600 - this.height) {
-        this.game.container.emit('duckkill', new Event('duckkill'), this.x);
+        this.scene.mainContainer.emit(
+          'duckkill',
+          new Event('duckkill'),
+          this.x
+        );
       }
       return false;
     }

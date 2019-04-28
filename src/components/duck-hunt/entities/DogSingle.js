@@ -1,10 +1,10 @@
 import { Sprite } from 'pixi.js';
 
 export default class DogSingle extends Sprite {
-  constructor(game, x, y) {
-    super(game.resources.dogSingle.texture);
-    this.game = game;
-    this.x = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550].reduce(
+  constructor(scene, x, y) {
+    super(scene.resources.dogSingle.texture);
+    this.scene = scene;
+    this.x = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450].reduce(
       (prev, curr) => {
         return Math.abs(curr - x) < Math.abs(prev - x) ? curr : prev;
       },
@@ -20,7 +20,7 @@ export default class DogSingle extends Sprite {
     this.status = 'running';
   }
 
-  logicUpdate(delta) {
+  update_(delta) {
     if (this.status === 'idle' || this.status === 'end') return;
     this.x += this.vx;
     this.y += this.vy;

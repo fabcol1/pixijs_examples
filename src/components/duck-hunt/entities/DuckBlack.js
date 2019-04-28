@@ -23,7 +23,7 @@ export default class DuckBlack extends Duck {
         game.resources.duckBlackTopRight1.texture,
         game.resources.duckBlackTopRight2.texture
       ],
-      shot: [],
+      shot: [game.resources.duckBlackShot.texture],
       leftDead: [game.resources.duckBlackDead0.texture],
       rightDead: [game.resources.duckBlackDead1.texture]
     };
