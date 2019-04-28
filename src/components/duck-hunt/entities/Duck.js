@@ -22,24 +22,20 @@ export default class Duck extends AnimatedSprite {
       rightDead: this.rightDead.bind(this)
     };
     super.play();
+    this.killEvent = this.killEvent.bind(this);
     this.interactive = true;
+    this.removeAllListeners();
     this.on('pointerdown', e => {
       if (this.state == 'rightDead' || this.state == 'leftDead') return;
 
+      const lastState = this.state;
       if (this.frames['shot'].length > 0) {
-        const lastState = this.state;
         this.stateUpdate('shot');
         setTimeout(() => {
-          let nextStatus = 'rightDead';
-          if (lastState === 'left' || lastState === 'topLeft')
-            nextStatus = 'leftDead';
-          this.stateUpdate(nextStatus);
+          this.killEvent(lastState);
         }, 500);
       } else {
-        let nextStatus = 'rightDead';
-        if (this.state === 'left' || this.state === 'topLeft')
-          nextStatus = 'leftDead';
-        this.stateUpdate(nextStatus);
+        this.killEvent(lastState);
       }
     });
 
@@ -47,6 +43,13 @@ export default class Duck extends AnimatedSprite {
     this.nextCounterChange = Math.floor(Math.random() * 50) + 50;
   }
 
+  killEvent(lastState) {
+    let nextStatus = 'rightDead';
+    if (lastState === 'left' || lastState === 'topLeft')
+      nextStatus = 'leftDead';
+
+    this.stateUpdate(nextStatus);
+  }
   stateUpdate(newState) {
     this.state = newState;
     this.textures = this.frames[this.state];
@@ -101,6 +104,9 @@ export default class Duck extends AnimatedSprite {
 
   isActive() {
     if (this.y > 600 - this.height || this.y < 0 - this.height) {
+      if (this.y > 600 - this.height) {
+        this.game.container.emit('duckkill', new Event('duckkill'), this.x);
+      }
       return false;
     }
     return true;

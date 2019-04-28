@@ -1,4 +1,4 @@
-import { Sprite, Texture, extras } from 'pixi.js';
+import { Sprite, Texture, extras, Container } from 'pixi.js';
 
 const { AnimatedSprite } = extras;
 
@@ -6,6 +6,7 @@ import Background from '../entities/Background.js';
 import DuckBlack from '../entities/DuckBlack.js';
 import DuckRed from '../entities/DuckRed.js';
 import Scene from './Scene.js';
+import DogAnimationBuilder from '../animations/DogAnimationBuilder.js';
 
 export default class GameScene extends Scene {
   constructor(resources, changeScene) {
@@ -14,17 +15,17 @@ export default class GameScene extends Scene {
   }
 
   play(delta) {
-    for (let o in this.ducks) {
-      this.ducks[o].logicUpdate(delta);
-    }
-
+    this.ducks.forEach(duck => duck.logicUpdate(delta));
     this.ducks = this.ducks.filter(o => {
-      if (!o.isActive()) {
+      const isActive = o.isActive();
+      if (!isActive) {
         o.visible = false;
         this.container.removeChild(o);
       }
-      return o.isActive();
+      return isActive;
     });
+
+    this.dogAnimationBuilder.logicUpdate(delta);
   }
 
   destroy() {
@@ -34,7 +35,7 @@ export default class GameScene extends Scene {
 
   reset() {
     this.background = new Background(this.resources);
-
+    this.dogAnimationBuilder = new DogAnimationBuilder(this);
     this.ducks = [
       new DuckBlack(this, 210, 430, 'topRight'),
       new DuckBlack(this, 330, 400, 'topRight'),
@@ -43,21 +44,14 @@ export default class GameScene extends Scene {
     ];
 
     this.gameSceneEvents();
-
-    const bgColor = new Sprite(Texture.WHITE);
-    bgColor.height = 600;
-    bgColor.width = 800;
-    bgColor.tint = 0x89c4f4;
-
-    this.container.addChild(bgColor);
-
-    for (const o of this.ducks) {
-      this.container.addChild(o);
-    }
+    this.bgColor();
+    this.ducks.forEach(duck => this.container.addChild(duck));
+    this.container.addChild(this.dogAnimationBuilder);
     this.container.addChild(this.background);
   }
 
   gameSceneEvents() {
+    this.container.removeAllListeners();
     this.container.interactive = true;
     this.container.on('pointerdown', e => {
       const shotBg = new Sprite(Texture.WHITE);
@@ -69,5 +63,16 @@ export default class GameScene extends Scene {
         this.container.removeChild(shotBg);
       }, 20);
     });
+    this.container.on('duckkill', (e, x) => {
+      this.dogAnimationBuilder.dogSingleAnim(x, 500);
+    });
+  }
+
+  bgColor() {
+    const bgColor = new Sprite(Texture.WHITE);
+    bgColor.height = 600;
+    bgColor.width = 800;
+    bgColor.tint = 0x89c4f4;
+    this.container.addChild(bgColor);
   }
 }

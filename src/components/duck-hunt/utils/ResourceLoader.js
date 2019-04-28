@@ -39,7 +39,8 @@ import {
   duck_red_top_left_2,
   duck_red_top_right_0,
   duck_red_top_right_1,
-  duck_red_top_right_2
+  duck_red_top_right_2,
+  dog_single_0
 } from '../../../static/duck_hunt_static/*.png';
 
 export default class ResourceLoader {
@@ -85,6 +86,7 @@ export default class ResourceLoader {
       .add('duckRedTopRight0', duck_red_top_right_0)
       .add('duckRedTopRight1', duck_red_top_right_1)
       .add('duckRedTopRight2', duck_red_top_right_2)
+      .add('dogSingle', dog_single_0)
       .load(setup);
   }
 }

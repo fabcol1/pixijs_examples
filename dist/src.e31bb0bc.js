@@ -41529,7 +41529,7 @@ function () {
   _createClass(ResourceLoader, null, [{
     key: "loadResources",
     value: function loadResources(setup) {
-      _pixi.loader.add('sceneBack', _.scene_back_0).add('sceneTree', _.scene_tree_0).add('dogSniff0', _.dog_sniff_0).add('dogSniff1', _.dog_sniff_1).add('dogSniff2', _.dog_sniff_2).add('dogSniff3', _.dog_sniff_3).add('dogSniff4', _.dog_sniff_4).add('dogFind', _.dog_find_0).add('dogJump0', _.dog_jump_0).add('dogJump1', _.dog_jump_1).add('duckBlackDead0', _.duck_black_dead_0).add('duckBlackDead1', _.duck_black_dead_1).add('duckBlackDead2', _.duck_black_dead_2).add('duckBlackLeft0', _.duck_black_left_0).add('duckBlackLeft1', _.duck_black_left_1).add('duckBlackLeft2', _.duck_black_left_2).add('duckBlackRight0', _.duck_black_right_0).add('duckBlackRight1', _.duck_black_right_1).add('duckBlackRight2', _.duck_black_right_2).add('duckBlackTopLeft0', _.duck_black_top_left_0).add('duckBlackTopLeft1', _.duck_black_top_left_1).add('duckBlackTopLeft2', _.duck_black_top_left_2).add('duckBlackTopRight0', _.duck_black_top_right_0).add('duckBlackTopRight1', _.duck_black_top_right_1).add('duckBlackTopRight2', _.duck_black_top_right_2).add('duckRedShot', _.duck_red_shot_0).add('duckRedDead0', _.duck_red_dead_0).add('duckRedDead1', _.duck_red_dead_1).add('duckRedDead2', _.duck_red_dead_2).add('duckRedLeft0', _.duck_red_left_0).add('duckRedLeft1', _.duck_red_left_1).add('duckRedLeft2', _.duck_red_left_2).add('duckRedRight0', _.duck_red_right_0).add('duckRedRight2', _.duck_red_right_2).add('duckRedTopLeft0', _.duck_red_top_left_0).add('duckRedTopLeft1', _.duck_red_top_left_1).add('duckRedTopLeft2', _.duck_red_top_left_2).add('duckRedTopRight0', _.duck_red_top_right_0).add('duckRedTopRight1', _.duck_red_top_right_1).add('duckRedTopRight2', _.duck_red_top_right_2).load(setup);
+      _pixi.loader.add('sceneBack', _.scene_back_0).add('sceneTree', _.scene_tree_0).add('dogSniff0', _.dog_sniff_0).add('dogSniff1', _.dog_sniff_1).add('dogSniff2', _.dog_sniff_2).add('dogSniff3', _.dog_sniff_3).add('dogSniff4', _.dog_sniff_4).add('dogFind', _.dog_find_0).add('dogJump0', _.dog_jump_0).add('dogJump1', _.dog_jump_1).add('duckBlackDead0', _.duck_black_dead_0).add('duckBlackDead1', _.duck_black_dead_1).add('duckBlackDead2', _.duck_black_dead_2).add('duckBlackLeft0', _.duck_black_left_0).add('duckBlackLeft1', _.duck_black_left_1).add('duckBlackLeft2', _.duck_black_left_2).add('duckBlackRight0', _.duck_black_right_0).add('duckBlackRight1', _.duck_black_right_1).add('duckBlackRight2', _.duck_black_right_2).add('duckBlackTopLeft0', _.duck_black_top_left_0).add('duckBlackTopLeft1', _.duck_black_top_left_1).add('duckBlackTopLeft2', _.duck_black_top_left_2).add('duckBlackTopRight0', _.duck_black_top_right_0).add('duckBlackTopRight1', _.duck_black_top_right_1).add('duckBlackTopRight2', _.duck_black_top_right_2).add('duckRedShot', _.duck_red_shot_0).add('duckRedDead0', _.duck_red_dead_0).add('duckRedDead1', _.duck_red_dead_1).add('duckRedDead2', _.duck_red_dead_2).add('duckRedLeft0', _.duck_red_left_0).add('duckRedLeft1', _.duck_red_left_1).add('duckRedLeft2', _.duck_red_left_2).add('duckRedRight0', _.duck_red_right_0).add('duckRedRight2', _.duck_red_right_2).add('duckRedTopLeft0', _.duck_red_top_left_0).add('duckRedTopLeft1', _.duck_red_top_left_1).add('duckRedTopLeft2', _.duck_red_top_left_2).add('duckRedTopRight0', _.duck_red_top_right_0).add('duckRedTopRight1', _.duck_red_top_right_1).add('duckRedTopRight2', _.duck_red_top_right_2).add('dogSingle', _.dog_single_0).load(setup);
     }
   }]);
 
@@ -41928,27 +41928,23 @@ function (_AnimatedSprite) {
 
     _get(_getPrototypeOf(Duck.prototype), "play", _assertThisInitialized(_this)).call(_assertThisInitialized(_this));
 
+    _this.killEvent = _this.killEvent.bind(_assertThisInitialized(_this));
     _this.interactive = true;
+
+    _this.removeAllListeners();
 
     _this.on('pointerdown', function (e) {
       if (_this.state == 'rightDead' || _this.state == 'leftDead') return;
+      var lastState = _this.state;
 
       if (_this.frames['shot'].length > 0) {
-        var lastState = _this.state;
-
         _this.stateUpdate('shot');
 
         setTimeout(function () {
-          var nextStatus = 'rightDead';
-          if (lastState === 'left' || lastState === 'topLeft') nextStatus = 'leftDead';
-
-          _this.stateUpdate(nextStatus);
+          _this.killEvent(lastState);
         }, 500);
       } else {
-        var nextStatus = 'rightDead';
-        if (_this.state === 'left' || _this.state === 'topLeft') nextStatus = 'leftDead';
-
-        _this.stateUpdate(nextStatus);
+        _this.killEvent(lastState);
       }
     });
 
@@ -41958,6 +41954,13 @@ function (_AnimatedSprite) {
   }
 
   _createClass(Duck, [{
+    key: "killEvent",
+    value: function killEvent(lastState) {
+      var nextStatus = 'rightDead';
+      if (lastState === 'left' || lastState === 'topLeft') nextStatus = 'leftDead';
+      this.stateUpdate(nextStatus);
+    }
+  }, {
     key: "stateUpdate",
     value: function stateUpdate(newState) {
       this.state = newState;
@@ -42027,6 +42030,10 @@ function (_AnimatedSprite) {
     key: "isActive",
     value: function isActive() {
       if (this.y > 600 - this.height || this.y < 0 - this.height) {
+        if (this.y > 600 - this.height) {
+          this.game.container.emit('duckkill', new Event('duckkill'), this.x);
+        }
+
         return false;
       }
 
@@ -42158,7 +42165,163 @@ function (_Duck) {
 }(_Duck2.default);
 
 exports.default = DuckRed;
-},{"./Duck.js":"components/duck-hunt/entities/Duck.js"}],"components/duck-hunt/scenes/GameScene.js":[function(require,module,exports) {
+},{"./Duck.js":"components/duck-hunt/entities/Duck.js"}],"components/duck-hunt/animations/DogSingle.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _pixi = require("pixi.js");
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var DogSingle =
+/*#__PURE__*/
+function (_Sprite) {
+  _inherits(DogSingle, _Sprite);
+
+  function DogSingle(game, x, y) {
+    var _this;
+
+    _classCallCheck(this, DogSingle);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DogSingle).call(this, game.resources.dogSingle.texture));
+    _this.game = game;
+    _this.x = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500, 550].reduce(function (prev, curr) {
+      return Math.abs(curr - x) < Math.abs(prev - x) ? curr : prev;
+    }, x);
+    _this.y = y;
+    _this.vx = 0;
+    _this.vy = -3;
+    _this.minY = y - 120;
+    _this.maxY = y + 1;
+    _this.status = 'running';
+    return _this;
+  }
+
+  _createClass(DogSingle, [{
+    key: "logicUpdate",
+    value: function logicUpdate(delta) {
+      var _this2 = this;
+
+      if (this.status === 'idle' || this.status === 'end') return;
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.y < this.minY) {
+        this.status = 'idle';
+        this.vy = 0;
+        setTimeout(function () {
+          _this2.status = 'running';
+          _this2.vy = 4;
+        }, 500);
+      } else if (this.y > this.maxY) {
+        this.status = 'end';
+      }
+    }
+  }]);
+
+  return DogSingle;
+}(_pixi.Sprite);
+
+exports.default = DogSingle;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js"}],"components/duck-hunt/animations/DogAnimationBuilder.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _pixi = require("pixi.js");
+
+var _DogSingle = _interopRequireDefault(require("./DogSingle"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var DogAnimationBuilder =
+/*#__PURE__*/
+function (_Container) {
+  _inherits(DogAnimationBuilder, _Container);
+
+  function DogAnimationBuilder(game) {
+    var _this;
+
+    _classCallCheck(this, DogAnimationBuilder);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DogAnimationBuilder).call(this));
+    _this.game = game;
+    _this.dogAnimations = [];
+    return _this;
+  }
+
+  _createClass(DogAnimationBuilder, [{
+    key: "dogSingleAnim",
+    value: function dogSingleAnim(x, y) {
+      var ds = new _DogSingle.default(this.game, x, y);
+      this.addChild(ds);
+      this.dogAnimations.push(ds);
+    }
+  }, {
+    key: "logicUpdate",
+    value: function logicUpdate(delta) {
+      this.singleAnimLogicUpdate(delta);
+    }
+  }, {
+    key: "singleAnimLogicUpdate",
+    value: function singleAnimLogicUpdate(delta) {
+      if (this.dogAnimations.length > 0) {
+        this.dogAnimations[0].logicUpdate(delta);
+
+        if (this.dogAnimations[0].status === 'end') {
+          this.removeChild(this.dogAnimations[0]);
+          this.dogAnimations.splice(0, 1);
+        }
+      }
+    }
+  }]);
+
+  return DogAnimationBuilder;
+}(_pixi.Container);
+
+exports.default = DogAnimationBuilder;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./DogSingle":"components/duck-hunt/animations/DogSingle.js"}],"components/duck-hunt/scenes/GameScene.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42175,6 +42338,8 @@ var _DuckBlack = _interopRequireDefault(require("../entities/DuckBlack.js"));
 var _DuckRed = _interopRequireDefault(require("../entities/DuckRed.js"));
 
 var _Scene2 = _interopRequireDefault(require("./Scene.js"));
+
+var _DogAnimationBuilder = _interopRequireDefault(require("../animations/DogAnimationBuilder.js"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -42220,19 +42385,21 @@ function (_Scene) {
     value: function play(delta) {
       var _this2 = this;
 
-      for (var o in this.ducks) {
-        this.ducks[o].logicUpdate(delta);
-      }
-
+      this.ducks.forEach(function (duck) {
+        return duck.logicUpdate(delta);
+      });
       this.ducks = this.ducks.filter(function (o) {
-        if (!o.isActive()) {
+        var isActive = o.isActive();
+
+        if (!isActive) {
           o.visible = false;
 
           _this2.container.removeChild(o);
         }
 
-        return o.isActive();
+        return isActive;
       });
+      this.dogAnimationBuilder.logicUpdate(delta);
     }
   }, {
     key: "destroy",
@@ -42243,45 +42410,25 @@ function (_Scene) {
   }, {
     key: "reset",
     value: function reset() {
+      var _this3 = this;
+
       this.background = new _Background.default(this.resources);
+      this.dogAnimationBuilder = new _DogAnimationBuilder.default(this);
       this.ducks = [new _DuckBlack.default(this, 210, 430, 'topRight'), new _DuckBlack.default(this, 330, 400, 'topRight'), new _DuckRed.default(this, 325, 420, 'topRight'), new _DuckRed.default(this, 435, 410, 'topLeft')];
       this.gameSceneEvents();
-      var bgColor = new _pixi.Sprite(_pixi.Texture.WHITE);
-      bgColor.height = 600;
-      bgColor.width = 800;
-      bgColor.tint = 0x89c4f4;
-      this.container.addChild(bgColor);
-      var _iteratorNormalCompletion = true;
-      var _didIteratorError = false;
-      var _iteratorError = undefined;
-
-      try {
-        for (var _iterator = this.ducks[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-          var o = _step.value;
-          this.container.addChild(o);
-        }
-      } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion && _iterator.return != null) {
-            _iterator.return();
-          }
-        } finally {
-          if (_didIteratorError) {
-            throw _iteratorError;
-          }
-        }
-      }
-
+      this.bgColor();
+      this.ducks.forEach(function (duck) {
+        return _this3.container.addChild(duck);
+      });
+      this.container.addChild(this.dogAnimationBuilder);
       this.container.addChild(this.background);
     }
   }, {
     key: "gameSceneEvents",
     value: function gameSceneEvents() {
-      var _this3 = this;
+      var _this4 = this;
 
+      this.container.removeAllListeners();
       this.container.interactive = true;
       this.container.on('pointerdown', function (e) {
         var shotBg = new _pixi.Sprite(_pixi.Texture.WHITE);
@@ -42289,12 +42436,24 @@ function (_Scene) {
         shotBg.width = 800;
         shotBg.alpha = 0.5;
 
-        _this3.container.addChild(shotBg);
+        _this4.container.addChild(shotBg);
 
         setTimeout(function () {
-          _this3.container.removeChild(shotBg);
+          _this4.container.removeChild(shotBg);
         }, 20);
       });
+      this.container.on('duckkill', function (e, x) {
+        _this4.dogAnimationBuilder.dogSingleAnim(x, 500);
+      });
+    }
+  }, {
+    key: "bgColor",
+    value: function bgColor() {
+      var bgColor = new _pixi.Sprite(_pixi.Texture.WHITE);
+      bgColor.height = 600;
+      bgColor.width = 800;
+      bgColor.tint = 0x89c4f4;
+      this.container.addChild(bgColor);
     }
   }]);
 
@@ -42302,7 +42461,7 @@ function (_Scene) {
 }(_Scene2.default);
 
 exports.default = GameScene;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/Background.js":"components/duck-hunt/entities/Background.js","../entities/DuckBlack.js":"components/duck-hunt/entities/DuckBlack.js","../entities/DuckRed.js":"components/duck-hunt/entities/DuckRed.js","./Scene.js":"components/duck-hunt/scenes/Scene.js"}],"components/duck-hunt/Game.js":[function(require,module,exports) {
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/Background.js":"components/duck-hunt/entities/Background.js","../entities/DuckBlack.js":"components/duck-hunt/entities/DuckBlack.js","../entities/DuckRed.js":"components/duck-hunt/entities/DuckRed.js","./Scene.js":"components/duck-hunt/scenes/Scene.js","../animations/DogAnimationBuilder.js":"components/duck-hunt/animations/DogAnimationBuilder.js"}],"components/duck-hunt/Game.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42471,7 +42630,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41187" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "33157" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
