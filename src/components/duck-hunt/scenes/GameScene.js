@@ -3,7 +3,8 @@ import { Sprite, Texture, extras } from 'pixi.js';
 const { AnimatedSprite } = extras;
 
 import Background from '../entities/Background.js';
-import Duck from '../entities/Duck.js';
+import DuckBlack from '../entities/DuckBlack.js';
+import DuckRed from '../entities/DuckRed.js';
 import Scene from './Scene.js';
 
 export default class GameScene extends Scene {
@@ -13,7 +14,17 @@ export default class GameScene extends Scene {
   }
 
   play(delta) {
-    this.destroy();
+    for (let o in this.ducks) {
+      this.ducks[o].logicUpdate(delta);
+    }
+
+    this.ducks = this.ducks.filter(o => {
+      if (!o.isActive()) {
+        o.visible = false;
+        this.container.removeChild(o);
+      }
+      return o.isActive();
+    });
   }
 
   destroy() {
@@ -23,29 +34,40 @@ export default class GameScene extends Scene {
 
   reset() {
     this.background = new Background(this.resources);
-    this.background.initOnClickEffect();
 
-    this.duck = new Duck(
-      [
-        this.resources.duckBlackDead0.texture,
-        this.resources.duckBlackDead1.texture,
-        this.resources.duckBlackDead2.texture
-      ],
-      'left',
-      100,
-      100,
-      0,
-      0
-    );
+    this.ducks = [
+      new DuckBlack(this, 210, 430, 'topRight'),
+      new DuckBlack(this, 330, 400, 'topRight'),
+      new DuckRed(this, 325, 420, 'topRight'),
+      new DuckRed(this, 435, 410, 'topLeft')
+    ];
 
-    // setTimeout(() => {
-    //   this.duck.left([
-    //     this.resources.duckRedDead0.texture,
-    //     this.resources.duckRedDead1.texture,
-    //     this.resources.duckRedDead2.texture
-    //   ]);
-    // }, 3000);
+    this.gameSceneEvents();
+
+    const bgColor = new Sprite(Texture.WHITE);
+    bgColor.height = 600;
+    bgColor.width = 800;
+    bgColor.tint = 0x89c4f4;
+
+    this.container.addChild(bgColor);
+
+    for (const o of this.ducks) {
+      this.container.addChild(o);
+    }
     this.container.addChild(this.background);
-    this.container.addChild(this.duck);
+  }
+
+  gameSceneEvents() {
+    this.container.interactive = true;
+    this.container.on('pointerdown', e => {
+      const shotBg = new Sprite(Texture.WHITE);
+      shotBg.height = 600;
+      shotBg.width = 800;
+      shotBg.alpha = 0.5;
+      this.container.addChild(shotBg);
+      setTimeout(() => {
+        this.container.removeChild(shotBg);
+      }, 20);
+    });
   }
 }

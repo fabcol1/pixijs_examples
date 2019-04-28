@@ -28,6 +28,13 @@ export default class MainMenu extends Scene {
   reset() {
     this.background = new Background(this.resources);
     this.dog = new DogEntryAnimation(this.resources);
+
+    const bgColor = new Sprite(Texture.WHITE);
+    bgColor.height = 600;
+    bgColor.width = 800;
+    bgColor.tint = 0x89c4f4;
+    this.container.addChild(bgColor);
+
     this.container.addChild(this.background);
     this.container.addChild(this.dog);
   }

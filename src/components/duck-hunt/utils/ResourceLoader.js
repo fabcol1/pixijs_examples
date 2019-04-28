@@ -13,9 +13,33 @@ import {
   duck_black_dead_0,
   duck_black_dead_1,
   duck_black_dead_2,
+  duck_black_left_0,
+  duck_black_left_1,
+  duck_black_left_2,
+  duck_black_right_0,
+  duck_black_right_1,
+  duck_black_right_2,
+  duck_black_top_left_0,
+  duck_black_top_left_1,
+  duck_black_top_left_2,
+  duck_black_top_right_0,
+  duck_black_top_right_1,
+  duck_black_top_right_2,
   duck_red_dead_0,
   duck_red_dead_1,
-  duck_red_dead_2
+  duck_red_dead_2,
+  duck_red_shot_0,
+  duck_red_left_0,
+  duck_red_left_1,
+  duck_red_left_2,
+  duck_red_right_0,
+  duck_red_right_2,
+  duck_red_top_left_0,
+  duck_red_top_left_1,
+  duck_red_top_left_2,
+  duck_red_top_right_0,
+  duck_red_top_right_1,
+  duck_red_top_right_2
 } from '../../../static/duck_hunt_static/*.png';
 
 export default class ResourceLoader {
@@ -34,9 +58,33 @@ export default class ResourceLoader {
       .add('duckBlackDead0', duck_black_dead_0)
       .add('duckBlackDead1', duck_black_dead_1)
       .add('duckBlackDead2', duck_black_dead_2)
+      .add('duckBlackLeft0', duck_black_left_0)
+      .add('duckBlackLeft1', duck_black_left_1)
+      .add('duckBlackLeft2', duck_black_left_2)
+      .add('duckBlackRight0', duck_black_right_0)
+      .add('duckBlackRight1', duck_black_right_1)
+      .add('duckBlackRight2', duck_black_right_2)
+      .add('duckBlackTopLeft0', duck_black_top_left_0)
+      .add('duckBlackTopLeft1', duck_black_top_left_1)
+      .add('duckBlackTopLeft2', duck_black_top_left_2)
+      .add('duckBlackTopRight0', duck_black_top_right_0)
+      .add('duckBlackTopRight1', duck_black_top_right_1)
+      .add('duckBlackTopRight2', duck_black_top_right_2)
+      .add('duckRedShot', duck_red_shot_0)
       .add('duckRedDead0', duck_red_dead_0)
       .add('duckRedDead1', duck_red_dead_1)
       .add('duckRedDead2', duck_red_dead_2)
+      .add('duckRedLeft0', duck_red_left_0)
+      .add('duckRedLeft1', duck_red_left_1)
+      .add('duckRedLeft2', duck_red_left_2)
+      .add('duckRedRight0', duck_red_right_0)
+      .add('duckRedRight2', duck_red_right_2)
+      .add('duckRedTopLeft0', duck_red_top_left_0)
+      .add('duckRedTopLeft1', duck_red_top_left_1)
+      .add('duckRedTopLeft2', duck_red_top_left_2)
+      .add('duckRedTopRight0', duck_red_top_right_0)
+      .add('duckRedTopRight1', duck_red_top_right_1)
+      .add('duckRedTopRight2', duck_red_top_right_2)
       .load(setup);
   }
 }

@@ -2,35 +2,123 @@ import { Sprite, Texture, Container, extras } from 'pixi.js';
 const { AnimatedSprite } = extras;
 
 export default class Duck extends AnimatedSprite {
-  constructor(textures, activeStatus, x, y, vx, vy) {
-    super(textures);
-    this.activeStatus = activeStatus;
-    this.status = {
-      left: 'left',
-      right: 'right',
-      topLeft: 'top-left',
-      topRight: 'top-right',
-      dead: 'dead'
-    };
+  constructor(game, x, y, state, frames) {
+    super(frames[state]);
+    this.game = game;
     this.x = x;
     this.y = y;
-    this.vx = vx;
-    this.vy = vy;
-
+    this.vx = 0;
+    this.vy = 0;
     this.animationSpeed = 0.1;
+    this.state = state;
+    this.frames = frames;
+    this.logics = {
+      left: this.left.bind(this),
+      right: this.right.bind(this),
+      topLeft: this.topLeft.bind(this),
+      topRight: this.topRight.bind(this),
+      shot: this.shot.bind(this),
+      leftDead: this.leftDead.bind(this),
+      rightDead: this.rightDead.bind(this)
+    };
     super.play();
+    this.interactive = true;
+    this.on('pointerdown', e => {
+      if (this.state == 'rightDead' || this.state == 'leftDead') return;
+
+      if (this.frames['shot'].length > 0) {
+        const lastState = this.state;
+        this.stateUpdate('shot');
+        setTimeout(() => {
+          let nextStatus = 'rightDead';
+          if (lastState === 'left' || lastState === 'topLeft')
+            nextStatus = 'leftDead';
+          this.stateUpdate(nextStatus);
+        }, 500);
+      } else {
+        let nextStatus = 'rightDead';
+        if (this.state === 'left' || this.state === 'topLeft')
+          nextStatus = 'leftDead';
+        this.stateUpdate(nextStatus);
+      }
+    });
+
+    this.counter = 0;
+    this.nextCounterChange = Math.floor(Math.random() * 50) + 50;
   }
 
-  left(textures) {
-    this.activeStatus = 'left';
-    this.textures = textures;
+  stateUpdate(newState) {
+    this.state = newState;
+    this.textures = this.frames[this.state];
+    this.play();
   }
-  right() {}
-  topLeft() {}
-  topRight() {}
-  dead() {}
+
+  left() {
+    this.vx = -3;
+    this.vy = 0;
+  }
+  right() {
+    this.vx = 3;
+    this.vy = 0;
+  }
+  topLeft() {
+    this.vx = -3;
+    this.vy = -3;
+  }
+  topRight() {
+    this.vx = 3;
+    this.vy = -3;
+  }
+
+  leftDead() {
+    this.vx = 0;
+    this.vy = 6;
+  }
+  rightDead() {
+    this.leftDead();
+  }
+
+  shot() {
+    this.vx = 0;
+    this.vy = 0;
+  }
+  randomState() {
+    if (
+      this.state == 'rightDead' ||
+      this.state == 'leftDead' ||
+      this.state == 'shot'
+    )
+      return;
+    this.counter++;
+    if (this.counter >= this.nextCounterChange) {
+      let rnd = ['left', 'right', 'topLeft', 'topRight'];
+      rnd = rnd.filter(v => v !== this.state);
+      this.stateUpdate(rnd[Math.floor(Math.random() * rnd.length)]);
+      this.counter = 0;
+      this.nextCounterChange = Math.floor(Math.random() * 50) + 50;
+    }
+  }
+
+  isActive() {
+    if (this.y > 600 - this.height || this.y < 0 - this.height) {
+      return false;
+    }
+    return true;
+  }
+
+  checkMargin() {
+    if (this.x <= 0) {
+      this.stateUpdate('right');
+    }
+    if (this.x >= 800 - this.width) {
+      this.stateUpdate('left');
+    }
+  }
 
   logicUpdate(delta) {
+    this.logics[this.state]();
+    this.randomState();
+    this.checkMargin();
     this.x += this.vx;
     this.y += this.vy;
   }
