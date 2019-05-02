@@ -3,8 +3,10 @@ import { Container } from 'pixi.js';
 import EventListenerController from '../event-listeners/EventListenerController';
 
 export default class Scene {
-  constructor(resources, changeScene) {
-    this.changeScene = changeScene;
+  constructor(resources, game) {
+    this.game = game;
+    this.globalState = this.game.globalState;
+    this.changeScene = this.game.changeScene;
     this.update_ = this.update_.bind(this);
     this.destroy = this.destroy.bind(this);
     this.reset = this.reset.bind(this);

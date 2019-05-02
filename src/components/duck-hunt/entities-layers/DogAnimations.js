@@ -2,7 +2,7 @@ import { Container } from 'pixi.js';
 import DogSingle from '../entities/DogSingle';
 import DogEntry from '../entities/DogEntry';
 
-export default class DogAnimationBuilder extends Container {
+export default class DogAnimations extends Container {
   constructor(scene) {
     super();
     this.scene = scene;
@@ -35,6 +35,7 @@ export default class DogAnimationBuilder extends Container {
     if (this.dogSingleAnimArr.length > 0) {
       this.dogSingleAnimArr[0].update_(delta);
       if (this.dogSingleAnimArr[0].status === 'end') {
+        this.dogSingleAnimArr[0].visible = false;
         this.removeChild(this.dogSingleAnimArr[0]);
         this.dogSingleAnimArr.splice(0, 1);
       }

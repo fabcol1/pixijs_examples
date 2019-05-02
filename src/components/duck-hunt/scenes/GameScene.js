@@ -5,25 +5,28 @@ const { AnimatedSprite } = extras;
 import Background from '../entities/Background.js';
 import Scene from './Scene.js';
 
-import DogAnimationBuilder from '../entities-layers/DogAnimationBuilder.js';
+import DogAnimations from '../entities-layers/DogAnimations.js';
+
+import Wave from '../entities-layers/Wave.js';
 import Ducks from '../entities-layers/Ducks.js';
 
 import GameSceneEventListenerController from '../event-listeners/GameSceneEventListenerController';
 
 export default class GameScene extends Scene {
-  constructor(resources, changeScene) {
-    super(resources, changeScene);
+  constructor(resources, game) {
+    super(resources, game);
     this.reset();
   }
 
   update_(delta) {
     this.ducks.update_(delta);
-    this.dogAnimationBuilder.update_(delta);
+    this.dogAnimations.update_(delta);
   }
 
   destroy() {
     this.eventListenerController.removeEventListeners();
-    this.mainContainer.removeChild(this.dogAnimationBuilder);
+    this.mainContainer.removeChild(this.dogAnimations);
+    this.mainContainer.removeChild(this.ducks);
     this.mainContainer.removeChild(this.background);
   }
 
@@ -36,12 +39,17 @@ export default class GameScene extends Scene {
     this.bgColor();
 
     // Layer 2
-    this.ducks = new Ducks(this);
-    this.ducks.generateWave();
+    // Creazione di wave da globalState..
+    // this.ducks = new Ducks(this);
+    // this.ducks.generateWave();
+    // this.mainContainer.addChild(this.ducks);
+
+    this.ducks = new Wave(this, 30, 100000000);
+    this.mainContainer.addChild(this.ducks);
 
     // Layer 3
-    this.dogAnimationBuilder = new DogAnimationBuilder(this);
-    this.mainContainer.addChild(this.dogAnimationBuilder);
+    this.dogAnimations = new DogAnimations(this);
+    this.mainContainer.addChild(this.dogAnimations);
 
     // Layer 4
     this.background = new Background(this);

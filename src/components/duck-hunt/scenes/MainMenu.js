@@ -3,22 +3,22 @@ import { Sprite, Texture } from 'pixi.js';
 import Scene from './Scene.js';
 import MainMenuEventListenerController from '../event-listeners/MainMenuEventListenerController.js';
 import Background from '../entities/Background.js';
-import DogAnimationBuilder from '../entities-layers/DogAnimationBuilder';
+import DogAnimations from '../entities-layers/DogAnimations.js';
 
 export default class MainMenu extends Scene {
-  constructor(resources, changeScene) {
-    super(resources, changeScene);
+  constructor(resources, game) {
+    super(resources, game);
     this.reset();
   }
 
   update_(delta) {
-    this.dogAnimationBuilder.update_(delta);
+    this.dogAnimations.update_(delta);
   }
 
   destroy() {
     this.eventListenerController.removeEventListeners();
     this.mainContainer.removeChild(this.background);
-    this.mainContainer.removeChild(this.dogAnimationBuilder);
+    this.mainContainer.removeChild(this.dogAnimations);
   }
 
   reset() {
@@ -31,9 +31,9 @@ export default class MainMenu extends Scene {
     this.background = new Background(this);
     this.mainContainer.addChild(this.background);
     // Layer 3
-    this.dogAnimationBuilder = new DogAnimationBuilder(this);
-    this.dogAnimationBuilder.dogEntryAnim(0, 470);
-    this.mainContainer.addChild(this.dogAnimationBuilder);
+    this.dogAnimations = new DogAnimations(this);
+    this.dogAnimations.dogEntryAnim(0, 470);
+    this.mainContainer.addChild(this.dogAnimations);
   }
 
   bgColor() {

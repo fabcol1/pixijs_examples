@@ -44,7 +44,7 @@ import {
   dog_single_0
 } from '../../../static/duck_hunt_static/*.png';
 
-export default class ResourceLoader {
+export default class Resources {
   static loadResources(setup) {
     loader
       .add('sceneBack', scene_back_0)

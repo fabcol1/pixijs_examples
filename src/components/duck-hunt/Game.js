@@ -1,5 +1,5 @@
-import { Application, utils } from 'pixi.js';
-import ResourceLoader from './utils/ResourceLoader.js';
+import { Application, utils, Sprite, Texture } from 'pixi.js';
+import Resources from './utils/Resources.js';
 import MainMenu from './scenes/MainMenu.js';
 import GameScene from './scenes/GameScene.js';
 import GameOver from './scenes/GameOver.js';
@@ -11,6 +11,7 @@ export default class Game {
 
     this.scenes = {};
     this.currenScene = '';
+    this.globalState = {};
 
     this.app = this.buildApp(parentElement);
     this.loadResources();
@@ -21,10 +22,24 @@ export default class Game {
     // Resize all scenes on window resize event
     window.addEventListener('resize', e => {
       this.app.renderer.resize(window.innerWidth, window.innerHeight);
+
       for (let s in this.scenes) {
         this.scenes[s].mainContainer.width = this.app.screen.width;
         this.scenes[s].mainContainer.height = this.app.screen.height;
       }
+
+      const bg = new Sprite(Texture.WHITE);
+      bg.height = window.innerHeight;
+      bg.width = window.innerWidth;
+      for (let s in this.scenes) {
+        this.scenes[s].mainContainer.addChild(bg);
+      }
+
+      setTimeout(() => {
+        for (let s in this.scenes) {
+          this.scenes[s].mainContainer.removeChild(bg);
+        }
+      }, 20);
     });
   }
 
@@ -49,20 +64,21 @@ export default class Game {
     //Add the canvas that Pixi automatically created for you to the HTML document
     parentElement.innerHTML = '';
     parentElement.appendChild(app.view);
+
     return app;
   }
 
   loadResources() {
-    ResourceLoader.loadResources(this.setup);
+    Resources.loadResources(this.setup);
   }
 
   setup(loader, resources) {
     // create scenes
-    this.createScene(new MainMenu(resources, this.changeScene), 'MM');
-    this.createScene(new GameScene(resources, this.changeScene), 'GS');
-    this.createScene(new GameOver(resources, this.changeScene), 'GO');
+    this.createScene(new MainMenu(resources, this), 'MM');
+    this.createScene(new GameScene(resources, this), 'GS');
+    this.createScene(new GameOver(resources, this), 'GO');
 
-    this.changeScene('MM');
+    this.changeScene('GS');
     this.app.ticker.add(delta => this.gameLoop(delta));
   }
 

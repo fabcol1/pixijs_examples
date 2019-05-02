@@ -2,7 +2,7 @@ import { Container } from 'pixi.js';
 import DuckBlack from '../entities/DuckBlack.js';
 import DuckRed from '../entities/DuckRed.js';
 
-export default class DogAnimationBuilder extends Container {
+export default class Ducks extends Container {
   constructor(scene) {
     super();
     this.scene = scene;
@@ -15,7 +15,7 @@ export default class DogAnimationBuilder extends Container {
       const isActive = o.isActive();
       if (!isActive) {
         o.visible = false;
-        this.scene.mainContainer.removeChild(o);
+        this.removeChild(o);
       }
       return isActive;
     });
@@ -26,11 +26,11 @@ export default class DogAnimationBuilder extends Container {
 
   generateWave() {
     this.ducks = [
-      new DuckBlack(this.scene, 210, 470, 'topRight'),
-      new DuckBlack(this.scene, 330, 470, 'topRight'),
-      new DuckRed(this.scene, 325, 470, 'topRight'),
-      new DuckRed(this.scene, 435, 470, 'topLeft')
+      new DuckBlack(this.scene, 210, 470),
+      new DuckBlack(this.scene, 330, 470),
+      new DuckRed(this.scene, 325, 470),
+      new DuckRed(this.scene, 435, 470)
     ];
-    this.ducks.forEach(duck => this.scene.mainContainer.addChild(duck));
+    this.ducks.forEach(duck => this.addChild(duck));
   }
 }

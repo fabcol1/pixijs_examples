@@ -5,8 +5,8 @@ import GameOverEventListenerController from '../event-listeners/GameOverEventLis
 import Background from '../entities/Background.js';
 
 export default class MainMenu extends Scene {
-  constructor(resources, changeScene) {
-    super(resources, changeScene);
+  constructor(resources, game) {
+    super(resources, game);
     this.reset();
   }
 
