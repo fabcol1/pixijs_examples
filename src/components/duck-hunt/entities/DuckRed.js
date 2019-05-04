@@ -33,8 +33,10 @@ export default class DuckRed extends Duck {
         game.resources.duckRedTopRight2.texture
       ],
       shot: [game.resources.duckRedShot.texture],
-      leftDead: [game.resources.duckRedDead0.texture],
-      rightDead: [game.resources.duckRedDead1.texture]
+      dead: [
+        game.resources.duckRedDead0.texture,
+        game.resources.duckRedDead1.texture
+      ]
     };
 
     super(game, x, y, state, frames);

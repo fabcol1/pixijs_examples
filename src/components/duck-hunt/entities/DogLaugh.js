@@ -1,23 +1,21 @@
-import { Sprite } from 'pixi.js';
+import { extras } from 'pixi.js';
+const { AnimatedSprite } = extras;
 
-export default class DogSingle extends Sprite {
+export default class DogLaugh extends AnimatedSprite {
   constructor(scene, x, y) {
-    super(scene.resources.dogSingle.texture);
+    super([
+      scene.resources.dogLaugh0.texture,
+      scene.resources.dogLaugh1.texture
+    ]);
+    this.animationSpeed = 0.1;
+    this.play();
     this.scene = scene;
-    // this.x = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450].reduce(
-    //   (prev, curr) => {
-    //     return Math.abs(curr - x) < Math.abs(prev - x) ? curr : prev;
-    //   },
-    //   x
-    // );
     this.x = 300;
     this.y = y;
     this.vx = 0;
     this.vy = -3;
-
     this.minY = y - 100;
     this.maxY = y + 1;
-
     this.status = 'running';
   }
 

@@ -28,18 +28,18 @@ export default class Game {
         this.scenes[s].mainContainer.height = this.app.screen.height;
       }
 
-      const bg = new Sprite(Texture.WHITE);
-      bg.height = window.innerHeight;
-      bg.width = window.innerWidth;
-      for (let s in this.scenes) {
-        this.scenes[s].mainContainer.addChild(bg);
-      }
+      // const bg = new Sprite(Texture.WHITE);
+      // bg.height = window.innerHeight;
+      // bg.width = window.innerWidth;
+      // for (let s in this.scenes) {
+      //   this.scenes[s].mainContainer.addChild(bg);
+      // }
 
-      setTimeout(() => {
-        for (let s in this.scenes) {
-          this.scenes[s].mainContainer.removeChild(bg);
-        }
-      }, 20);
+      // setTimeout(() => {
+      //   for (let s in this.scenes) {
+      //     this.scenes[s].mainContainer.removeChild(bg);
+      //   }
+      // }, 20);
     });
   }
 

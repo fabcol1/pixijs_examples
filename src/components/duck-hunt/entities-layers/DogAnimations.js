@@ -1,18 +1,30 @@
 import { Container } from 'pixi.js';
-import DogSingle from '../entities/DogSingle';
 import DogEntry from '../entities/DogEntry';
+import { DogFoundSingle, DogFoundDouble } from '../entities/DogDucksFound';
+import DogLaugh from '../entities/DogLaugh';
 
 export default class DogAnimations extends Container {
   constructor(scene) {
     super();
     this.scene = scene;
-    this.dogSingleAnimArr = [];
+    this.dogFoundAnimArr = [];
     this.dogEntryAnimArr = [];
+    this.dogLaugh = null;
   }
 
   update_(delta) {
     this.dogEntryAnimUpdate(delta);
-    this.dogSingleAnimLogicUpdate(delta);
+    if (this.dogLaugh === null) {
+      this.dogFoundAnimLogicUpdate(delta);
+    } else {
+      this.dogFoundAnimArr.forEach(an => {
+        an.visible = false;
+        an.texture = null;
+        this.removeChild(an);
+      });
+      this.dogFoundAnimArr = [];
+      this.dogLaughAnimUpdate(delta);
+    }
   }
 
   dogEntryAnim(x, y) {
@@ -26,25 +38,50 @@ export default class DogAnimations extends Container {
     });
   }
 
-  dogSingleAnim(x, y) {
-    const ds = new DogSingle(this.scene, x, y);
+  dogFoundSingleAnim(x, y) {
+    const ds = new DogFoundSingle(this.scene, x, y);
     this.addChild(ds);
-    this.dogSingleAnimArr.push(ds);
+    this.dogFoundAnimArr.push(ds);
   }
-  dogSingleAnimLogicUpdate(delta) {
-    if (this.dogSingleAnimArr.length > 0) {
-      this.dogSingleAnimArr[0].update_(delta);
-      if (this.dogSingleAnimArr[0].status === 'end') {
-        this.dogSingleAnimArr[0].visible = false;
-        this.removeChild(this.dogSingleAnimArr[0]);
-        this.dogSingleAnimArr.splice(0, 1);
+  dogFoundDoubleAnim(x, y) {
+    const ds = new DogFoundDouble(this.scene, x, y);
+    this.addChild(ds);
+    this.dogFoundAnimArr.push(ds);
+  }
+  dogFoundAnimLogicUpdate(delta) {
+    if (this.dogFoundAnimArr.length > 0) {
+      this.dogFoundAnimArr[0].update_(delta);
+      if (this.dogFoundAnimArr[0].status === 'end') {
+        this.dogFoundAnimArr[0].visible = false;
+        this.dogFoundAnimArr[0].texture = null;
+        this.removeChild(this.dogFoundAnimArr[0]);
+        this.dogFoundAnimArr.splice(0, 1);
+      }
+    }
+  }
+  dogLaughAnim(x, y) {
+    console.log('hello');
+    const ds = new DogLaugh(this.scene, x, y);
+    this.addChild(ds);
+    this.dogLaugh = ds;
+  }
+  dogLaughAnimUpdate(delta) {
+    if (this.dogLaugh !== null) {
+      this.dogLaugh.update_(delta);
+      if (this.dogLaugh.status === 'end') {
+        this.dogLaugh.visible = false;
+        this.dogLaugh.texture = false;
+        this.removeChild(this.dogLaugh);
+        this.dogLaugh = null;
       }
     }
   }
 
   allAnimAreOver() {
     return (
-      this.dogSingleAnimArr.length === 0 && this.dogEntryAnimArr.length === 0
+      this.dogFoundAnimArr.length === 0 &&
+      this.dogEntryAnimArr.length === 0 &&
+      this.dogLaugh === null
     );
   }
 }

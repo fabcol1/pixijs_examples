@@ -1,4 +1,4 @@
-import { Sprite, Texture, Container, extras } from 'pixi.js';
+import { extras } from 'pixi.js';
 const { AnimatedSprite } = extras;
 
 import Math2 from '../utils/Math2';
@@ -17,20 +17,23 @@ export default class Duck extends AnimatedSprite {
     this.active = true;
     this.interactive = true;
     this.marginControl = true;
+    this.randomStateChange = true;
     this.speed = 3;
-    this.marginControlOffSpeed = 4;
+    this.marginControlOffSpeed = 8;
     this.stateUpdate(state);
     this.counter = 0;
     this.nextCounterChange = Math.floor(Math.random() * 50) + 50;
   }
 
   stateUpdate(newState) {
+    if (this.state === 'dead') return false;
     this.state = newState;
     // rendering frame update
     this.textures = this.frames[this.state];
     this.play();
     // movement speed update
     const s = this.marginControl ? this.speed : this.marginControlOffSpeed;
+    // console.log(s);
     const speeds = {
       left: { vx: -s, vy: 0 },
       right: { vx: s, vy: 0 },
@@ -38,8 +41,7 @@ export default class Duck extends AnimatedSprite {
       topRight: { vx: s, vy: -s },
       bottomLeft: { vx: -s, vy: s },
       bottomRight: { vx: s, vy: s },
-      leftDead: { vx: 0, vy: 6 },
-      rightDead: { vx: 0, vy: 6 },
+      dead: { vx: 0, vy: 10 },
       shot: { vx: 0, vy: 0 }
     };
 
@@ -48,40 +50,25 @@ export default class Duck extends AnimatedSprite {
   }
 
   haveHitMe(point, radius) {
-    if (this.state == 'rightDead' || this.state == 'leftDead') return false;
-
+    if (this.state === 'dead' || this.state === 'shot') return false;
     if (
       Math2.distance(point, {
         x: this.x + this.width / 2,
         y: this.y + this.height / 2
       }) < radius
     ) {
-      const lastState = this.state;
       this.stateUpdate('shot');
       setTimeout(() => {
-        let nextStatus = 'rightDead';
-        if (
-          lastState === 'left' ||
-          lastState === 'topLeft' ||
-          lastState === 'bottomLeft'
-        )
-          nextStatus = 'leftDead';
-        this.stateUpdate(nextStatus);
-      }, 500);
-
+        this.stateUpdate('dead');
+      }, 250);
       return true;
     }
-
     return false;
   }
 
   randomState() {
-    if (
-      this.state == 'rightDead' ||
-      this.state == 'leftDead' ||
-      this.state == 'shot'
-    )
-      return;
+    if (this.state === 'dead' || this.state === 'shot') return;
+    if (!this.randomStateChange) return;
     this.counter++;
     if (this.counter >= this.nextCounterChange) {
       let rnd = [
@@ -92,8 +79,8 @@ export default class Duck extends AnimatedSprite {
         'bottomRight',
         'bottomLeft'
       ];
-
       rnd = rnd.filter(v => v !== this.state);
+      this.speed = Math2.randomInt(3, 4);
       this.stateUpdate(rnd[Math.floor(Math.random() * rnd.length)]);
       this.counter = 0;
       this.nextCounterChange = Math.floor(Math.random() * 50) + 50;
@@ -101,7 +88,7 @@ export default class Duck extends AnimatedSprite {
   }
 
   checkMargin() {
-    if (this.state == 'rightDead' || this.state == 'leftDead') return;
+    if (this.state === 'dead' || this.state === 'shot') return false;
 
     if (!this.marginControl) {
       if (
@@ -130,11 +117,11 @@ export default class Duck extends AnimatedSprite {
     }
     if (this.y <= 0) {
       this.stateUpdate(
-        Math2.randomInt(0, 2) == 0 ? 'bottomLeft' : 'bottomRight'
+        Math2.randomInt(0, 2) === 0 ? 'bottomLeft' : 'bottomRight'
       );
     }
     if (this.y > 450) {
-      this.stateUpdate(Math2.randomInt(0, 2) == 0 ? 'topLeft' : 'topRight');
+      this.stateUpdate(Math2.randomInt(0, 2) === 0 ? 'topLeft' : 'topRight');
     }
   }
 
@@ -149,9 +136,7 @@ export default class Duck extends AnimatedSprite {
   emitDuckKill() {
     if (
       this.y > 600 - this.height &&
-      (this.state == 'rightDead' ||
-        this.state == 'leftDead' ||
-        this.state == 'shot')
+      (this.state === 'dead' || this.state === 'shot')
     ) {
       // this.scene.mainContainer.emit('duckkill', new Event('duckkill'), this.x);
       this.visible = false;
@@ -159,6 +144,18 @@ export default class Duck extends AnimatedSprite {
     }
   }
 
+  turnOffMarginControl() {
+    if (this.state === 'dead' || this.state === 'shot') return false;
+    this.marginControl = false;
+    if (this.x > 800 / 2) {
+      this.stateUpdate('topLeft');
+    } else {
+      this.stateUpdate('topRight');
+    }
+  }
+  turnOffRandomState() {
+    this.randomStateChange = false;
+  }
   isActive() {
     return this.active;
   }

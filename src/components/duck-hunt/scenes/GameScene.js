@@ -8,7 +8,7 @@ import Scene from './Scene.js';
 import DogAnimations from '../entities-layers/DogAnimations.js';
 
 import Wave from '../entities-layers/Wave.js';
-import Ducks from '../entities-layers/Ducks.js';
+import HUD from '../entities-layers/HUD';
 
 import GameSceneEventListenerController from '../event-listeners/GameSceneEventListenerController';
 
@@ -21,6 +21,7 @@ export default class GameScene extends Scene {
   update_(delta) {
     this.ducks.update_(delta);
     this.dogAnimations.update_(delta);
+    this.hud.update_(delta);
   }
 
   destroy() {
@@ -28,23 +29,24 @@ export default class GameScene extends Scene {
     this.mainContainer.removeChild(this.dogAnimations);
     this.mainContainer.removeChild(this.ducks);
     this.mainContainer.removeChild(this.background);
+    this.mainContainer.removeChild(this.hud);
   }
 
   reset() {
+    this.nextWave(10, 10);
+  }
+
+  nextWave(nOfDucks, duration) {
     // EventListenerController
     this.eventListenerController = new GameSceneEventListenerController(this);
     this.eventListenerController.initEventListeners();
 
     // Layer 1
-    this.bgColor();
+    this.bgColor = this.bgColorInstance(0x6fcbfc);
 
     // Layer 2
     // Creazione di wave da globalState..
-    // this.ducks = new Ducks(this);
-    // this.ducks.generateWave();
-    // this.mainContainer.addChild(this.ducks);
-
-    this.ducks = new Wave(this, 30, 100000000);
+    this.ducks = new Wave(this, nOfDucks, duration);
     this.mainContainer.addChild(this.ducks);
 
     // Layer 3
@@ -54,13 +56,18 @@ export default class GameScene extends Scene {
     // Layer 4
     this.background = new Background(this);
     this.mainContainer.addChild(this.background);
+
+    // Layer 5 (HUD)
+    this.hud = new HUD(this, nOfDucks);
+    this.mainContainer.addChild(this.hud);
   }
 
-  bgColor() {
+  bgColorInstance(color) {
     const bgColor = new Sprite(Texture.WHITE);
     bgColor.height = 600;
     bgColor.width = 800;
-    bgColor.tint = 0x89c4f4;
+    bgColor.tint = color;
     this.mainContainer.addChild(bgColor);
+    return bgColor;
   }
 }

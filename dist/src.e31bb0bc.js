@@ -41532,7 +41532,7 @@ function () {
   _createClass(Resources, null, [{
     key: "loadResources",
     value: function loadResources(setup) {
-      _pixi.loader.add('sceneBack', _.scene_back_0).add('sceneTree', _.scene_tree_0).add('dogSniff0', _.dog_sniff_0).add('dogSniff1', _.dog_sniff_1).add('dogSniff2', _.dog_sniff_2).add('dogSniff3', _.dog_sniff_3).add('dogSniff4', _.dog_sniff_4).add('dogFind', _.dog_find_0).add('dogJump0', _.dog_jump_0).add('dogJump1', _.dog_jump_1).add('duckBlackShot', _.duck_black_shot_0).add('duckBlackDead0', _.duck_black_dead_0).add('duckBlackDead1', _.duck_black_dead_1).add('duckBlackDead2', _.duck_black_dead_2).add('duckBlackLeft0', _.duck_black_left_0).add('duckBlackLeft1', _.duck_black_left_1).add('duckBlackLeft2', _.duck_black_left_2).add('duckBlackRight0', _.duck_black_right_0).add('duckBlackRight1', _.duck_black_right_1).add('duckBlackRight2', _.duck_black_right_2).add('duckBlackTopLeft0', _.duck_black_top_left_0).add('duckBlackTopLeft1', _.duck_black_top_left_1).add('duckBlackTopLeft2', _.duck_black_top_left_2).add('duckBlackTopRight0', _.duck_black_top_right_0).add('duckBlackTopRight1', _.duck_black_top_right_1).add('duckBlackTopRight2', _.duck_black_top_right_2).add('duckRedShot', _.duck_red_shot_0).add('duckRedDead0', _.duck_red_dead_0).add('duckRedDead1', _.duck_red_dead_1).add('duckRedDead2', _.duck_red_dead_2).add('duckRedLeft0', _.duck_red_left_0).add('duckRedLeft1', _.duck_red_left_1).add('duckRedLeft2', _.duck_red_left_2).add('duckRedRight0', _.duck_red_right_0).add('duckRedRight2', _.duck_red_right_2).add('duckRedTopLeft0', _.duck_red_top_left_0).add('duckRedTopLeft1', _.duck_red_top_left_1).add('duckRedTopLeft2', _.duck_red_top_left_2).add('duckRedTopRight0', _.duck_red_top_right_0).add('duckRedTopRight1', _.duck_red_top_right_1).add('duckRedTopRight2', _.duck_red_top_right_2).add('dogSingle', _.dog_single_0).load(setup);
+      _pixi.loader.add('sceneBack', _.scene_back_0).add('sceneTree', _.scene_tree_0).add('dogSniff0', _.dog_sniff_0).add('dogSniff1', _.dog_sniff_1).add('dogSniff2', _.dog_sniff_2).add('dogSniff3', _.dog_sniff_3).add('dogSniff4', _.dog_sniff_4).add('dogFind', _.dog_find_0).add('dogDouble', _.dog_double_0).add('dogJump0', _.dog_jump_0).add('dogJump1', _.dog_jump_1).add('duckBlackShot', _.duck_black_shot_0).add('duckBlackDead0', _.duck_black_dead_0).add('duckBlackDead1', _.duck_black_dead_1).add('duckBlackDead2', _.duck_black_dead_2).add('duckBlackLeft0', _.duck_black_left_0).add('duckBlackLeft1', _.duck_black_left_1).add('duckBlackLeft2', _.duck_black_left_2).add('duckBlackRight0', _.duck_black_right_0).add('duckBlackRight1', _.duck_black_right_1).add('duckBlackRight2', _.duck_black_right_2).add('duckBlackTopLeft0', _.duck_black_top_left_0).add('duckBlackTopLeft1', _.duck_black_top_left_1).add('duckBlackTopLeft2', _.duck_black_top_left_2).add('duckBlackTopRight0', _.duck_black_top_right_0).add('duckBlackTopRight1', _.duck_black_top_right_1).add('duckBlackTopRight2', _.duck_black_top_right_2).add('duckRedShot', _.duck_red_shot_0).add('duckRedDead0', _.duck_red_dead_0).add('duckRedDead1', _.duck_red_dead_1).add('duckRedDead2', _.duck_red_dead_2).add('duckRedLeft0', _.duck_red_left_0).add('duckRedLeft1', _.duck_red_left_1).add('duckRedLeft2', _.duck_red_left_2).add('duckRedRight0', _.duck_red_right_0).add('duckRedRight2', _.duck_red_right_2).add('duckRedTopLeft0', _.duck_red_top_left_0).add('duckRedTopLeft1', _.duck_red_top_left_1).add('duckRedTopLeft2', _.duck_red_top_left_2).add('duckRedTopRight0', _.duck_red_top_right_0).add('duckRedTopRight1', _.duck_red_top_right_1).add('duckRedTopRight2', _.duck_red_top_right_2).add('dogSingle', _.dog_single_0).add('dogLaugh0', _.dog_laugh_0).add('dogLaugh1', _.dog_laugh_1).load(setup);
     }
   }]);
 
@@ -41757,89 +41757,6 @@ function (_Container) {
 }(_pixi.Container);
 
 exports.default = Background;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js"}],"components/duck-hunt/entities/DogSingle.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _pixi = require("pixi.js");
-
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-var DogSingle =
-/*#__PURE__*/
-function (_Sprite) {
-  _inherits(DogSingle, _Sprite);
-
-  function DogSingle(scene, x, y) {
-    var _this;
-
-    _classCallCheck(this, DogSingle);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DogSingle).call(this, scene.resources.dogSingle.texture));
-    _this.scene = scene; // this.x = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450].reduce(
-    //   (prev, curr) => {
-    //     return Math.abs(curr - x) < Math.abs(prev - x) ? curr : prev;
-    //   },
-    //   x
-    // );
-
-    _this.x = 300;
-    _this.y = y;
-    _this.vx = 0;
-    _this.vy = -3;
-    _this.minY = y - 100;
-    _this.maxY = y + 1;
-    _this.status = 'running';
-    return _this;
-  }
-
-  _createClass(DogSingle, [{
-    key: "update_",
-    value: function update_(delta) {
-      var _this2 = this;
-
-      if (this.status === 'idle' || this.status === 'end') return;
-      this.x += this.vx;
-      this.y += this.vy;
-
-      if (this.y < this.minY) {
-        this.status = 'idle';
-        this.vy = 0;
-        setTimeout(function () {
-          _this2.status = 'running';
-          _this2.vy = 4;
-        }, 500);
-      } else if (this.y > this.maxY) {
-        this.visible = false;
-        this.status = 'end';
-      }
-    }
-  }]);
-
-  return DogSingle;
-}(_pixi.Sprite);
-
-exports.default = DogSingle;
 },{"pixi.js":"../node_modules/pixi.js/lib/index.js"}],"components/duck-hunt/entities/DogEntry.js":[function(require,module,exports) {
 "use strict";
 
@@ -41943,6 +41860,202 @@ function (_AnimatedSprite) {
 }(AnimatedSprite);
 
 exports.default = DogEntry;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js"}],"components/duck-hunt/entities/DogDucksFound.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.DogFoundDouble = exports.DogFoundSingle = void 0;
+
+var _pixi = require("pixi.js");
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var DogDucksFound =
+/*#__PURE__*/
+function (_Sprite) {
+  _inherits(DogDucksFound, _Sprite);
+
+  function DogDucksFound(scene, texture, x, y) {
+    var _this;
+
+    _classCallCheck(this, DogDucksFound);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DogDucksFound).call(this, texture));
+    _this.scene = scene; // this.x = [0, 50, 100, 150, 200, 250, 300, 350, 400, 450].reduce(
+    //   (prev, curr) => {
+    //     return Math.abs(curr - x) < Math.abs(prev - x) ? curr : prev;
+    //   },
+    //   x
+    // );
+
+    _this.x = 300;
+    _this.y = y;
+    _this.vx = 0;
+    _this.vy = -3;
+    _this.minY = y - 100;
+    _this.maxY = y + 1;
+    _this.status = 'running';
+    return _this;
+  }
+
+  _createClass(DogDucksFound, [{
+    key: "update_",
+    value: function update_(delta) {
+      var _this2 = this;
+
+      if (this.status === 'idle' || this.status === 'end') return;
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.y < this.minY) {
+        this.status = 'idle';
+        this.vy = 0;
+        setTimeout(function () {
+          _this2.status = 'running';
+          _this2.vy = 4;
+        }, 500);
+      } else if (this.y > this.maxY) {
+        this.visible = false;
+        this.status = 'end';
+      }
+    }
+  }]);
+
+  return DogDucksFound;
+}(_pixi.Sprite);
+
+var DogFoundSingle =
+/*#__PURE__*/
+function (_DogDucksFound) {
+  _inherits(DogFoundSingle, _DogDucksFound);
+
+  function DogFoundSingle(scene, x, y) {
+    _classCallCheck(this, DogFoundSingle);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DogFoundSingle).call(this, scene, scene.resources.dogSingle.texture, x, y));
+  }
+
+  return DogFoundSingle;
+}(DogDucksFound);
+
+exports.DogFoundSingle = DogFoundSingle;
+
+var DogFoundDouble =
+/*#__PURE__*/
+function (_DogDucksFound2) {
+  _inherits(DogFoundDouble, _DogDucksFound2);
+
+  function DogFoundDouble(scene, x, y) {
+    _classCallCheck(this, DogFoundDouble);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DogFoundDouble).call(this, scene, scene.resources.dogDouble.texture, x, y));
+  }
+
+  return DogFoundDouble;
+}(DogDucksFound);
+
+exports.DogFoundDouble = DogFoundDouble;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js"}],"components/duck-hunt/entities/DogLaugh.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _pixi = require("pixi.js");
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var AnimatedSprite = _pixi.extras.AnimatedSprite;
+
+var DogLaugh =
+/*#__PURE__*/
+function (_AnimatedSprite) {
+  _inherits(DogLaugh, _AnimatedSprite);
+
+  function DogLaugh(scene, x, y) {
+    var _this;
+
+    _classCallCheck(this, DogLaugh);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DogLaugh).call(this, [scene.resources.dogLaugh0.texture, scene.resources.dogLaugh1.texture]));
+    _this.animationSpeed = 0.1;
+
+    _this.play();
+
+    _this.scene = scene;
+    _this.x = 300;
+    _this.y = y;
+    _this.vx = 0;
+    _this.vy = -3;
+    _this.minY = y - 100;
+    _this.maxY = y + 1;
+    _this.status = 'running';
+    return _this;
+  }
+
+  _createClass(DogLaugh, [{
+    key: "update_",
+    value: function update_(delta) {
+      var _this2 = this;
+
+      if (this.status === 'idle' || this.status === 'end') return;
+      this.x += this.vx;
+      this.y += this.vy;
+
+      if (this.y < this.minY) {
+        this.status = 'idle';
+        this.vy = 0;
+        setTimeout(function () {
+          _this2.status = 'running';
+          _this2.vy = 4;
+        }, 500);
+      } else if (this.y > this.maxY) {
+        this.visible = false;
+        this.status = 'end';
+      }
+    }
+  }]);
+
+  return DogLaugh;
+}(AnimatedSprite);
+
+exports.default = DogLaugh;
 },{"pixi.js":"../node_modules/pixi.js/lib/index.js"}],"components/duck-hunt/entities-layers/DogAnimations.js":[function(require,module,exports) {
 "use strict";
 
@@ -41953,9 +42066,11 @@ exports.default = void 0;
 
 var _pixi = require("pixi.js");
 
-var _DogSingle = _interopRequireDefault(require("../entities/DogSingle"));
-
 var _DogEntry = _interopRequireDefault(require("../entities/DogEntry"));
+
+var _DogDucksFound = require("../entities/DogDucksFound");
+
+var _DogLaugh = _interopRequireDefault(require("../entities/DogLaugh"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41989,16 +42104,31 @@ function (_Container) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DogAnimations).call(this));
     _this.scene = scene;
-    _this.dogSingleAnimArr = [];
+    _this.dogFoundAnimArr = [];
     _this.dogEntryAnimArr = [];
+    _this.dogLaugh = null;
     return _this;
   }
 
   _createClass(DogAnimations, [{
     key: "update_",
     value: function update_(delta) {
+      var _this2 = this;
+
       this.dogEntryAnimUpdate(delta);
-      this.dogSingleAnimLogicUpdate(delta);
+
+      if (this.dogLaugh === null) {
+        this.dogFoundAnimLogicUpdate(delta);
+      } else {
+        this.dogFoundAnimArr.forEach(function (an) {
+          an.visible = false;
+          an.texture = null;
+
+          _this2.removeChild(an);
+        });
+        this.dogFoundAnimArr = [];
+        this.dogLaughAnimUpdate(delta);
+      }
     }
   }, {
     key: "dogEntryAnim",
@@ -42015,29 +42145,59 @@ function (_Container) {
       });
     }
   }, {
-    key: "dogSingleAnim",
-    value: function dogSingleAnim(x, y) {
-      var ds = new _DogSingle.default(this.scene, x, y);
+    key: "dogFoundSingleAnim",
+    value: function dogFoundSingleAnim(x, y) {
+      var ds = new _DogDucksFound.DogFoundSingle(this.scene, x, y);
       this.addChild(ds);
-      this.dogSingleAnimArr.push(ds);
+      this.dogFoundAnimArr.push(ds);
     }
   }, {
-    key: "dogSingleAnimLogicUpdate",
-    value: function dogSingleAnimLogicUpdate(delta) {
-      if (this.dogSingleAnimArr.length > 0) {
-        this.dogSingleAnimArr[0].update_(delta);
+    key: "dogFoundDoubleAnim",
+    value: function dogFoundDoubleAnim(x, y) {
+      var ds = new _DogDucksFound.DogFoundDouble(this.scene, x, y);
+      this.addChild(ds);
+      this.dogFoundAnimArr.push(ds);
+    }
+  }, {
+    key: "dogFoundAnimLogicUpdate",
+    value: function dogFoundAnimLogicUpdate(delta) {
+      if (this.dogFoundAnimArr.length > 0) {
+        this.dogFoundAnimArr[0].update_(delta);
 
-        if (this.dogSingleAnimArr[0].status === 'end') {
-          this.dogSingleAnimArr[0].visible = false;
-          this.removeChild(this.dogSingleAnimArr[0]);
-          this.dogSingleAnimArr.splice(0, 1);
+        if (this.dogFoundAnimArr[0].status === 'end') {
+          this.dogFoundAnimArr[0].visible = false;
+          this.dogFoundAnimArr[0].texture = null;
+          this.removeChild(this.dogFoundAnimArr[0]);
+          this.dogFoundAnimArr.splice(0, 1);
+        }
+      }
+    }
+  }, {
+    key: "dogLaughAnim",
+    value: function dogLaughAnim(x, y) {
+      console.log('hello');
+      var ds = new _DogLaugh.default(this.scene, x, y);
+      this.addChild(ds);
+      this.dogLaugh = ds;
+    }
+  }, {
+    key: "dogLaughAnimUpdate",
+    value: function dogLaughAnimUpdate(delta) {
+      if (this.dogLaugh !== null) {
+        this.dogLaugh.update_(delta);
+
+        if (this.dogLaugh.status === 'end') {
+          this.dogLaugh.visible = false;
+          this.dogLaugh.texture = false;
+          this.removeChild(this.dogLaugh);
+          this.dogLaugh = null;
         }
       }
     }
   }, {
     key: "allAnimAreOver",
     value: function allAnimAreOver() {
-      return this.dogSingleAnimArr.length === 0 && this.dogEntryAnimArr.length === 0;
+      return this.dogFoundAnimArr.length === 0 && this.dogEntryAnimArr.length === 0 && this.dogLaugh === null;
     }
   }]);
 
@@ -42045,7 +42205,7 @@ function (_Container) {
 }(_pixi.Container);
 
 exports.default = DogAnimations;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/DogSingle":"components/duck-hunt/entities/DogSingle.js","../entities/DogEntry":"components/duck-hunt/entities/DogEntry.js"}],"components/duck-hunt/scenes/MainMenu.js":[function(require,module,exports) {
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/DogEntry":"components/duck-hunt/entities/DogEntry.js","../entities/DogDucksFound":"components/duck-hunt/entities/DogDucksFound.js","../entities/DogLaugh":"components/duck-hunt/entities/DogLaugh.js"}],"components/duck-hunt/scenes/MainMenu.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42241,8 +42401,9 @@ function (_AnimatedSprite) {
     _this.active = true;
     _this.interactive = true;
     _this.marginControl = true;
+    _this.randomStateChange = true;
     _this.speed = 3;
-    _this.marginControlOffSpeed = 4;
+    _this.marginControlOffSpeed = 8;
 
     _this.stateUpdate(state);
 
@@ -42254,12 +42415,14 @@ function (_AnimatedSprite) {
   _createClass(Duck, [{
     key: "stateUpdate",
     value: function stateUpdate(newState) {
+      if (this.state === 'dead') return false;
       this.state = newState; // rendering frame update
 
       this.textures = this.frames[this.state];
       this.play(); // movement speed update
 
-      var s = this.marginControl ? this.speed : this.marginControlOffSpeed;
+      var s = this.marginControl ? this.speed : this.marginControlOffSpeed; // console.log(s);
+
       var speeds = {
         left: {
           vx: -s,
@@ -42285,13 +42448,9 @@ function (_AnimatedSprite) {
           vx: s,
           vy: s
         },
-        leftDead: {
+        dead: {
           vx: 0,
-          vy: 6
-        },
-        rightDead: {
-          vx: 0,
-          vy: 6
+          vy: 10
         },
         shot: {
           vx: 0,
@@ -42306,20 +42465,16 @@ function (_AnimatedSprite) {
     value: function haveHitMe(point, radius) {
       var _this2 = this;
 
-      if (this.state == 'rightDead' || this.state == 'leftDead') return false;
+      if (this.state === 'dead' || this.state === 'shot') return false;
 
       if (_Math.default.distance(point, {
         x: this.x + this.width / 2,
         y: this.y + this.height / 2
       }) < radius) {
-        var lastState = this.state;
         this.stateUpdate('shot');
         setTimeout(function () {
-          var nextStatus = 'rightDead';
-          if (lastState === 'left' || lastState === 'topLeft' || lastState === 'bottomLeft') nextStatus = 'leftDead';
-
-          _this2.stateUpdate(nextStatus);
-        }, 500);
+          _this2.stateUpdate('dead');
+        }, 250);
         return true;
       }
 
@@ -42330,7 +42485,8 @@ function (_AnimatedSprite) {
     value: function randomState() {
       var _this3 = this;
 
-      if (this.state == 'rightDead' || this.state == 'leftDead' || this.state == 'shot') return;
+      if (this.state === 'dead' || this.state === 'shot') return;
+      if (!this.randomStateChange) return;
       this.counter++;
 
       if (this.counter >= this.nextCounterChange) {
@@ -42338,6 +42494,7 @@ function (_AnimatedSprite) {
         rnd = rnd.filter(function (v) {
           return v !== _this3.state;
         });
+        this.speed = _Math.default.randomInt(3, 4);
         this.stateUpdate(rnd[Math.floor(Math.random() * rnd.length)]);
         this.counter = 0;
         this.nextCounterChange = Math.floor(Math.random() * 50) + 50;
@@ -42346,7 +42503,7 @@ function (_AnimatedSprite) {
   }, {
     key: "checkMargin",
     value: function checkMargin() {
-      if (this.state == 'rightDead' || this.state == 'leftDead') return;
+      if (this.state === 'dead' || this.state === 'shot') return false;
 
       if (!this.marginControl) {
         if (this.x < 0 - this.width || this.y < 0 - this.height || this.x > 800 || this.y > 600 - this.height) {
@@ -42367,11 +42524,11 @@ function (_AnimatedSprite) {
       }
 
       if (this.y <= 0) {
-        this.stateUpdate(_Math.default.randomInt(0, 2) == 0 ? 'bottomLeft' : 'bottomRight');
+        this.stateUpdate(_Math.default.randomInt(0, 2) === 0 ? 'bottomLeft' : 'bottomRight');
       }
 
       if (this.y > 450) {
-        this.stateUpdate(_Math.default.randomInt(0, 2) == 0 ? 'topLeft' : 'topRight');
+        this.stateUpdate(_Math.default.randomInt(0, 2) === 0 ? 'topLeft' : 'topRight');
       }
     }
   }, {
@@ -42386,11 +42543,28 @@ function (_AnimatedSprite) {
   }, {
     key: "emitDuckKill",
     value: function emitDuckKill() {
-      if (this.y > 600 - this.height && (this.state == 'rightDead' || this.state == 'leftDead' || this.state == 'shot')) {
+      if (this.y > 600 - this.height && (this.state === 'dead' || this.state === 'shot')) {
         // this.scene.mainContainer.emit('duckkill', new Event('duckkill'), this.x);
         this.visible = false;
         this.active = false;
       }
+    }
+  }, {
+    key: "turnOffMarginControl",
+    value: function turnOffMarginControl() {
+      if (this.state === 'dead' || this.state === 'shot') return false;
+      this.marginControl = false;
+
+      if (this.x > 800 / 2) {
+        this.stateUpdate('topLeft');
+      } else {
+        this.stateUpdate('topRight');
+      }
+    }
+  }, {
+    key: "turnOffRandomState",
+    value: function turnOffRandomState() {
+      this.randomStateChange = false;
     }
   }, {
     key: "isActive",
@@ -42445,8 +42619,7 @@ function (_Duck) {
       bottomLeft: [game.resources.duckBlackTopLeft0.texture, game.resources.duckBlackTopLeft1.texture, game.resources.duckBlackTopLeft2.texture],
       bottomRight: [game.resources.duckBlackTopRight0.texture, game.resources.duckBlackTopRight1.texture, game.resources.duckBlackTopRight2.texture],
       shot: [game.resources.duckBlackShot.texture],
-      leftDead: [game.resources.duckBlackDead0.texture],
-      rightDead: [game.resources.duckBlackDead1.texture]
+      dead: [game.resources.duckBlackDead0.texture, game.resources.duckBlackDead1.texture]
     };
     return _possibleConstructorReturn(this, _getPrototypeOf(DuckBlack).call(this, game, x, y, state, frames));
   }
@@ -42497,8 +42670,7 @@ function (_Duck) {
       bottomLeft: [game.resources.duckRedTopLeft0.texture, game.resources.duckRedTopLeft1.texture, game.resources.duckRedTopLeft2.texture],
       topRight: [game.resources.duckRedTopRight0.texture, game.resources.duckRedTopRight1.texture, game.resources.duckRedTopRight2.texture],
       shot: [game.resources.duckRedShot.texture],
-      leftDead: [game.resources.duckRedDead0.texture],
-      rightDead: [game.resources.duckRedDead1.texture]
+      dead: [game.resources.duckRedDead0.texture, game.resources.duckRedDead1.texture]
     };
     return _possibleConstructorReturn(this, _getPrototypeOf(DuckRed).call(this, game, x, y, state, frames));
   }
@@ -42572,16 +42744,14 @@ function (_Container) {
     value: function update_(delta) {
       var _this2 = this;
 
-      if (!this.ended && (new Date() - this.start) / 1000 > this.duration) {
-        this.ended = true;
-        this.ducks.forEach(function (duck) {
-          return duck.marginControl = false;
-        });
-      }
-
       this.ducks.forEach(function (duck) {
         return duck.logicUpdate(delta);
       });
+
+      if (!this.ended && (new Date() - this.start) / 1000 > this.duration) {
+        this.waveEnd();
+      }
+
       this.ducks = this.ducks.filter(function (o) {
         var isActive = o.isActive();
 
@@ -42595,7 +42765,7 @@ function (_Container) {
       });
 
       if (this.ducks.length === 0) {
-        this.scene.mainContainer.emit('wave-end', new Event('wave-end'));
+        this.scene.mainContainer.emit('wave-end-change-anim', new Event('wave-end-change-anim'));
       }
     }
   }, {
@@ -42617,6 +42787,19 @@ function (_Container) {
         return _this3.addChild(duck);
       });
     }
+  }, {
+    key: "waveEnd",
+    value: function waveEnd() {
+      this.ended = true;
+      this.ducks.forEach(function (duck) {
+        duck.turnOffMarginControl();
+        duck.turnOffRandomState();
+      });
+
+      if (this.nOfDucks !== this.nOfKilledDucks) {
+        this.scene.mainContainer.emit('wave-end-dog-laugh', new Event('wave-end-dog-laugh'));
+      }
+    }
   }]);
 
   return Wave;
@@ -42624,7 +42807,7 @@ function (_Container) {
 
 var _default = Wave;
 exports.default = _default;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/DuckBlack.js":"components/duck-hunt/entities/DuckBlack.js","../entities/DuckRed.js":"components/duck-hunt/entities/DuckRed.js","../utils/Math2":"components/duck-hunt/utils/Math2.js"}],"components/duck-hunt/entities-layers/Ducks.js":[function(require,module,exports) {
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/DuckBlack.js":"components/duck-hunt/entities/DuckBlack.js","../entities/DuckRed.js":"components/duck-hunt/entities/DuckRed.js","../utils/Math2":"components/duck-hunt/utils/Math2.js"}],"components/duck-hunt/entities-layers/HUD.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42633,12 +42816,6 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = void 0;
 
 var _pixi = require("pixi.js");
-
-var _DuckBlack = _interopRequireDefault(require("../entities/DuckBlack.js"));
-
-var _DuckRed = _interopRequireDefault(require("../entities/DuckRed.js"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
@@ -42658,63 +42835,37 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var Ducks =
+var HUD =
 /*#__PURE__*/
 function (_Container) {
-  _inherits(Ducks, _Container);
+  _inherits(HUD, _Container);
 
-  function Ducks(scene) {
+  function HUD(scene, nOfBullets) {
     var _this;
 
-    _classCallCheck(this, Ducks);
+    _classCallCheck(this, HUD);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Ducks).call(this));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(HUD).call(this));
     _this.scene = scene;
-    _this.ducks = [];
+    _this.nOfBullets = nOfBullets;
+    _this.hitDucks = 0;
+    _this.missDucks = 0;
     return _this;
   }
 
-  _createClass(Ducks, [{
+  _createClass(HUD, [{
     key: "update_",
-    value: function update_(delta) {
-      var _this2 = this;
-
-      this.ducks.forEach(function (duck) {
-        return duck.logicUpdate(delta);
-      });
-      this.ducks = this.ducks.filter(function (o) {
-        var isActive = o.isActive();
-
-        if (!isActive) {
-          o.visible = false;
-
-          _this2.removeChild(o);
-        }
-
-        return isActive;
-      });
-
-      if (this.ducks.length === 0) {
-        this.scene.mainContainer.emit('wave-end', new Event('wave-end'));
-      }
-    }
+    value: function update_(delta) {}
   }, {
-    key: "generateWave",
-    value: function generateWave() {
-      var _this3 = this;
-
-      this.ducks = [new _DuckBlack.default(this.scene, 210, 470), new _DuckBlack.default(this.scene, 330, 470), new _DuckRed.default(this.scene, 325, 470), new _DuckRed.default(this.scene, 435, 470)];
-      this.ducks.forEach(function (duck) {
-        return _this3.addChild(duck);
-      });
-    }
+    key: "init_",
+    value: function init_() {}
   }]);
 
-  return Ducks;
+  return HUD;
 }(_pixi.Container);
 
-exports.default = Ducks;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/DuckBlack.js":"components/duck-hunt/entities/DuckBlack.js","../entities/DuckRed.js":"components/duck-hunt/entities/DuckRed.js"}],"components/duck-hunt/event-listeners/GameSceneEventListenerController.js":[function(require,module,exports) {
+exports.default = HUD;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js"}],"components/duck-hunt/event-listeners/GameSceneEventListenerController.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -42769,7 +42920,16 @@ function (_EventListenerControl) {
       this.scene.mainContainer.removeAllListeners();
       this.scene.mainContainer.interactive = true;
       this.scene.mainContainer.on('pointerdown', function (e) {
-        // if user can shot check if has shot a duck
+        // if wave is over.. return
+        if (_this2.scene.ducks.ended) {
+          return;
+        } // if bullets are over... set wave to end..
+
+
+        if (false) {
+          _this2.scene.ducks.waveEnd();
+        }
+
         var shotBg = new _pixi.Sprite(_pixi.Texture.WHITE);
         shotBg.height = 600;
         shotBg.width = 800;
@@ -42781,50 +42941,53 @@ function (_EventListenerControl) {
           _this2.scene.mainContainer.removeChild(shotBg);
         }, 20);
         var point = e.data.getLocalPosition(_this2.scene.mainContainer);
-        var shotRadius = 100; // pixel
+        var shotRadius = 40; // pixel
 
         var nOfHitDucks = 0; // const graphics = new Graphics();
-        // graphics.beginFill(0xe74c3c);
+        // graphics.beginFill(0x333);
         // graphics.drawCircle(point.x, point.y, shotRadius); //
         // graphics.endFill();
         // this.scene.mainContainer.addChild(graphics);
+        // setTimeout(() => {
+        //   this.scene.mainContainer.removeChild(graphics);
+        // }, 40);
 
         _this2.scene.ducks.ducks.forEach(function (duck) {
           nOfHitDucks += duck.haveHitMe(point, shotRadius) ? 1 : 0;
-        });
+        }); // generate dog animation
 
-        console.log(nOfHitDucks); // generate dog animation
 
-        var exced = nOfHitDucks % 2;
-        var doubleAnim = nOfHitDucks / 2;
-        console.log('exed: ', exced);
-        console.log('doubleAnim: ', doubleAnim);
-
-        for (var i = 0; i < doubleAnim; i++) {
-          console.log('double'); // this.scene.dogAnimations.dogDoubleAnim(400, 480);
-        }
-
-        nOfHitDucks -= doubleAnim * 2;
-        nOfHitDucks += exced;
-        console.log('nofhit', nOfHitDucks);
-
-        for (var _i = 0; _i < nOfHitDucks; _i++) {
-          console.log('single'); // this.scene.dogAnimations.dogSingleAnim(400, 480);
+        for (var i = nOfHitDucks; i > 0; i -= 2) {
+          if (i >= 2) {
+            setTimeout(function () {
+              _this2.scene.dogAnimations.dogFoundDoubleAnim(point.x, 475);
+            }, 1200);
+          } else {
+            setTimeout(function () {
+              _this2.scene.dogAnimations.dogFoundSingleAnim(point.x, 475);
+            }, 1200);
+          }
         }
 
         _this2.scene.ducks.nOfKilledDucks += nOfHitDucks;
-      }); // this.scene.mainContainer.on('duckkill', (e, x) => {
-      //   this.scene.ducks.nOfKilledDucks++;
-      //   this.scene.dogAnimations.dogSingleAnim(x, 500);
-      // });
-
+      });
       this.scene.mainContainer.on('duckescape', function (e, x, y) {
         console.log('duckescape');
       });
-      this.scene.mainContainer.on('wave-end', function (e) {
+      this.scene.mainContainer.on('wave-end-change-anim', function (e) {
         if (_this2.scene.dogAnimations.allAnimAreOver()) {
-          _this2.scene.changeScene('GO');
+          // next wave
+          // this.scene.nextWave(20, 20);
+          // next level
+          // game over
+          _this2.scene.changeScene('GO'); // game win
+
         }
+      });
+      this.scene.mainContainer.on('wave-end-dog-laugh', function (e) {
+        _this2.scene.bgColor.tint = 0xfc9688; // dog laugh animation
+
+        _this2.scene.dogAnimations.dogLaughAnim(0, 475);
       });
     }
   }, {
@@ -42856,7 +43019,7 @@ var _DogAnimations = _interopRequireDefault(require("../entities-layers/DogAnima
 
 var _Wave = _interopRequireDefault(require("../entities-layers/Wave.js"));
 
-var _Ducks = _interopRequireDefault(require("../entities-layers/Ducks.js"));
+var _HUD = _interopRequireDefault(require("../entities-layers/HUD"));
 
 var _GameSceneEventListenerController = _interopRequireDefault(require("../event-listeners/GameSceneEventListenerController"));
 
@@ -42904,6 +43067,7 @@ function (_Scene) {
     value: function update_(delta) {
       this.ducks.update_(delta);
       this.dogAnimations.update_(delta);
+      this.hud.update_(delta);
     }
   }, {
     key: "destroy",
@@ -42912,37 +43076,44 @@ function (_Scene) {
       this.mainContainer.removeChild(this.dogAnimations);
       this.mainContainer.removeChild(this.ducks);
       this.mainContainer.removeChild(this.background);
+      this.mainContainer.removeChild(this.hud);
     }
   }, {
     key: "reset",
     value: function reset() {
+      this.nextWave(10, 10);
+    }
+  }, {
+    key: "nextWave",
+    value: function nextWave(nOfDucks, duration) {
       // EventListenerController
       this.eventListenerController = new _GameSceneEventListenerController.default(this);
       this.eventListenerController.initEventListeners(); // Layer 1
 
-      this.bgColor(); // Layer 2
+      this.bgColor = this.bgColorInstance(0x6fcbfc); // Layer 2
       // Creazione di wave da globalState..
-      // this.ducks = new Ducks(this);
-      // this.ducks.generateWave();
-      // this.mainContainer.addChild(this.ducks);
 
-      this.ducks = new _Wave.default(this, 30, 100000000);
+      this.ducks = new _Wave.default(this, nOfDucks, duration);
       this.mainContainer.addChild(this.ducks); // Layer 3
 
       this.dogAnimations = new _DogAnimations.default(this);
       this.mainContainer.addChild(this.dogAnimations); // Layer 4
 
       this.background = new _Background.default(this);
-      this.mainContainer.addChild(this.background);
+      this.mainContainer.addChild(this.background); // Layer 5 (HUD)
+
+      this.hud = new _HUD.default(this, nOfDucks);
+      this.mainContainer.addChild(this.hud);
     }
   }, {
-    key: "bgColor",
-    value: function bgColor() {
+    key: "bgColorInstance",
+    value: function bgColorInstance(color) {
       var bgColor = new _pixi.Sprite(_pixi.Texture.WHITE);
       bgColor.height = 600;
       bgColor.width = 800;
-      bgColor.tint = 0x89c4f4;
+      bgColor.tint = color;
       this.mainContainer.addChild(bgColor);
+      return bgColor;
     }
   }]);
 
@@ -42950,7 +43121,7 @@ function (_Scene) {
 }(_Scene2.default);
 
 exports.default = GameScene;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/Background.js":"components/duck-hunt/entities/Background.js","./Scene.js":"components/duck-hunt/scenes/Scene.js","../entities-layers/DogAnimations.js":"components/duck-hunt/entities-layers/DogAnimations.js","../entities-layers/Wave.js":"components/duck-hunt/entities-layers/Wave.js","../entities-layers/Ducks.js":"components/duck-hunt/entities-layers/Ducks.js","../event-listeners/GameSceneEventListenerController":"components/duck-hunt/event-listeners/GameSceneEventListenerController.js"}],"components/duck-hunt/event-listeners/GameOverEventListenerController.js":[function(require,module,exports) {
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","../entities/Background.js":"components/duck-hunt/entities/Background.js","./Scene.js":"components/duck-hunt/scenes/Scene.js","../entities-layers/DogAnimations.js":"components/duck-hunt/entities-layers/DogAnimations.js","../entities-layers/Wave.js":"components/duck-hunt/entities-layers/Wave.js","../entities-layers/HUD":"components/duck-hunt/entities-layers/HUD.js","../event-listeners/GameSceneEventListenerController":"components/duck-hunt/event-listeners/GameSceneEventListenerController.js"}],"components/duck-hunt/event-listeners/GameOverEventListenerController.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43183,21 +43354,18 @@ function () {
         for (var s in _this.scenes) {
           _this.scenes[s].mainContainer.width = _this.app.screen.width;
           _this.scenes[s].mainContainer.height = _this.app.screen.height;
-        }
+        } // const bg = new Sprite(Texture.WHITE);
+        // bg.height = window.innerHeight;
+        // bg.width = window.innerWidth;
+        // for (let s in this.scenes) {
+        //   this.scenes[s].mainContainer.addChild(bg);
+        // }
+        // setTimeout(() => {
+        //   for (let s in this.scenes) {
+        //     this.scenes[s].mainContainer.removeChild(bg);
+        //   }
+        // }, 20);
 
-        var bg = new _pixi.Sprite(_pixi.Texture.WHITE);
-        bg.height = window.innerHeight;
-        bg.width = window.innerWidth;
-
-        for (var _s in _this.scenes) {
-          _this.scenes[_s].mainContainer.addChild(bg);
-        }
-
-        setTimeout(function () {
-          for (var _s2 in _this.scenes) {
-            _this.scenes[_s2].mainContainer.removeChild(bg);
-          }
-        }, 20);
       });
     }
   }, {
@@ -43323,7 +43491,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43343" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46313" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

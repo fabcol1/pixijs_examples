@@ -17,12 +17,10 @@ class Wave extends Container {
   }
 
   update_(delta) {
-    if (!this.ended && (new Date() - this.start) / 1000 > this.duration) {
-      this.ended = true;
-      this.ducks.forEach(duck => (duck.marginControl = false));
-    }
-
     this.ducks.forEach(duck => duck.logicUpdate(delta));
+    if (!this.ended && (new Date() - this.start) / 1000 > this.duration) {
+      this.waveEnd();
+    }
     this.ducks = this.ducks.filter(o => {
       const isActive = o.isActive();
       if (!isActive) {
@@ -33,7 +31,10 @@ class Wave extends Container {
     });
 
     if (this.ducks.length === 0) {
-      this.scene.mainContainer.emit('wave-end', new Event('wave-end'));
+      this.scene.mainContainer.emit(
+        'wave-end-change-anim',
+        new Event('wave-end-change-anim')
+      );
     }
   }
 
@@ -49,6 +50,20 @@ class Wave extends Container {
       );
     }
     this.ducks.forEach(duck => this.addChild(duck));
+  }
+
+  waveEnd() {
+    this.ended = true;
+    this.ducks.forEach(duck => {
+      duck.turnOffMarginControl();
+      duck.turnOffRandomState();
+    });
+    if (this.nOfDucks !== this.nOfKilledDucks) {
+      this.scene.mainContainer.emit(
+        'wave-end-dog-laugh',
+        new Event('wave-end-dog-laugh')
+      );
+    }
   }
 }
 

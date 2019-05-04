@@ -8,6 +8,7 @@ import {
   dog_sniff_3,
   dog_sniff_4,
   dog_find_0,
+  dog_double_0,
   dog_jump_0,
   dog_jump_1,
   duck_black_shot_0,
@@ -41,7 +42,9 @@ import {
   duck_red_top_right_0,
   duck_red_top_right_1,
   duck_red_top_right_2,
-  dog_single_0
+  dog_single_0,
+  dog_laugh_0,
+  dog_laugh_1
 } from '../../../static/duck_hunt_static/*.png';
 
 export default class Resources {
@@ -55,6 +58,7 @@ export default class Resources {
       .add('dogSniff3', dog_sniff_3)
       .add('dogSniff4', dog_sniff_4)
       .add('dogFind', dog_find_0)
+      .add('dogDouble', dog_double_0)
       .add('dogJump0', dog_jump_0)
       .add('dogJump1', dog_jump_1)
       .add('duckBlackShot', duck_black_shot_0)
@@ -89,6 +93,8 @@ export default class Resources {
       .add('duckRedTopRight1', duck_red_top_right_1)
       .add('duckRedTopRight2', duck_red_top_right_2)
       .add('dogSingle', dog_single_0)
+      .add('dogLaugh0', dog_laugh_0)
+      .add('dogLaugh1', dog_laugh_1)
       .load(setup);
   }
 }
