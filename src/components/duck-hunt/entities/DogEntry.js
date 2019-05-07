@@ -22,7 +22,7 @@ export default class DogEntry extends AnimatedSprite {
     this.frames = frames;
     this.x = x;
     this.y = y;
-    this.vx = 2.5;
+    this.vx = 3.5;
     this.vy = 0;
     this.animationSpeed = 0.1;
     this.play();
@@ -33,7 +33,7 @@ export default class DogEntry extends AnimatedSprite {
     this.x += this.vx;
     this.y += this.vy;
 
-    if (this.x === 320 && this.status === 'sniff') {
+    if (this.x >= 320 && this.status === 'sniff') {
       this.vx = 0;
       this.vy = 0;
       this.status = 'find';

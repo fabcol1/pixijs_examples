@@ -18,7 +18,7 @@ export default class GameSceneEventListenerController extends EventListenerContr
       }
 
       // if bullets are over... set wave to end..
-      if (false) {
+      if (--this.scene.hud.nOfBullets === 0) {
         this.scene.ducks.waveEnd();
       }
 
@@ -62,22 +62,48 @@ export default class GameSceneEventListenerController extends EventListenerContr
       }
 
       this.scene.ducks.nOfKilledDucks += nOfHitDucks;
+      this.scene.globalState.hitDucks++;
+
+      this.scene.globalState.currentPoints +=
+        nOfHitDucks *
+        this.scene.globalState.levels[this.scene.globalState.currentLevel]
+          .pointPerDuck;
     });
 
     this.scene.mainContainer.on('duckescape', (e, x, y) => {
-      console.log('duckescape');
+      // console.log('duckescape');
+      this.scene.globalState.missDucks++;
     });
 
     this.scene.mainContainer.on('wave-end-change-anim', e => {
       if (this.scene.dogAnimations.allAnimAreOver()) {
-        // next wave
-        // this.scene.nextWave(20, 20);
-        // next level
+        const {
+          currentWave,
+          levels,
+          currentLevel,
+          currentPoints
+        } = this.scene.globalState;
 
-        // game over
-        this.scene.changeScene('GO');
-
-        // game win
+        if (currentWave < levels[currentLevel].waves) {
+          // next wave
+          this.scene.reset();
+        } else {
+          if (
+            currentPoints < levels[this.scene.globalState.currentLevel].points
+          ) {
+            this.scene.changeScene('GO');
+          } else {
+            this.scene.globalState.hitDucks = 0;
+            this.scene.globalState.missDucks = 0;
+            this.scene.globalState.currentWave = 0;
+            this.scene.globalState.currentLevel++;
+            if (levels[this.scene.globalState.currentLevel] === undefined) {
+              this.scene.changeScene('GW');
+            } else {
+              this.scene.changeScene('MM');
+            }
+          }
+        }
       }
     });
 

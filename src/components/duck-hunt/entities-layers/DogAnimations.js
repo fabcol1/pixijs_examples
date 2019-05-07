@@ -60,7 +60,6 @@ export default class DogAnimations extends Container {
     }
   }
   dogLaughAnim(x, y) {
-    console.log('hello');
     const ds = new DogLaugh(this.scene, x, y);
     this.addChild(ds);
     this.dogLaugh = ds;

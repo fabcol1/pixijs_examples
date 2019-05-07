@@ -3,15 +3,24 @@ import Resources from './utils/Resources.js';
 import MainMenu from './scenes/MainMenu.js';
 import GameScene from './scenes/GameScene.js';
 import GameOver from './scenes/GameOver.js';
+import GameWin from './scenes/GameWin.js';
+import levels from './utils/levels.json';
 
 export default class Game {
   constructor(parentElement) {
     this.setup = this.setup.bind(this);
     this.changeScene = this.changeScene.bind(this);
 
-    this.scenes = {};
+    this.scene = undefined;
     this.currenScene = '';
-    this.globalState = {};
+    this.globalState = {
+      levels,
+      currentLevel: 0,
+      currentWave: 0,
+      currentPoints: 0,
+      hitDucks: 0,
+      missDucks: 0
+    };
 
     this.app = this.buildApp(parentElement);
     this.loadResources();
@@ -22,11 +31,12 @@ export default class Game {
     // Resize all scenes on window resize event
     window.addEventListener('resize', e => {
       this.app.renderer.resize(window.innerWidth, window.innerHeight);
-
-      for (let s in this.scenes) {
-        this.scenes[s].mainContainer.width = this.app.screen.width;
-        this.scenes[s].mainContainer.height = this.app.screen.height;
-      }
+      this.scene.mainContainer.width = this.app.screen.width;
+      this.scene.mainContainer.height = this.app.screen.height;
+      // for (let s in this.scenes) {
+      //   this.scenes[s].mainContainer.width = this.app.screen.width;
+      //   this.scenes[s].mainContainer.height = this.app.screen.height;
+      // }
 
       // const bg = new Sprite(Texture.WHITE);
       // bg.height = window.innerHeight;
@@ -73,28 +83,56 @@ export default class Game {
   }
 
   setup(loader, resources) {
+    this.resources = resources;
     // create scenes
-    this.createScene(new MainMenu(resources, this), 'MM');
-    this.createScene(new GameScene(resources, this), 'GS');
-    this.createScene(new GameOver(resources, this), 'GO');
-
-    this.changeScene('GS');
+    // this.createScene(new MainMenu(resources, this), 'MM');
+    // this.createScene(new GameScene(resources, this), 'GS');
+    // this.createScene(new GameOver(resources, this), 'GO');
+    // this.createScene(new GameOver(resources, this), 'GW');
+    this.changeScene('MM');
     this.app.ticker.add(delta => this.gameLoop(delta));
   }
 
   gameLoop(delta) {
-    this.scenes[this.currenScene].update_(delta);
+    this.scene.update_(delta);
   }
 
   createScene(scene, sceneName) {
     scene.mainContainer.width = this.app.screen.width;
     scene.mainContainer.height = this.app.screen.height;
-    this.scenes[sceneName] = scene;
+    this.scene = scene;
     this.currenScene = sceneName;
   }
+
   changeScene(sceneName) {
+    if (sceneName === 'MM') {
+      this.createScene(new MainMenu(this.resources, this), sceneName);
+    } else if (sceneName === 'GS') {
+      this.createScene(new GameScene(this.resources, this), sceneName);
+    } else if (sceneName === 'GO') {
+      this.globalState = {
+        levels,
+        currentLevel: 0,
+        currentWave: 0,
+        currentPoints: 0,
+        hitDucks: 0,
+        missDucks: 0
+      };
+      this.createScene(new GameOver(this.resources, this), sceneName);
+    } else if (sceneName === 'GW') {
+      this.globalState = {
+        levels,
+        currentLevel: 0,
+        currentWave: 0,
+        currentPoints: 0,
+        hitDucks: 0,
+        missDucks: 0
+      };
+      this.createScene(new GameWin(this.resources, this), sceneName);
+    }
+
     this.currenScene = sceneName;
-    this.scenes[sceneName].reset();
-    this.app.stage.addChild(this.scenes[sceneName].mainContainer);
+    this.scene.reset();
+    this.app.stage.addChild(this.scene.mainContainer);
   }
 }

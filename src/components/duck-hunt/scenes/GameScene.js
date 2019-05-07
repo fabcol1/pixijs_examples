@@ -15,7 +15,7 @@ import GameSceneEventListenerController from '../event-listeners/GameSceneEventL
 export default class GameScene extends Scene {
   constructor(resources, game) {
     super(resources, game);
-    this.reset();
+    this.bgColor = this.bgColorInstance(0x6fcbfc);
   }
 
   update_(delta) {
@@ -33,7 +33,12 @@ export default class GameScene extends Scene {
   }
 
   reset() {
-    this.nextWave(10, 10);
+    const { currentLevel, levels } = this.game.globalState;
+    this.game.globalState.currentWave++;
+    this.nextWave(
+      levels[currentLevel]['ducks'],
+      levels[currentLevel]['duration']
+    );
   }
 
   nextWave(nOfDucks, duration) {

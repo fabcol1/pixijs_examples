@@ -40,7 +40,7 @@ export default class MainMenu extends Scene {
     const bgColor = new Sprite(Texture.WHITE);
     bgColor.height = 600;
     bgColor.width = 800;
-    bgColor.tint = 0x89c4f4;
+    bgColor.tint = 0x6fcbfc;
     this.mainContainer.addChild(bgColor);
   }
 }

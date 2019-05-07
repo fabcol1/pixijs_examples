@@ -41807,7 +41807,7 @@ function (_AnimatedSprite) {
     _this.frames = frames;
     _this.x = x;
     _this.y = y;
-    _this.vx = 2.5;
+    _this.vx = 3.5;
     _this.vy = 0;
     _this.animationSpeed = 0.1;
 
@@ -41825,7 +41825,7 @@ function (_AnimatedSprite) {
       this.x += this.vx;
       this.y += this.vy;
 
-      if (this.x === 320 && this.status === 'sniff') {
+      if (this.x >= 320 && this.status === 'sniff') {
         this.vx = 0;
         this.vy = 0;
         this.status = 'find';
@@ -42175,7 +42175,6 @@ function (_Container) {
   }, {
     key: "dogLaughAnim",
     value: function dogLaughAnim(x, y) {
-      console.log('hello');
       var ds = new _DogLaugh.default(this.scene, x, y);
       this.addChild(ds);
       this.dogLaugh = ds;
@@ -42294,7 +42293,7 @@ function (_Scene) {
       var bgColor = new _pixi.Sprite(_pixi.Texture.WHITE);
       bgColor.height = 600;
       bgColor.width = 800;
-      bgColor.tint = 0x89c4f4;
+      bgColor.tint = 0x6fcbfc;
       this.mainContainer.addChild(bgColor);
     }
   }]);
@@ -42848,17 +42847,48 @@ function (_Container) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(HUD).call(this));
     _this.scene = scene;
     _this.nOfBullets = nOfBullets;
-    _this.hitDucks = 0;
-    _this.missDucks = 0;
+    _this.hitDucks = _this.scene.globalState.hitDucks;
+    _this.missDucks = _this.scene.globalState.missDucks;
+
+    _this.init_();
+
     return _this;
   }
 
   _createClass(HUD, [{
     key: "update_",
-    value: function update_(delta) {}
+    value: function update_(delta) {
+      this.nOfBulletsMessage.text = 'Bullets: ' + this.nOfBullets;
+      this.nOfhitDucksMessage.text = 'Hit Ducks: ' + this.scene.globalState.hitDucks;
+      this.missDucksMessage.text = 'Miss Ducks: ' + this.scene.globalState.missDucks;
+      this.pointsMessage.text = 'Points: ' + this.scene.globalState.currentPoints;
+    }
   }, {
     key: "init_",
-    value: function init_() {}
+    value: function init_() {
+      var style = new _pixi.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 15,
+        fill: 'white',
+        align: 'center'
+      });
+      this.nOfBulletsMessage = new _pixi.Text('Bullets: ' + this.nOfBullets, style);
+      this.nOfBulletsMessage.x = 10;
+      this.nOfBulletsMessage.y = 10;
+      this.addChild(this.nOfBulletsMessage);
+      this.nOfhitDucksMessage = new _pixi.Text('Hit Ducks: ' + this.hitDucks, style);
+      this.nOfhitDucksMessage.x = 10;
+      this.nOfhitDucksMessage.y = 30;
+      this.addChild(this.nOfhitDucksMessage);
+      this.missDucksMessage = new _pixi.Text('Miss Ducks: ' + this.missDucks, style);
+      this.missDucksMessage.x = 10;
+      this.missDucksMessage.y = 50;
+      this.addChild(this.missDucksMessage);
+      this.pointsMessage = new _pixi.Text('Points: ' + this.scene.globalState.currentPoints, style);
+      this.pointsMessage.x = 10;
+      this.pointsMessage.y = 70;
+      this.addChild(this.pointsMessage);
+    }
   }]);
 
   return HUD;
@@ -42926,7 +42956,7 @@ function (_EventListenerControl) {
         } // if bullets are over... set wave to end..
 
 
-        if (false) {
+        if (--_this2.scene.hud.nOfBullets === 0) {
           _this2.scene.ducks.waveEnd();
         }
 
@@ -42970,18 +43000,40 @@ function (_EventListenerControl) {
         }
 
         _this2.scene.ducks.nOfKilledDucks += nOfHitDucks;
+        _this2.scene.globalState.hitDucks++;
+        _this2.scene.globalState.currentPoints += nOfHitDucks * _this2.scene.globalState.levels[_this2.scene.globalState.currentLevel].pointPerDuck;
       });
       this.scene.mainContainer.on('duckescape', function (e, x, y) {
-        console.log('duckescape');
+        // console.log('duckescape');
+        _this2.scene.globalState.missDucks++;
       });
       this.scene.mainContainer.on('wave-end-change-anim', function (e) {
         if (_this2.scene.dogAnimations.allAnimAreOver()) {
-          // next wave
-          // this.scene.nextWave(20, 20);
-          // next level
-          // game over
-          _this2.scene.changeScene('GO'); // game win
+          var _this2$scene$globalSt = _this2.scene.globalState,
+              currentWave = _this2$scene$globalSt.currentWave,
+              levels = _this2$scene$globalSt.levels,
+              currentLevel = _this2$scene$globalSt.currentLevel,
+              currentPoints = _this2$scene$globalSt.currentPoints;
 
+          if (currentWave < levels[currentLevel].waves) {
+            // next wave
+            _this2.scene.reset();
+          } else {
+            if (currentPoints < levels[_this2.scene.globalState.currentLevel].points) {
+              _this2.scene.changeScene('GO');
+            } else {
+              _this2.scene.globalState.hitDucks = 0;
+              _this2.scene.globalState.missDucks = 0;
+              _this2.scene.globalState.currentWave = 0;
+              _this2.scene.globalState.currentLevel++;
+
+              if (levels[_this2.scene.globalState.currentLevel] === undefined) {
+                _this2.scene.changeScene('GW');
+              } else {
+                _this2.scene.changeScene('MM');
+              }
+            }
+          }
         }
       });
       this.scene.mainContainer.on('wave-end-dog-laugh', function (e) {
@@ -43056,9 +43108,7 @@ function (_Scene) {
     _classCallCheck(this, GameScene);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GameScene).call(this, resources, game));
-
-    _this.reset();
-
+    _this.bgColor = _this.bgColorInstance(0x6fcbfc);
     return _this;
   }
 
@@ -43081,7 +43131,11 @@ function (_Scene) {
   }, {
     key: "reset",
     value: function reset() {
-      this.nextWave(10, 10);
+      var _this$game$globalStat = this.game.globalState,
+          currentLevel = _this$game$globalStat.currentLevel,
+          levels = _this$game$globalStat.levels;
+      this.game.globalState.currentWave++;
+      this.nextWave(levels[currentLevel]['ducks'], levels[currentLevel]['duration']);
     }
   }, {
     key: "nextWave",
@@ -43291,7 +43345,7 @@ function (_Scene) {
       var bgColor = new _pixi.Sprite(_pixi.Texture.WHITE);
       bgColor.height = 600;
       bgColor.width = 800;
-      bgColor.tint = 0x89c4f4;
+      bgColor.tint = 0x6fcbfc;
       this.mainContainer.addChild(bgColor);
     }
   }]);
@@ -43300,7 +43354,142 @@ function (_Scene) {
 }(_Scene2.default);
 
 exports.default = MainMenu;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./Scene.js":"components/duck-hunt/scenes/Scene.js","../event-listeners/GameOverEventListenerController.js":"components/duck-hunt/event-listeners/GameOverEventListenerController.js","../entities/Background.js":"components/duck-hunt/entities/Background.js"}],"components/duck-hunt/Game.js":[function(require,module,exports) {
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./Scene.js":"components/duck-hunt/scenes/Scene.js","../event-listeners/GameOverEventListenerController.js":"components/duck-hunt/event-listeners/GameOverEventListenerController.js","../entities/Background.js":"components/duck-hunt/entities/Background.js"}],"components/duck-hunt/scenes/GameWin.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _pixi = require("pixi.js");
+
+var _Scene2 = _interopRequireDefault(require("./Scene.js"));
+
+var _GameOverEventListenerController = _interopRequireDefault(require("../event-listeners/GameOverEventListenerController.js"));
+
+var _Background = _interopRequireDefault(require("../entities/Background.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+var MainMenu =
+/*#__PURE__*/
+function (_Scene) {
+  _inherits(MainMenu, _Scene);
+
+  function MainMenu(resources, game) {
+    var _this;
+
+    _classCallCheck(this, MainMenu);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(MainMenu).call(this, resources, game));
+
+    _this.reset();
+
+    return _this;
+  }
+
+  _createClass(MainMenu, [{
+    key: "update_",
+    value: function update_(delta) {}
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      this.eventListenerController.removeEventListeners();
+      this.mainContainer.removeChild(this.background);
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      // EventListenerController
+      this.eventListenerController = new _GameOverEventListenerController.default(this);
+      this.eventListenerController.initEventListeners(); // Layer 1
+
+      this.bgColor(); // Layer 2
+
+      this.background = new _Background.default(this);
+      this.mainContainer.addChild(this.background); // Layer 3
+
+      this.message();
+    }
+  }, {
+    key: "message",
+    value: function message() {
+      var style = new _pixi.TextStyle({
+        fontFamily: 'Arial',
+        fontSize: 42,
+        fill: 'white',
+        align: 'center',
+        dropShadow: true,
+        dropShadowColor: '#000000',
+        dropShadowBlur: 1,
+        dropShadowAngle: Math.PI / 10,
+        dropShadowDistance: 3
+      });
+      var message = new _pixi.Text('Congratulations, you have win!\nplay again?', style);
+      message.x = 400 - message.width / 2;
+      message.y = 300 - message.height / 2;
+      this.mainContainer.addChild(message);
+    }
+  }, {
+    key: "bgColor",
+    value: function bgColor() {
+      var bgColor = new _pixi.Sprite(_pixi.Texture.WHITE);
+      bgColor.height = 600;
+      bgColor.width = 800;
+      bgColor.tint = 0x6fcbfc;
+      this.mainContainer.addChild(bgColor);
+    }
+  }]);
+
+  return MainMenu;
+}(_Scene2.default);
+
+exports.default = MainMenu;
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./Scene.js":"components/duck-hunt/scenes/Scene.js","../event-listeners/GameOverEventListenerController.js":"components/duck-hunt/event-listeners/GameOverEventListenerController.js","../entities/Background.js":"components/duck-hunt/entities/Background.js"}],"components/duck-hunt/utils/levels.json":[function(require,module,exports) {
+module.exports = [{
+  "id": 0,
+  "waves": 3,
+  "ducks": 5,
+  "duration": 6,
+  "points": 500,
+  "pointPerDuck": 100
+}, // 1500 points
+{
+  "id": 1,
+  "waves": 3,
+  "ducks": 7,
+  "duration": 5,
+  "points": 2500,
+  "pointPerDuck": 100
+}, // 3600 points
+{
+  "id": 2,
+  "waves": 3,
+  "ducks": 10,
+  "duration": 4,
+  "points": 4000,
+  "pointPerDuck": 100
+}];
+},{}],"components/duck-hunt/Game.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -43318,6 +43507,10 @@ var _GameScene = _interopRequireDefault(require("./scenes/GameScene.js"));
 
 var _GameOver = _interopRequireDefault(require("./scenes/GameOver.js"));
 
+var _GameWin = _interopRequireDefault(require("./scenes/GameWin.js"));
+
+var _levels = _interopRequireDefault(require("./utils/levels.json"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -43334,9 +43527,16 @@ function () {
 
     this.setup = this.setup.bind(this);
     this.changeScene = this.changeScene.bind(this);
-    this.scenes = {};
+    this.scene = undefined;
     this.currenScene = '';
-    this.globalState = {};
+    this.globalState = {
+      levels: _levels.default,
+      currentLevel: 0,
+      currentWave: 0,
+      currentPoints: 0,
+      hitDucks: 0,
+      missDucks: 0
+    };
     this.app = this.buildApp(parentElement);
     this.loadResources();
     this.eventListenerInit();
@@ -43351,10 +43551,12 @@ function () {
       window.addEventListener('resize', function (e) {
         _this.app.renderer.resize(window.innerWidth, window.innerHeight);
 
-        for (var s in _this.scenes) {
-          _this.scenes[s].mainContainer.width = _this.app.screen.width;
-          _this.scenes[s].mainContainer.height = _this.app.screen.height;
-        } // const bg = new Sprite(Texture.WHITE);
+        _this.scene.mainContainer.width = _this.app.screen.width;
+        _this.scene.mainContainer.height = _this.app.screen.height; // for (let s in this.scenes) {
+        //   this.scenes[s].mainContainer.width = this.app.screen.width;
+        //   this.scenes[s].mainContainer.height = this.app.screen.height;
+        // }
+        // const bg = new Sprite(Texture.WHITE);
         // bg.height = window.innerHeight;
         // bg.width = window.innerWidth;
         // for (let s in this.scenes) {
@@ -43365,7 +43567,6 @@ function () {
         //     this.scenes[s].mainContainer.removeChild(bg);
         //   }
         // }, 20);
-
       });
     }
   }, {
@@ -43406,11 +43607,13 @@ function () {
     value: function setup(loader, resources) {
       var _this2 = this;
 
-      // create scenes
-      this.createScene(new _MainMenu.default(resources, this), 'MM');
-      this.createScene(new _GameScene.default(resources, this), 'GS');
-      this.createScene(new _GameOver.default(resources, this), 'GO');
-      this.changeScene('GS');
+      this.resources = resources; // create scenes
+      // this.createScene(new MainMenu(resources, this), 'MM');
+      // this.createScene(new GameScene(resources, this), 'GS');
+      // this.createScene(new GameOver(resources, this), 'GO');
+      // this.createScene(new GameOver(resources, this), 'GW');
+
+      this.changeScene('MM');
       this.app.ticker.add(function (delta) {
         return _this2.gameLoop(delta);
       });
@@ -43418,22 +43621,48 @@ function () {
   }, {
     key: "gameLoop",
     value: function gameLoop(delta) {
-      this.scenes[this.currenScene].update_(delta);
+      this.scene.update_(delta);
     }
   }, {
     key: "createScene",
     value: function createScene(scene, sceneName) {
       scene.mainContainer.width = this.app.screen.width;
       scene.mainContainer.height = this.app.screen.height;
-      this.scenes[sceneName] = scene;
+      this.scene = scene;
       this.currenScene = sceneName;
     }
   }, {
     key: "changeScene",
     value: function changeScene(sceneName) {
+      if (sceneName === 'MM') {
+        this.createScene(new _MainMenu.default(this.resources, this), sceneName);
+      } else if (sceneName === 'GS') {
+        this.createScene(new _GameScene.default(this.resources, this), sceneName);
+      } else if (sceneName === 'GO') {
+        this.globalState = {
+          levels: _levels.default,
+          currentLevel: 0,
+          currentWave: 0,
+          currentPoints: 0,
+          hitDucks: 0,
+          missDucks: 0
+        };
+        this.createScene(new _GameOver.default(this.resources, this), sceneName);
+      } else if (sceneName === 'GW') {
+        this.globalState = {
+          levels: _levels.default,
+          currentLevel: 0,
+          currentWave: 0,
+          currentPoints: 0,
+          hitDucks: 0,
+          missDucks: 0
+        };
+        this.createScene(new _GameWin.default(this.resources, this), sceneName);
+      }
+
       this.currenScene = sceneName;
-      this.scenes[sceneName].reset();
-      this.app.stage.addChild(this.scenes[sceneName].mainContainer);
+      this.scene.reset();
+      this.app.stage.addChild(this.scene.mainContainer);
     }
   }]);
 
@@ -43441,7 +43670,7 @@ function () {
 }();
 
 exports.default = Game;
-},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./utils/Resources.js":"components/duck-hunt/utils/Resources.js","./scenes/MainMenu.js":"components/duck-hunt/scenes/MainMenu.js","./scenes/GameScene.js":"components/duck-hunt/scenes/GameScene.js","./scenes/GameOver.js":"components/duck-hunt/scenes/GameOver.js"}],"index.js":[function(require,module,exports) {
+},{"pixi.js":"../node_modules/pixi.js/lib/index.js","./utils/Resources.js":"components/duck-hunt/utils/Resources.js","./scenes/MainMenu.js":"components/duck-hunt/scenes/MainMenu.js","./scenes/GameScene.js":"components/duck-hunt/scenes/GameScene.js","./scenes/GameOver.js":"components/duck-hunt/scenes/GameOver.js","./scenes/GameWin.js":"components/duck-hunt/scenes/GameWin.js","./utils/levels.json":"components/duck-hunt/utils/levels.json"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 require("./styles/main.scss");
@@ -43491,7 +43720,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "46313" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40307" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2019-05-08
+
+### Added
+
+- [Duck Hunt Clone](https://eager-shaw-8e9d24.netlify.com/#!duck-hunt) : Levels system
+
+### Changed
+
+- Changed scene reset system.
+
 ## [0.1.0] - 2019-04-28
 
 ### Added

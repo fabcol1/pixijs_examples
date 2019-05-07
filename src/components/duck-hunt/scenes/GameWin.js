@@ -1,5 +1,4 @@
 import { Sprite, Texture, TextStyle, Text } from 'pixi.js';
-
 import Scene from './Scene.js';
 import GameOverEventListenerController from '../event-listeners/GameOverEventListenerController.js';
 import Background from '../entities/Background.js';
@@ -27,10 +26,10 @@ export default class MainMenu extends Scene {
     this.background = new Background(this);
     this.mainContainer.addChild(this.background);
     // Layer 3
-    this.gameOverMessage();
+    this.message();
   }
 
-  gameOverMessage() {
+  message() {
     const style = new TextStyle({
       fontFamily: 'Arial',
       fontSize: 42,
@@ -42,7 +41,10 @@ export default class MainMenu extends Scene {
       dropShadowAngle: Math.PI / 10,
       dropShadowDistance: 3
     });
-    const message = new Text('Game Over\nplay again?', style);
+    const message = new Text(
+      'Congratulations, you have win!\nplay again?',
+      style
+    );
     message.x = 400 - message.width / 2;
     message.y = 300 - message.height / 2;
     this.mainContainer.addChild(message);
