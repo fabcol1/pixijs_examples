@@ -13,7 +13,7 @@ class DogDucksFound extends Sprite {
     this.x = 300;
     this.y = y;
     this.vx = 0;
-    this.vy = -3;
+    this.vy = -6;
     this.minY = y - 100;
     this.maxY = y + 1;
     this.status = 'running';
@@ -28,8 +28,8 @@ class DogDucksFound extends Sprite {
       this.vy = 0;
       setTimeout(() => {
         this.status = 'running';
-        this.vy = 4;
-      }, 500);
+        this.vy = 6;
+      }, 300);
     } else if (this.y > this.maxY) {
       this.visible = false;
       this.status = 'end';

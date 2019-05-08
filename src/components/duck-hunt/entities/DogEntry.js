@@ -42,7 +42,8 @@ export default class DogEntry extends AnimatedSprite {
       setTimeout(() => {
         this.status = 'jump';
         this.y = 470;
-        this.vy = -3;
+        this.vy = -6;
+        this.vx = 2;
         this.textures = this.frames['jump'];
         this.play();
         this.loop = false;

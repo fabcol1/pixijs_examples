@@ -62,7 +62,7 @@ export default class GameSceneEventListenerController extends EventListenerContr
       }
 
       this.scene.ducks.nOfKilledDucks += nOfHitDucks;
-      this.scene.globalState.hitDucks++;
+      this.scene.globalState.hitDucks += nOfHitDucks;
 
       this.scene.globalState.currentPoints +=
         nOfHitDucks *
@@ -91,15 +91,22 @@ export default class GameSceneEventListenerController extends EventListenerContr
           if (
             currentPoints < levels[this.scene.globalState.currentLevel].points
           ) {
-            this.scene.changeScene('GO');
+            setTimeout(() => {
+              this.scene.destroy();
+              this.scene.changeScene('GO');
+            }, 1000);
           } else {
             this.scene.globalState.hitDucks = 0;
             this.scene.globalState.missDucks = 0;
             this.scene.globalState.currentWave = 0;
             this.scene.globalState.currentLevel++;
             if (levels[this.scene.globalState.currentLevel] === undefined) {
-              this.scene.changeScene('GW');
+              setTimeout(() => {
+                this.scene.destroy();
+                this.scene.changeScene('GW');
+              }, 1000);
             } else {
+              this.scene.destroy();
               this.scene.changeScene('MM');
             }
           }

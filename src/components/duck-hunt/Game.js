@@ -5,6 +5,9 @@ import GameScene from './scenes/GameScene.js';
 import GameOver from './scenes/GameOver.js';
 import GameWin from './scenes/GameWin.js';
 import levels from './utils/levels.json';
+import WebFont from 'webfontloader';
+
+import '../../styles/main.scss';
 
 export default class Game {
   constructor(parentElement) {
@@ -21,6 +24,14 @@ export default class Game {
       hitDucks: 0,
       missDucks: 0
     };
+
+    // console.time('loading font');
+    WebFont.load({
+      google: {
+        families: ['VT323', 'monospace']
+      }
+    });
+    // console.timeEnd('loading font');
 
     this.app = this.buildApp(parentElement);
     this.loadResources();
@@ -105,21 +116,15 @@ export default class Game {
   }
 
   changeScene(sceneName) {
+    if (this.scene) {
+      this.scene.destroy();
+    }
     if (sceneName === 'MM') {
       this.createScene(new MainMenu(this.resources, this), sceneName);
     } else if (sceneName === 'GS') {
       this.createScene(new GameScene(this.resources, this), sceneName);
     } else if (sceneName === 'GO') {
-      this.globalState = {
-        levels,
-        currentLevel: 0,
-        currentWave: 0,
-        currentPoints: 0,
-        hitDucks: 0,
-        missDucks: 0
-      };
       this.createScene(new GameOver(this.resources, this), sceneName);
-    } else if (sceneName === 'GW') {
       this.globalState = {
         levels,
         currentLevel: 0,
@@ -128,7 +133,16 @@ export default class Game {
         hitDucks: 0,
         missDucks: 0
       };
+    } else if (sceneName === 'GW') {
       this.createScene(new GameWin(this.resources, this), sceneName);
+      this.globalState = {
+        levels,
+        currentLevel: 0,
+        currentWave: 0,
+        currentPoints: 0,
+        hitDucks: 0,
+        missDucks: 0
+      };
     }
 
     this.currenScene = sceneName;

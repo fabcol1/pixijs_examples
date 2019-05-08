@@ -44,7 +44,10 @@ import {
   duck_red_top_right_2,
   dog_single_0,
   dog_laugh_0,
-  dog_laugh_1
+  dog_laugh_1,
+  hud_bullet_0,
+  hud_score_dead_0,
+  hud_score_live_0
 } from '../../../static/duck_hunt_static/*.png';
 
 export default class Resources {
@@ -95,6 +98,9 @@ export default class Resources {
       .add('dogSingle', dog_single_0)
       .add('dogLaugh0', dog_laugh_0)
       .add('dogLaugh1', dog_laugh_1)
+      .add('hudBullet', hud_bullet_0)
+      .add('hudScoreDead', hud_score_dead_0)
+      .add('hudScoreLive', hud_score_live_0)
       .load(setup);
   }
 }

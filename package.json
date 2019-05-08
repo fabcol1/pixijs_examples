@@ -15,6 +15,7 @@
     "sass": "^1.19.0"
   },
   "dependencies": {
-    "pixi.js": "^4.5.5"
+    "pixi.js": "^4.5.5",
+    "webfontloader": "^1.6.28"
   }
 }

@@ -2,27 +2,25 @@
   {
     "id": 0,
     "waves": 3,
-    "ducks": 5,
+    "ducks": 4,
     "duration": 6,
     "points": 500,
     "pointPerDuck": 100
   },
-  // 1500 points
   {
     "id": 1,
     "waves": 3,
-    "ducks": 7,
+    "ducks": 4,
     "duration": 5,
-    "points": 2500,
+    "points": 1800,
     "pointPerDuck": 100
   },
-  // 3600 points
   {
     "id": 2,
     "waves": 3,
-    "ducks": 10,
+    "ducks": 4,
     "duration": 4,
-    "points": 4000,
+    "points": 3000,
     "pointPerDuck": 100
   }
 ]

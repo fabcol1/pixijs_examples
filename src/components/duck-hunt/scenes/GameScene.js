@@ -30,6 +30,7 @@ export default class GameScene extends Scene {
     this.mainContainer.removeChild(this.ducks);
     this.mainContainer.removeChild(this.background);
     this.mainContainer.removeChild(this.hud);
+    this.mainContainer.destroy();
   }
 
   reset() {

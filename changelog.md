@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.0] - 2019-05-09
+
+### Added
+
+- [Duck Hunt Clone](https://eager-shaw-8e9d24.netlify.com/#!duck-hunt) : HUD, (hit, score, shot)
+
 ## [0.2.0] - 2019-05-08
 
 ### Added

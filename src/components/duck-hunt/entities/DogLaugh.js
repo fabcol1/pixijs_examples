@@ -13,7 +13,7 @@ export default class DogLaugh extends AnimatedSprite {
     this.x = 300;
     this.y = y;
     this.vx = 0;
-    this.vy = -3;
+    this.vy = -7;
     this.minY = y - 100;
     this.maxY = y + 1;
     this.status = 'running';
@@ -28,8 +28,8 @@ export default class DogLaugh extends AnimatedSprite {
       this.vy = 0;
       setTimeout(() => {
         this.status = 'running';
-        this.vy = 4;
-      }, 500);
+        this.vy = 7;
+      }, 300);
     } else if (this.y > this.maxY) {
       this.visible = false;
       this.status = 'end';

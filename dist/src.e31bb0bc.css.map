@@ -1,1 +1,1 @@
-{"version":3,"sources":["styles/main.scss"],"names":[],"mappings":"AAAA;EACE;EACA","file":"src.e31bb0bc.css","sourceRoot":"../src","sourcesContent":["* {\n  padding: 0;\n  margin: 0;\n}\n"]}
+{"version":3,"sources":["styles/main.scss"],"names":[],"mappings":"AAAQ;AAER;EACE;EACA","file":"src.e31bb0bc.css","sourceRoot":"../src","sourcesContent":["@import url('https://fonts.googleapis.com/css?family=VT323');\n\n* {\n  padding: 0;\n  margin: 0;\n}\n"]}
