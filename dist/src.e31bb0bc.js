@@ -41605,7 +41605,7 @@ function () {
 
     this.game = game;
     this.globalState = this.game.globalState;
-    this.changeScene = this.game.changeScene;
+    this.sceneMultiplexer = this.game.sceneMultiplexer;
     this.update_ = this.update_.bind(this);
     this.destroy = this.destroy.bind(this);
     this.reset = this.reset.bind(this);
@@ -41690,7 +41690,7 @@ function (_EventListenerControl) {
         setTimeout(function () {
           _this2.scene.destroy();
 
-          _this2.scene.changeScene('GS');
+          _this2.scene.sceneMultiplexer('GS');
         }, 400);
       });
     }
@@ -41910,7 +41910,7 @@ function (_Sprite) {
     _this.x = 300;
     _this.y = y;
     _this.vx = 0;
-    _this.vy = -6;
+    _this.vy = -5;
     _this.minY = y - 100;
     _this.maxY = y + 1;
     _this.status = 'running';
@@ -42023,7 +42023,7 @@ function (_AnimatedSprite) {
     _this.x = 300;
     _this.y = y;
     _this.vx = 0;
-    _this.vy = -7;
+    _this.vy = -5;
     _this.minY = y - 100;
     _this.maxY = y + 1;
     _this.status = 'running';
@@ -42445,7 +42445,7 @@ function (_AnimatedSprite) {
       this.textures = this.frames[this.state];
       this.play(); // movement speed update
 
-      var s = this.marginControl ? this.speed : this.marginControlOffSpeed; // console.log(s);
+      var s = this.marginControl ? _Math.default.randomInt(this.speed, this.speed * 2) : this.marginControlOffSpeed; // console.log(s);
 
       var speeds = {
         left: {
@@ -43080,11 +43080,6 @@ function (_EventListenerControl) {
         // if wave is over.. return
         if (_this2.scene.ducks.ended) {
           return;
-        } // if bullets are over... set wave to end..
-
-
-        if (--_this2.scene.hud.nOfBullets === 0) {
-          _this2.scene.ducks.waveEnd();
         }
 
         var shotBg = new _pixi.Sprite(_pixi.Texture.WHITE);
@@ -43128,7 +43123,11 @@ function (_EventListenerControl) {
 
         _this2.scene.ducks.nOfKilledDucks += nOfHitDucks;
         _this2.scene.globalState.hitDucks += nOfHitDucks;
-        _this2.scene.globalState.currentPoints += nOfHitDucks * _this2.scene.globalState.levels[_this2.scene.globalState.currentLevel].pointPerDuck;
+        _this2.scene.globalState.currentPoints += nOfHitDucks * _this2.scene.globalState.levels[_this2.scene.globalState.currentLevel].pointPerDuck; // if bullets are over... set wave to end..
+
+        if (--_this2.scene.hud.nOfBullets === 0) {
+          _this2.scene.ducks.waveEnd();
+        }
       });
       this.scene.mainContainer.on('duckescape', function (e, x, y) {
         // console.log('duckescape');
@@ -43147,11 +43146,9 @@ function (_EventListenerControl) {
             _this2.scene.reset();
           } else {
             if (currentPoints < levels[_this2.scene.globalState.currentLevel].points) {
-              setTimeout(function () {
-                _this2.scene.destroy();
+              _this2.scene.destroy();
 
-                _this2.scene.changeScene('GO');
-              }, 1000);
+              _this2.scene.sceneMultiplexer('GO');
             } else {
               _this2.scene.globalState.hitDucks = 0;
               _this2.scene.globalState.missDucks = 0;
@@ -43159,15 +43156,13 @@ function (_EventListenerControl) {
               _this2.scene.globalState.currentLevel++;
 
               if (levels[_this2.scene.globalState.currentLevel] === undefined) {
-                setTimeout(function () {
-                  _this2.scene.destroy();
+                _this2.scene.destroy();
 
-                  _this2.scene.changeScene('GW');
-                }, 1000);
+                _this2.scene.sceneMultiplexer('GW');
               } else {
                 _this2.scene.destroy();
 
-                _this2.scene.changeScene('MM');
+                _this2.scene.sceneMultiplexer('MM');
               }
             }
           }
@@ -43232,8 +43227,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var AnimatedSprite = _pixi.extras.AnimatedSprite;
-
 var GameScene =
 /*#__PURE__*/
 function (_Scene) {
@@ -43246,6 +43239,9 @@ function (_Scene) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(GameScene).call(this, resources, game));
     _this.bgColor = _this.bgColorInstance(0x6fcbfc);
+
+    _this.reset();
+
     return _this;
   }
 
@@ -43368,7 +43364,7 @@ function (_EventListenerControl) {
       this.scene.mainContainer.on('pointerdown', function (e) {
         _this2.scene.destroy();
 
-        _this2.scene.changeScene('MM');
+        _this2.scene.sceneMultiplexer('MM');
       });
     }
   }, {
@@ -43442,6 +43438,11 @@ function (_Scene) {
     key: "destroy",
     value: function destroy() {
       this.eventListenerController.removeEventListeners();
+      this.mainContainer.removeChild(this.graphics);
+      this.mainContainer.removeChild(this.round);
+      this.mainContainer.removeChild(this.scoreGraphics);
+      this.mainContainer.removeChild(this.scoreText);
+      this.mainContainer.removeChild(this.bgColor);
       this.mainContainer.removeChild(this.background);
     }
   }, {
@@ -43462,15 +43463,15 @@ function (_Scene) {
   }, {
     key: "gameOverMessage",
     value: function gameOverMessage() {
-      var graphics = new _pixi.Graphics();
-      graphics.beginFill(0xffffff);
-      graphics.drawRoundedRect(312.5, 127.5, 215, 95, 4); // drawRoundedRect(x, y, width, height, radius)
+      this.graphics = new _pixi.Graphics();
+      this.graphics.beginFill(0xffffff);
+      this.graphics.drawRoundedRect(312.5, 127.5, 215, 95, 4); // drawRoundedRect(x, y, width, height, radius)
 
-      graphics.beginFill(0x000);
-      graphics.drawRoundedRect(315, 130, 210, 90, 4); // drawRoundedRect(x, y, width, height, radius)
+      this.graphics.beginFill(0x000);
+      this.graphics.drawRoundedRect(315, 130, 210, 90, 4); // drawRoundedRect(x, y, width, height, radius)
 
-      graphics.endFill();
-      this.mainContainer.addChild(graphics);
+      this.graphics.endFill();
+      this.mainContainer.addChild(this.graphics);
       var style = new _pixi.TextStyle({
         fontFamily: 'VT323',
         fontSize: 45,
@@ -43485,13 +43486,13 @@ function (_Scene) {
   }, {
     key: "score",
     value: function score() {
-      var graphics = new _pixi.Graphics();
-      graphics.lineStyle(4, 0xffffff, 1);
-      graphics.beginFill(0x000);
-      graphics.drawRoundedRect(660, 15, 125, 50, 4); // drawRoundedRect(x, y, width, height, radius)
+      this.scoreGraphics = new _pixi.Graphics();
+      this.scoreGraphics.lineStyle(4, 0xffffff, 1);
+      this.scoreGraphics.beginFill(0x000);
+      this.scoreGraphics.drawRoundedRect(660, 15, 125, 50, 4); // drawRoundedRect(x, y, width, height, radius)
 
-      graphics.endFill();
-      this.mainContainer.addChild(graphics);
+      this.scoreGraphics.endFill();
+      this.mainContainer.addChild(this.scoreGraphics);
       var style = new _pixi.TextStyle({
         fontFamily: 'VT323',
         fontSize: 30,
@@ -43506,11 +43507,11 @@ function (_Scene) {
   }, {
     key: "bgColor",
     value: function bgColor() {
-      var bgColor = new _pixi.Sprite(_pixi.Texture.WHITE);
-      bgColor.height = 600;
-      bgColor.width = 800;
-      bgColor.tint = 0x6fcbfc;
-      this.mainContainer.addChild(bgColor);
+      this.bgColor = new _pixi.Sprite(_pixi.Texture.WHITE);
+      this.bgColor.height = 600;
+      this.bgColor.width = 800;
+      this.bgColor.tint = 0x6fcbfc;
+      this.mainContainer.addChild(this.bgColor);
     }
   }]);
 
@@ -43659,21 +43660,21 @@ module.exports = [{
   "id": 0,
   "waves": 3,
   "ducks": 4,
-  "duration": 6,
+  "duration": 9,
   "points": 500,
   "pointPerDuck": 100
 }, {
   "id": 1,
   "waves": 3,
   "ducks": 4,
-  "duration": 5,
+  "duration": 7,
   "points": 1800,
   "pointPerDuck": 100
 }, {
   "id": 2,
   "waves": 3,
   "ducks": 4,
-  "duration": 4,
+  "duration": 5,
   "points": 3000,
   "pointPerDuck": 100
 }];
@@ -43738,17 +43739,9 @@ function () {
     _classCallCheck(this, Game);
 
     this.setup = this.setup.bind(this);
-    this.changeScene = this.changeScene.bind(this);
+    this.sceneMultiplexer = this.sceneMultiplexer.bind(this);
     this.scene = undefined;
-    this.currenScene = '';
-    this.globalState = {
-      levels: _levels.default,
-      currentLevel: 0,
-      currentWave: 0,
-      currentPoints: 0,
-      hitDucks: 0,
-      missDucks: 0
-    }; // console.time('loading font');
+    this.globalState = this.globalStateJson(); // console.time('loading font');
 
     _webfontloader.default.load({
       google: {
@@ -43772,22 +43765,20 @@ function () {
         _this.app.renderer.resize(window.innerWidth, window.innerHeight);
 
         _this.scene.mainContainer.width = _this.app.screen.width;
-        _this.scene.mainContainer.height = _this.app.screen.height; // for (let s in this.scenes) {
-        //   this.scenes[s].mainContainer.width = this.app.screen.width;
-        //   this.scenes[s].mainContainer.height = this.app.screen.height;
-        // }
-        // const bg = new Sprite(Texture.WHITE);
-        // bg.height = window.innerHeight;
-        // bg.width = window.innerWidth;
-        // for (let s in this.scenes) {
-        //   this.scenes[s].mainContainer.addChild(bg);
-        // }
-        // setTimeout(() => {
-        //   for (let s in this.scenes) {
-        //     this.scenes[s].mainContainer.removeChild(bg);
-        //   }
-        // }, 20);
+        _this.scene.mainContainer.height = _this.app.screen.height;
       });
+    }
+  }, {
+    key: "globalStateJson",
+    value: function globalStateJson() {
+      return {
+        levels: _levels.default,
+        currentLevel: 0,
+        currentWave: 0,
+        currentPoints: 0,
+        hitDucks: 0,
+        missDucks: 0
+      };
     }
   }, {
     key: "buildApp",
@@ -43827,13 +43818,8 @@ function () {
     value: function setup(loader, resources) {
       var _this2 = this;
 
-      this.resources = resources; // create scenes
-      // this.createScene(new MainMenu(resources, this), 'MM');
-      // this.createScene(new GameScene(resources, this), 'GS');
-      // this.createScene(new GameOver(resources, this), 'GO');
-      // this.createScene(new GameOver(resources, this), 'GW');
-
-      this.changeScene('MM');
+      this.resources = resources;
+      this.sceneMultiplexer('MM');
       this.app.ticker.add(function (delta) {
         return _this2.gameLoop(delta);
       });
@@ -43844,48 +43830,32 @@ function () {
       this.scene.update_(delta);
     }
   }, {
-    key: "createScene",
-    value: function createScene(scene, sceneName) {
+    key: "commonSceneSetup",
+    value: function commonSceneSetup(scene) {
       scene.mainContainer.width = this.app.screen.width;
       scene.mainContainer.height = this.app.screen.height;
       this.scene = scene;
-      this.currenScene = sceneName;
     }
   }, {
-    key: "changeScene",
-    value: function changeScene(sceneName) {
+    key: "sceneMultiplexer",
+    value: function sceneMultiplexer(sceneName) {
       if (this.scene) {
+        this.app.stage.removeChild(this.scene.mainContainer);
         this.scene.destroy();
       }
 
       if (sceneName === 'MM') {
-        this.createScene(new _MainMenu.default(this.resources, this), sceneName);
+        this.commonSceneSetup(new _MainMenu.default(this.resources, this));
       } else if (sceneName === 'GS') {
-        this.createScene(new _GameScene.default(this.resources, this), sceneName);
+        this.commonSceneSetup(new _GameScene.default(this.resources, this));
       } else if (sceneName === 'GO') {
-        this.createScene(new _GameOver.default(this.resources, this), sceneName);
-        this.globalState = {
-          levels: _levels.default,
-          currentLevel: 0,
-          currentWave: 0,
-          currentPoints: 0,
-          hitDucks: 0,
-          missDucks: 0
-        };
+        this.commonSceneSetup(new _GameOver.default(this.resources, this));
+        this.globalState = this.globalStateJson();
       } else if (sceneName === 'GW') {
-        this.createScene(new _GameWin.default(this.resources, this), sceneName);
-        this.globalState = {
-          levels: _levels.default,
-          currentLevel: 0,
-          currentWave: 0,
-          currentPoints: 0,
-          hitDucks: 0,
-          missDucks: 0
-        };
+        this.commonSceneSetup(new _GameWin.default(this.resources, this));
+        this.globalState = this.globalStateJson();
       }
 
-      this.currenScene = sceneName;
-      this.scene.reset();
       this.app.stage.addChild(this.scene.mainContainer);
     }
   }]);
@@ -43944,7 +43914,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37007" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42859" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

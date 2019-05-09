@@ -17,11 +17,6 @@ export default class GameSceneEventListenerController extends EventListenerContr
         return;
       }
 
-      // if bullets are over... set wave to end..
-      if (--this.scene.hud.nOfBullets === 0) {
-        this.scene.ducks.waveEnd();
-      }
-
       const shotBg = new Sprite(Texture.WHITE);
       shotBg.height = 600;
       shotBg.width = 800;
@@ -68,6 +63,11 @@ export default class GameSceneEventListenerController extends EventListenerContr
         nOfHitDucks *
         this.scene.globalState.levels[this.scene.globalState.currentLevel]
           .pointPerDuck;
+
+      // if bullets are over... set wave to end..
+      if (--this.scene.hud.nOfBullets === 0) {
+        this.scene.ducks.waveEnd();
+      }
     });
 
     this.scene.mainContainer.on('duckescape', (e, x, y) => {
@@ -91,23 +91,19 @@ export default class GameSceneEventListenerController extends EventListenerContr
           if (
             currentPoints < levels[this.scene.globalState.currentLevel].points
           ) {
-            setTimeout(() => {
-              this.scene.destroy();
-              this.scene.changeScene('GO');
-            }, 1000);
+            this.scene.destroy();
+            this.scene.sceneMultiplexer('GO');
           } else {
             this.scene.globalState.hitDucks = 0;
             this.scene.globalState.missDucks = 0;
             this.scene.globalState.currentWave = 0;
             this.scene.globalState.currentLevel++;
             if (levels[this.scene.globalState.currentLevel] === undefined) {
-              setTimeout(() => {
-                this.scene.destroy();
-                this.scene.changeScene('GW');
-              }, 1000);
+              this.scene.destroy();
+              this.scene.sceneMultiplexer('GW');
             } else {
               this.scene.destroy();
-              this.scene.changeScene('MM');
+              this.scene.sceneMultiplexer('MM');
             }
           }
         }

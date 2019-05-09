@@ -1,21 +1,16 @@
-import { Sprite, Texture, extras, Container } from 'pixi.js';
-
-const { AnimatedSprite } = extras;
-
+import { Sprite, Texture } from 'pixi.js';
 import Background from '../entities/Background.js';
 import Scene from './Scene.js';
-
 import DogAnimations from '../entities-layers/DogAnimations.js';
-
 import Wave from '../entities-layers/Wave.js';
 import HUD from '../entities-layers/HUD';
-
 import GameSceneEventListenerController from '../event-listeners/GameSceneEventListenerController';
 
 export default class GameScene extends Scene {
   constructor(resources, game) {
     super(resources, game);
     this.bgColor = this.bgColorInstance(0x6fcbfc);
+    this.reset();
   }
 
   update_(delta) {

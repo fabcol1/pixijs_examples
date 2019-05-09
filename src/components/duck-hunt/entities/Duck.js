@@ -32,7 +32,9 @@ export default class Duck extends AnimatedSprite {
     this.textures = this.frames[this.state];
     this.play();
     // movement speed update
-    const s = this.marginControl ? this.speed : this.marginControlOffSpeed;
+    const s = this.marginControl
+      ? Math2.randomInt(this.speed, this.speed * 2)
+      : this.marginControlOffSpeed;
     // console.log(s);
     const speeds = {
       left: { vx: -s, vy: 0 },

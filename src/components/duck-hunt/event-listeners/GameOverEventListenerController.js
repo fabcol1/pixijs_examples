@@ -10,7 +10,7 @@ export default class GameOverEventListenerController extends EventListenerContro
     this.scene.mainContainer.interactive = true;
     this.scene.mainContainer.on('pointerdown', e => {
       this.scene.destroy();
-      this.scene.changeScene('MM');
+      this.scene.sceneMultiplexer('MM');
     });
   }
   removeEventListeners() {

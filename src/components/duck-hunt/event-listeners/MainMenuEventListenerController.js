@@ -10,7 +10,7 @@ export default class MainMenuEventListenerController extends EventListenerContro
     this.scene.mainContainer.on('dog-sniff-over', e => {
       setTimeout(() => {
         this.scene.destroy();
-        this.scene.changeScene('GS');
+        this.scene.sceneMultiplexer('GS');
       }, 400);
     });
   }

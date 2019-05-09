@@ -14,6 +14,11 @@ export default class MainMenu extends Scene {
 
   destroy() {
     this.eventListenerController.removeEventListeners();
+    this.mainContainer.removeChild(this.graphics);
+    this.mainContainer.removeChild(this.round);
+    this.mainContainer.removeChild(this.scoreGraphics);
+    this.mainContainer.removeChild(this.scoreText);
+    this.mainContainer.removeChild(this.bgColor);
     this.mainContainer.removeChild(this.background);
   }
 
@@ -32,14 +37,13 @@ export default class MainMenu extends Scene {
   }
 
   gameOverMessage() {
-    const graphics = new Graphics();
-    graphics.beginFill(0xffffff);
-    graphics.drawRoundedRect(312.5, 127.5, 215, 95, 4); // drawRoundedRect(x, y, width, height, radius)
-    graphics.beginFill(0x000);
-    graphics.drawRoundedRect(315, 130, 210, 90, 4); // drawRoundedRect(x, y, width, height, radius)
-    graphics.endFill();
-    this.mainContainer.addChild(graphics);
-
+    this.graphics = new Graphics();
+    this.graphics.beginFill(0xffffff);
+    this.graphics.drawRoundedRect(312.5, 127.5, 215, 95, 4); // drawRoundedRect(x, y, width, height, radius)
+    this.graphics.beginFill(0x000);
+    this.graphics.drawRoundedRect(315, 130, 210, 90, 4); // drawRoundedRect(x, y, width, height, radius)
+    this.graphics.endFill();
+    this.mainContainer.addChild(this.graphics);
     const style = new TextStyle({
       fontFamily: 'VT323',
       fontSize: 45,
@@ -49,18 +53,16 @@ export default class MainMenu extends Scene {
     this.round = new Text('GAME OVER', style);
     this.round.x = 340;
     this.round.y = 150;
-
     this.mainContainer.addChild(this.round);
   }
 
   score() {
-    const graphics = new Graphics();
-    graphics.lineStyle(4, 0xffffff, 1);
-    graphics.beginFill(0x000);
-    graphics.drawRoundedRect(660, 15, 125, 50, 4); // drawRoundedRect(x, y, width, height, radius)
-    graphics.endFill();
-    this.mainContainer.addChild(graphics);
-
+    this.scoreGraphics = new Graphics();
+    this.scoreGraphics.lineStyle(4, 0xffffff, 1);
+    this.scoreGraphics.beginFill(0x000);
+    this.scoreGraphics.drawRoundedRect(660, 15, 125, 50, 4); // drawRoundedRect(x, y, width, height, radius)
+    this.scoreGraphics.endFill();
+    this.mainContainer.addChild(this.scoreGraphics);
     const style = new TextStyle({
       fontFamily: 'VT323',
       fontSize: 30,
@@ -77,10 +79,10 @@ export default class MainMenu extends Scene {
   }
 
   bgColor() {
-    const bgColor = new Sprite(Texture.WHITE);
-    bgColor.height = 600;
-    bgColor.width = 800;
-    bgColor.tint = 0x6fcbfc;
-    this.mainContainer.addChild(bgColor);
+    this.bgColor = new Sprite(Texture.WHITE);
+    this.bgColor.height = 600;
+    this.bgColor.width = 800;
+    this.bgColor.tint = 0x6fcbfc;
+    this.mainContainer.addChild(this.bgColor);
   }
 }

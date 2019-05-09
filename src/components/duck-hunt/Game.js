@@ -12,18 +12,9 @@ import '../../styles/main.scss';
 export default class Game {
   constructor(parentElement) {
     this.setup = this.setup.bind(this);
-    this.changeScene = this.changeScene.bind(this);
-
+    this.sceneMultiplexer = this.sceneMultiplexer.bind(this);
     this.scene = undefined;
-    this.currenScene = '';
-    this.globalState = {
-      levels,
-      currentLevel: 0,
-      currentWave: 0,
-      currentPoints: 0,
-      hitDucks: 0,
-      missDucks: 0
-    };
+    this.globalState = this.globalStateJson();
 
     // console.time('loading font');
     WebFont.load({
@@ -44,24 +35,18 @@ export default class Game {
       this.app.renderer.resize(window.innerWidth, window.innerHeight);
       this.scene.mainContainer.width = this.app.screen.width;
       this.scene.mainContainer.height = this.app.screen.height;
-      // for (let s in this.scenes) {
-      //   this.scenes[s].mainContainer.width = this.app.screen.width;
-      //   this.scenes[s].mainContainer.height = this.app.screen.height;
-      // }
-
-      // const bg = new Sprite(Texture.WHITE);
-      // bg.height = window.innerHeight;
-      // bg.width = window.innerWidth;
-      // for (let s in this.scenes) {
-      //   this.scenes[s].mainContainer.addChild(bg);
-      // }
-
-      // setTimeout(() => {
-      //   for (let s in this.scenes) {
-      //     this.scenes[s].mainContainer.removeChild(bg);
-      //   }
-      // }, 20);
     });
+  }
+
+  globalStateJson() {
+    return {
+      levels,
+      currentLevel: 0,
+      currentWave: 0,
+      currentPoints: 0,
+      hitDucks: 0,
+      missDucks: 0
+    };
   }
 
   buildApp(parentElement) {
@@ -95,12 +80,7 @@ export default class Game {
 
   setup(loader, resources) {
     this.resources = resources;
-    // create scenes
-    // this.createScene(new MainMenu(resources, this), 'MM');
-    // this.createScene(new GameScene(resources, this), 'GS');
-    // this.createScene(new GameOver(resources, this), 'GO');
-    // this.createScene(new GameOver(resources, this), 'GW');
-    this.changeScene('MM');
+    this.sceneMultiplexer('MM');
     this.app.ticker.add(delta => this.gameLoop(delta));
   }
 
@@ -108,45 +88,28 @@ export default class Game {
     this.scene.update_(delta);
   }
 
-  createScene(scene, sceneName) {
+  commonSceneSetup(scene) {
     scene.mainContainer.width = this.app.screen.width;
     scene.mainContainer.height = this.app.screen.height;
     this.scene = scene;
-    this.currenScene = sceneName;
   }
 
-  changeScene(sceneName) {
+  sceneMultiplexer(sceneName) {
     if (this.scene) {
+      this.app.stage.removeChild(this.scene.mainContainer);
       this.scene.destroy();
     }
     if (sceneName === 'MM') {
-      this.createScene(new MainMenu(this.resources, this), sceneName);
+      this.commonSceneSetup(new MainMenu(this.resources, this));
     } else if (sceneName === 'GS') {
-      this.createScene(new GameScene(this.resources, this), sceneName);
+      this.commonSceneSetup(new GameScene(this.resources, this));
     } else if (sceneName === 'GO') {
-      this.createScene(new GameOver(this.resources, this), sceneName);
-      this.globalState = {
-        levels,
-        currentLevel: 0,
-        currentWave: 0,
-        currentPoints: 0,
-        hitDucks: 0,
-        missDucks: 0
-      };
+      this.commonSceneSetup(new GameOver(this.resources, this));
+      this.globalState = this.globalStateJson();
     } else if (sceneName === 'GW') {
-      this.createScene(new GameWin(this.resources, this), sceneName);
-      this.globalState = {
-        levels,
-        currentLevel: 0,
-        currentWave: 0,
-        currentPoints: 0,
-        hitDucks: 0,
-        missDucks: 0
-      };
+      this.commonSceneSetup(new GameWin(this.resources, this));
+      this.globalState = this.globalStateJson();
     }
-
-    this.currenScene = sceneName;
-    this.scene.reset();
     this.app.stage.addChild(this.scene.mainContainer);
   }
 }

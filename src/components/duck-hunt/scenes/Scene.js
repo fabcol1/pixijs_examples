@@ -6,7 +6,7 @@ export default class Scene {
   constructor(resources, game) {
     this.game = game;
     this.globalState = this.game.globalState;
-    this.changeScene = this.game.changeScene;
+    this.sceneMultiplexer = this.game.sceneMultiplexer;
     this.update_ = this.update_.bind(this);
     this.destroy = this.destroy.bind(this);
     this.reset = this.reset.bind(this);

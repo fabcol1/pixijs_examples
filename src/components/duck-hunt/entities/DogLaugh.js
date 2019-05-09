@@ -13,7 +13,7 @@ export default class DogLaugh extends AnimatedSprite {
     this.x = 300;
     this.y = y;
     this.vx = 0;
-    this.vy = -7;
+    this.vy = -5;
     this.minY = y - 100;
     this.maxY = y + 1;
     this.status = 'running';
