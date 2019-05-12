@@ -15,6 +15,9 @@
     "sass": "^1.19.0"
   },
   "dependencies": {
+    "@gamestdio/mathf": "^1.0.1",
+    "colyseus.js": "^0.10.5",
+    "pixi-viewport": "^3.23.2",
     "pixi.js": "^4.5.5",
     "webfontloader": "^1.6.28"
   }

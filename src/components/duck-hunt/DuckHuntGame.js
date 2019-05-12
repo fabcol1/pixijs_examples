@@ -9,7 +9,7 @@ import WebFont from 'webfontloader';
 
 import '../../styles/main.scss';
 
-export default class Game {
+export default class DuckHuntGame {
   constructor(parentElement) {
     this.setup = this.setup.bind(this);
     this.sceneMultiplexer = this.sceneMultiplexer.bind(this);

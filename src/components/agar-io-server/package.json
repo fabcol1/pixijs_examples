@@ -1,0 +1,28 @@
+{
+  "name": "agar-io-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon"
+  },
+  "keywords": [
+    "agar.io",
+    "simple-server",
+    "colyseus"
+  ],
+  "author": "FC",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^1.19.0",
+    "ts-node": "^8.1.0",
+    "typescript": "^3.4.5"
+  },
+  "dependencies": {
+    "@colyseus/monitor": "^0.10.0",
+    "colyseus": "^0.10.7",
+    "colyseus.js": "^0.10.5",
+    "express": "^4.16.4",
+    "express-basic-auth": "^1.2.0"
+  }
+}
